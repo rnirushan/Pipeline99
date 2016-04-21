@@ -1,0 +1,43 @@
+notes_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: NotesBundle:Default:index }
+    
+notes_savenotes:
+    path:     /savenotes
+    defaults: { _controller: NotesBundle:Default:savenotes }
+    
+notes_managenotes:
+    path:     /managenotes
+    defaults: { _controller: NotesBundle:Default:managenotes }
+    
+notes_managenotesV2:
+    path:     /managenotesV2/{type}
+    defaults: { _controller: NotesBundle:Default:managenotesV2 }
+    
+notes_table_data:
+    path:     /notesTableData
+    defaults: { _controller: NotesBundle:Default:getNoteTableData }
+    
+notes_updatenote:
+    path:     /updatenote
+    defaults: { _controller: NotesBundle:Default:updatenote }
+    
+notes_getnote:
+    path:     /getnote
+    defaults: { _controller: NotesBundle:Default:getnote }
+    
+notes_getnotes:
+    path:     /getnotes
+    defaults: { _controller: NotesBundle:Default:getnotes }
+    
+notes_savenote:
+    path:     /savenote
+    defaults: { _controller: NotesBundle:Default:savenote }
+    
+notes_updatenotes:
+    path:     /updatenotes
+    defaults: { _controller: NotesBundle:Default:updatenotes }
+    
+
+    
+

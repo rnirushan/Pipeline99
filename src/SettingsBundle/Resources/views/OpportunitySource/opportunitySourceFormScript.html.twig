@@ -1,0 +1,71 @@
+<script src="{{asset('bundles_v2.0/dist/js/bootstrap-tagsinput.js')}}"></script>
+
+<script>
+    function stageAvailability() {
+        $.post('{{path('settings_validatestage')}}',
+                {name: document.getElementById('addStageName').value},
+        function (response) {
+            if (response == "true") {
+                document.getElementById('addStageName').style.color = "#B94A48";
+                document.getElementById('addStageName').style.backgroundColor = "#F2DEDE";
+                document.getElementById('addStageName').style.border = "1px solid #EED3D7";
+                $('#savebutton').prop('disabled', true);
+            } else {
+                document.getElementById('addStageName').style.color = "#468847";
+                document.getElementById('addStageName').style.backgroundColor = "#DFF0D8";
+                document.getElementById('addStageName').style.border = "1px solid #D6E9C6";
+                $('#savebutton').prop('disabled', false);
+            }
+        });
+    }
+
+    function saveNewOpportunitySource() {
+        $.post('{{path('settings_saveopportunitysource')}}',
+                {name: $("#addOpportunitySourceName").val(), notes: $("#addOpportunitySourceNotes").val()},
+        function (response) {
+            if (response != "false") {
+                refreshOpportunitySourceTable();
+            }
+        });
+        $("#addOpportunitySourceModal").find("input[type=text]").each(function (i, object) { 
+            $(object).val('');
+        });
+        $('#addOpportunitySourceModal').modal('hide');
+        $("#addOpportunitySourceNotes").val('');
+        document.getElementById('addStageName').style.color = "";
+        document.getElementById('addStageName').style.backgroundColor = "";
+        document.getElementById('addStageName').style.border = "";
+        
+        return false;
+    }
+    
+    function opeEditOpportunitySourceModal(id){
+        var jsonString = JSON.parse(initOpportunitySourceResponse);
+
+        for (var i = 0; i < jsonString.opportunitySources.length; i++) {
+            var tempStage = jsonString.opportunitySources[i];
+
+            if (id === tempStage.id) {
+                $("#editOpportunitySourceId").val(id);
+                $("#editOpportunitySourceName").val(tempStage.opportunitySource);
+                $("#editOpportunitySourceNotes").val(tempStage.notes);
+                $('#editOpportunitySourceModal').modal('show');
+                break;
+            }
+
+        }
+    } 
+    
+    function updateOpportunitySource() {
+        $.post('{{path('settings_updateopportunitysource')}}',
+                {id: $("#editOpportunitySourceId").val(), name: $("#editOpportunitySourceName").val(), notes: $("#editOpportunitySourceNotes").val()},
+        function (response) {
+            if (response != "false") {
+                refreshOpportunitySourceTable();
+            }
+        });
+        $('#editOpportunitySourceModal').modal('hide');
+        
+        return false;
+    }
+</script>

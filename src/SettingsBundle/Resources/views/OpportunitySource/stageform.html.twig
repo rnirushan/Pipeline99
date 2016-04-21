@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form action="{{path('settings_savestage')}}" role="form" method="post" enctype="multipart/form-data" data-parsley-validate>
+                <div class="row">			
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="firstname">Name <span style="color:#FF0000;">*</span></label>
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Name" autocomplete="off"
+                                   placeholder="" pattern="^[a-zA-Z_.,':;0-9 ]*$" data-parsley-pattern="^[a-zA-Z_.,':;0-9 ]*$"  
+                                   data-parsley-trigger="keyup" onkeyup="stageAvailability()" required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">			
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="Last Name">Chance of Sale <span style="color:#FF0000;">*</span></label>
+                            <div class="input-group" >
+                                <input type="text" name="salechance" class="form-control" id="salechance" 
+                                       placeholder="Chance of sale" data-parsley-type="digits" data-parsley-trigger="keyup" required/>
+                                <span class="input-group-addon">
+                                    %
+                                </span>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">				
+                        <div class="form-group">
+                            <label for="username">Notes</label>
+                            <textarea  id="notes" placeholder="Notes" class="form-control" name="notes" rows ="4"
+                                       data-parsley-pattern="^[a-zA-Z0-9(),.:/;'_&\n ]*$" data-parsley-trigger="keyup"></textarea>
+                            <div id="usernameerror"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="avatar"> </label>
+                            <button id="savebutton" class="btn btn-primary">Save</button>
+                            <a class="btn btn-default" href="{{path('settings_managestagesV2')}}">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% include 'SettingsBundle:Stages:stageformScript.html.twig' %}

@@ -1,0 +1,71 @@
+<script src="{{asset('bundles_v2.0/dist/js/bootstrap-tagsinput.js')}}"></script>
+
+<script>
+    function stageAvailability() {
+        $.post('{{path('settings_validatestage')}}',
+                {name: document.getElementById('addStageName').value},
+        function (response) {
+            if (response == "true") {
+                document.getElementById('addStageName').style.color = "#B94A48";
+                document.getElementById('addStageName').style.backgroundColor = "#F2DEDE";
+                document.getElementById('addStageName').style.border = "1px solid #EED3D7";
+                $('#savebutton').prop('disabled', true);
+            } else {
+                document.getElementById('addStageName').style.color = "#468847";
+                document.getElementById('addStageName').style.backgroundColor = "#DFF0D8";
+                document.getElementById('addStageName').style.border = "1px solid #D6E9C6";
+                $('#savebutton').prop('disabled', false);
+            }
+        });
+    }
+
+    function saveNewProductType() {
+        $.post('{{path('settings_saveproducttype')}}',
+                {name: $("#addProductTypeName").val(), notes: $("#addProductTypeNotes").val()},
+        function (response) {
+            if (response != "false") {
+                refreshProductTypeTable();
+            }
+        });
+        $("#addProductTypeModal").find("input[type=text]").each(function (i, object) { 
+            $(object).val('');
+        });
+        $('#addProductTypeModal').modal('hide');
+        $("#addProductTypeName").val('');
+        document.getElementById('addProductTypeName').style.color = "";
+        document.getElementById('addProductTypeName').style.backgroundColor = "";
+        document.getElementById('addProductTypeName').style.border = "";
+        
+        return false;
+    }
+    
+    function opeEditProductTypeModal(id){
+        var jsonString = JSON.parse(initProductTypeResponse);
+
+        for (var i = 0; i < jsonString.productTypes.length; i++) {
+            var tempStage = jsonString.productTypes[i];
+
+            if (id === tempStage.id) {
+                $("#editProductTypeId").val(id);
+                $("#editProductTypeName").val(tempStage.productType);
+                $("#editProductTypeNotes").val(tempStage.notes);
+                $('#editProductTypeModal').modal('show');
+                break;
+            }
+
+        }
+    } 
+    
+    function updateProductType() {
+        $.post('{{path('settings_updateproducttype')}}',
+                {id: $("#editProductTypeId").val(), name: $("#editProductTypeName").val(), notes: $("#editProductTypeNotes").val()},
+        function (response) {
+            if (response != "false") {
+                refreshProductTypeTable();
+            }
+        });
+        $('#editProductTypeModal').modal('hide');
+        
+        return false;
+    }
+</script>

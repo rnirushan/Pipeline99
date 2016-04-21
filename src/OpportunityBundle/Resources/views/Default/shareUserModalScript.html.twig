@@ -1,0 +1,9 @@
+<script>
+    var $sharedUserTable = $('#sharedUserTable');
+    
+    function showSharedUserModal(users){
+        $sharedUserTable.bootstrapTable('removeAll');
+        $sharedUserTable.bootstrapTable('append', users);
+        $('#shareUserModal').modal('show');
+    }
+</script>

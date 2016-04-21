@@ -1,0 +1,140 @@
+<!-- #section:basics/sidebar.horizontal -->
+<div id="sidebar" class="sidebar h-sidebar no-gap sidebar-fixed responsive">
+
+		<script type="text/javascript">
+			try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+		</script>
+				
+    <!-- #section:basics/navbar.layout.brand -->
+    <a href="#" class="navbar-brand" style="margin-left:10px">
+        <h3>
+            <i class="fa fa-line-chart"></i>
+            Pipeline 99
+        </h3>
+    </a>
+
+    <!-- /section:basics/navbar.layout.brand -->
+
+    <ul class="nav nav-list pull-right">
+        <li class="hover" style="border-left:1px solid #d4dfe3;">
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-tachometer"></i>
+                <span class="menu-text"> Dashboard </span>
+            </a>
+        </li>
+
+		<li class="hover">
+            <a href="{{path('contacts_contacts_managecontacts')}}">
+                <i class="menu-icon fa fa-book"></i>
+                <span class="menu-text">Contacts</span>
+            </a>
+        </li>
+		
+        <li class="hover">
+            <a href="{{path('opportunity_manageopportunity')}}">
+                <i class="menu-icon fa fa-usd"></i>
+                <span class="menu-text">Opportunities</span>
+            </a>
+		</li>
+    
+		<li class="hover">
+            <a href="#">
+                <i class="menu-icon fa fa-bar-chart"></i>
+                <span class="menu-text">Reports</span>
+            </a>
+        </li>
+
+        <li class="hover">
+            <a href="{{path('login_login_users')}}">
+                <i class="menu-icon fa fa-group"></i>
+                <span class="menu-text">Users</span>
+            </a>
+        </li>
+
+        <li class="hover">
+            <a href="{{path('help_homepage')}}">
+                <i class="menu-icon fa fa-question"></i>
+                <span class="menu-text"> Help </span>
+            </a>
+        </li>
+
+        <li class="hover" style="margin-right:30px; border-right:1px solid #d4dfe3;">
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-user"></i>
+                <span class="menu-text"> {{fullname}} </span>
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <b class="arrow"></b>
+            <ul class="submenu">
+
+			<!-- Admin Only-->	
+			{%if role == "Admin"%}        
+				<li class="hover highlight" style="margin-right:30px;">
+					<a href="#" class="dropdown-toggle">
+						<i class="menu-icon fa fa-cog"></i>
+						<span class="menu-text">Pipeline Settings</span>
+						<b class="arrow fa fa-angle-down"></b>
+					</a>
+					<b class="arrow"></b>
+					 <ul class="submenu">
+						<li class="hover">
+							<a href="{{path('login_login_users')}}">
+								Manage Users
+							</a>
+						</li>
+						<li class="hover">
+							<a href="{{path('settings_manageaccounttypes')}}">
+								Account Types
+							</a>
+						</li>
+						<li class="hover">
+							<a href="{{path('settings_managestages')}}">
+								Pipeline Stages
+							</a>
+						</li>
+						<li class="hover">
+							<a href="{{path('settings_manageproducttypes')}}">
+								Product Types
+							</a>
+						</li>
+						<li class="hover">
+							<a href="{{path('settings_manageopportunitysources')}}">
+								Opportunity Source
+							</a>
+						</li>
+					</ul>	
+				</li>
+			{%endif%}        
+			<!-- END Admin Only --> 			
+			
+                <li class="hover">
+                    <a href="{{path('login_login_updateprofile')}}">
+                        <i class="ace-icon fa fa-user"></i>
+                        Profile
+                    </a>
+                </li>
+
+                <li class="divider"></li>
+
+                <li class="hover">
+                    <a href="{{path('login_login_logout')}}">
+                        <i class="ace-icon fa fa-power-off"></i>
+                        Logout
+                    </a>
+                </li>
+            </ul>				
+        </li>
+    </ul><!-- /.nav-list -->
+
+    <!-- #section:basics/sidebar.layout.minimize -->
+
+    <!-- /section:basics/sidebar.layout.minimize -->
+    <script type="text/javascript">
+        try {
+            ace.settings.check('sidebar', 'collapsed')
+        } catch (e) {
+        }
+    </script>
+</div>
+
+<!-- /section:basics/sidebar.horizontal -->

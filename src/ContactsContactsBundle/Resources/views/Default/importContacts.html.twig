@@ -1,0 +1,232 @@
+
+<html lang="en">
+    
+        {% include 'LoginLoginBundle:Default:head.html.twig' %}
+        
+	<body class="no-skin">
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			{% include 'LoginLoginBundle:Default:navbar.html.twig' %}
+                        
+			<div class="main-content">
+				<div class="main-content-inner">
+					<div class="page-content">
+
+
+						<!-- /section:settings.box -->
+						<div>
+							{%if successmsg is defined %}
+
+                                                            <div class="alert alert-success">
+                                                               <center> <strong><font color="green"> {{successmsg}}</font></strong></center>
+                                                           </div>
+
+                                                        {%endif%}
+                                                        {%if errormsg is defined %}
+
+                                                           <div class="alert alert-danger">
+                                                               <center> <strong><font color="red"> {{errormsg}}</font></strong></center>
+
+                                                           </div>
+                                                        {%endif%}
+                                                         <div class="alert alert-success alert-dismissable" id="successmsg" style="display: none">
+                                                            <button type="button" class="close bigger-200" data-dismiss="alert" aria-hidden="true">
+                                                                            &times;
+                                                            </button>
+                                                             <center> <strong> Well done! Your contacts have been sucessfully imported</strong></center>
+                                                        </div>
+             
+                                        
+                                        
+             
+                                            <div class="alert alert-danger alert-dismissible" id="errormsg" style="display: none">
+                                                <button type="button" class="close bigger-200" data-dismiss="alert" aria-hidden="true">
+                                                                            &times;
+                                                </button>
+                                                <center> <strong> Your import have some duplicates.Unique contacts succesfully imported</strong></center>
+                                           
+                                                 
+                                            </div>
+						</div><!-- /.page-header -->
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<h3 class="header smaller lighter blue">Import Contacts</h3>
+                                                                
+								<!-- PAGE CONTENT BEGINS -->
+                                                                <div class="col-xs-1">
+                                                                    
+                                                                </div>  
+                                                                
+								<div class="col-xs-10" style="padding-left: auto;padding-right: auto;">
+                                                                    <div class="widget-header" style="border: 1px solid #CCC">
+									<h4 class="widget-title">Import Contacts from CSV File</h4>
+
+													
+                                                                    </div>
+									<form action="{{path('contacts_contacts_uploadcontact')}}" class="dropzone" id="dropzone">
+										<div class="fallback">
+											<input name="file" type="file" multiple="" />
+										</div>
+									</form>
+								</div><!-- PAGE CONTENT ENDS -->
+                                                              								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div>
+			</div><!-- /.main-content -->
+
+                        {% include 'LoginLoginBundle:Default:footer.html.twig' %}
+
+			<a href="#" style="margin-right:30px;" id="btn-scroll-up" class="btn-scroll-up btn btn-lg btn-inverse">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-140"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='{{asset('bundles/loginlogin/js/ace/jquery.js')}}'>"+"<"+"/script>");
+		</script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='../assets/js/jquery1x.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+		<script type="text/javascript">
+			if('ontouchstart' in document.documentElement) document.write("<script src='{{asset('bundles/loginlogin/js/ace/jquery.mobile.custom.js')}}'>"+"<"+"/script>");
+		</script>
+		<script src="{{asset('bundles/loginlogin/js/ace/bootstrap.js')}}"></script>
+                
+		<!-- page specific plugin scripts -->
+
+		<!-- ace scripts -->
+		<script src="{{asset('bundles/loginlogin/js/ace/elements.scroller.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/elements.colorpicker.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/elements.fileinput.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/elements.typeahead.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/elements.wysiwyg.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/elements.spinner.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/elements.treeview.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/elements.wizard.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/elements.aside.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.ajax-content.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.touch-drag.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.sidebar.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.sidebar-scroll-1.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.submenu-hover.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.widget-box.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.settings.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.settings-rtl.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.settings-skin.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.widget-on-reload.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.searchbox-autocomplete.js')}}"></script>
+                <script src="{{asset('bundles/loginlogin/js/dropzone.js')}}"></script>
+                
+
+		<!-- inline scripts related to this page -->
+                <script type="text/javascript">
+			jQuery(function($){
+			
+			try {
+			  Dropzone.autoDiscover = false;
+			  var myDropzone = new Dropzone("#dropzone" , {
+			    paramName: "file", // The name that will be used to transfer the file
+			    maxFilesize: 0.5, // MB
+			
+				addRemoveLinks : true,
+				dictDefaultMessage :
+				'<span class="bigger-150 bolder"><i class="ace-icon fa fa-caret-right red"></i> Drop files</span> to upload \
+				<span class="smaller-80 grey">(or click)</span> <br /> \
+				<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i>'
+			,
+				dictResponseError: 'Error while uploading file!',
+				
+				//change the previewTemplate to use Bootstrap progress bars
+				previewTemplate: "<div class=\"dz-preview dz-file-preview\">\n  <div class=\"dz-details\">\n    <div class=\"dz-filename\"><span data-dz-name></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"progress progress-small progress-striped active\"><div class=\"progress-bar progress-bar-success\" data-dz-uploadprogress></div></div>\n  <div class=\"dz-success-mark\"><span></span></div>\n  <div class=\"dz-error-mark\"><span></span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>"
+			  });
+			  
+			   $(document).one('ajaxloadstart.page', function(e) {
+					try {
+						myDropzone.destroy();
+					} catch(e) {}
+			   });
+			
+			} catch(e) {
+			  alert('Dropzone.js does not support older browsers!');
+			}
+			
+			});
+		</script>
+                
+                
+		<script type="text/javascript">
+			jQuery(function($) {
+			 var $sidebar = $('.sidebar').eq(0);
+			 if( !$sidebar.hasClass('h-sidebar') ) return;
+			
+			 $(document).on('settings.ace.top_menu' , function(ev, event_name, fixed) {
+				if( event_name !== 'sidebar_fixed' ) return;
+			
+				var sidebar = $sidebar.get(0);
+				var $window = $(window);
+			
+				//return if sidebar is not fixed or in mobile view mode
+				var sidebar_vars = $sidebar.ace_sidebar('vars');
+				if( !fixed || ( sidebar_vars['mobile_view'] || sidebar_vars['collapsible'] ) ) {
+					$sidebar.removeClass('lower-highlight');
+					//restore original, default marginTop
+					sidebar.style.marginTop = '';
+			
+					$window.off('scroll.ace.top_menu')
+					return;
+				}
+			
+			
+				 var done = false;
+				 $window.on('scroll.ace.top_menu', function(e) {
+			
+					var scroll = $window.scrollTop();
+					scroll = parseInt(scroll / 4);//move the menu up 1px for every 4px of document scrolling
+					if (scroll > 17) scroll = 17;
+			
+			
+					if (scroll > 16) {			
+						if(!done) {
+							$sidebar.addClass('lower-highlight');
+							done = true;
+						}
+					}
+					else {
+						if(done) {
+							$sidebar.removeClass('lower-highlight');
+							done = false;
+						}
+					}
+			
+					sidebar.style['marginTop'] = (17-scroll)+'px';
+				 }).triggerHandler('scroll.ace.top_menu');
+			
+			 }).triggerHandler('settings.ace.top_menu', ['sidebar_fixed' , $sidebar.hasClass('sidebar-fixed')]);
+			
+			 $(window).on('resize.ace.top_menu', function() {
+				$(document).triggerHandler('settings.ace.top_menu', ['sidebar_fixed' , $sidebar.hasClass('sidebar-fixed')]);
+			 });
+			
+			
+			});
+		</script>
+
+		
+	</body>
+</html>

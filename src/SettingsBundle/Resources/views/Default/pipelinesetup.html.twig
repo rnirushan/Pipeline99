@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    {% include 'AppBundle:Default:head.html.twig' %}	
+
+    <body>
+    
+        <div id="wrapper">
+
+            {% include 'AppBundle:Default:navigation.html.twig' %}
+
+            <!-- Page Wrapper -->
+            <div id="page-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">Pipeline Setup</h1>
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+                    <!-- /.row -->
+                    <div class="row" style="height:1900px">
+                        <div class="col-lg-12">
+
+                            <!-- Help File -->
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <!-- Nav tabs -->
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#users" data-toggle="tab">Users</a>
+                                                </li>						
+                                                <li><a href="#accounttype" data-toggle="tab">Account Type</a>
+                                                </li>
+                                                <li><a href="#pipelinestages" data-toggle="tab">Pipeline Stages</a>
+                                                </li>
+                                                <li><a href="#producttype" data-toggle="tab">Product Type</a>
+                                                </li>
+                                                <li><a href="#opportunitysource" data-toggle="tab">Opportunity Source</a>
+                                                </li>						
+                                            </ul>
+                                            <!-- Tab panes -->
+                                            <div class="tab-content">
+
+                                                <div class="tab-pane fade active in" id="users">
+                                                    <h4>Users</h4>
+                                                    {% include 'SettingsBundle:User:adminManageUsersTable.html.twig' %}
+                                                </div>												
+                                                <div class="tab-pane fade" id="accounttype">
+                                                    <h4>Account Type</h4>
+                                                    {% include 'SettingsBundle:AccountType:accounttypesTable.html.twig' %}
+                                                </div>
+                                                <div class="tab-pane fade" id="pipelinestages">
+                                                    <h4>Pipeline Stages</h4>
+                                                    {% include 'SettingsBundle:Stages:stagesTable.html.twig' %}
+                                                </div>
+                                                <div class="tab-pane fade" id="producttype">
+                                                    <h4>Product Type</h4>
+                                                    {% include 'SettingsBundle:ProductType:productTypesTable.html.twig' %}
+                                                </div>
+                                                <div class="tab-pane fade" id="opportunitysource">
+                                                    <h4>Opportunity Source</h4>
+                                                    {% include 'SettingsBundle:OpportunitySource:opportunitySourcesTable.html.twig' %}
+                                                </div>								
+                                            </div>
+                                        </div>
+                                        <!-- /.panel-body -->						
+                                    </div>
+                                    <!-- /.panel-default -->
+                                </div>
+                                <!-- /.col-lg-12 -->
+                            </div>
+                            <!-- /.row -->
+                            <!-- / .Help File -->
+
+                            <!-- /.panel-default -->
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+
+            <!-- /#page-wrapper -->
+
+            {% include 'LoginLoginBundle:Default:footer_v2.html.twig' %}
+
+        </div>
+        <!-- /#wrapper -->
+
+        {% include 'AppBundle:Default:scripts.html.twig' %}
+        <script src="{{asset('bundles_v2.0/dist/js/sb-admin-2.js')}}"></script>
+        <script src="{{asset('bundles_v2.0/bower_components/raphael/raphael-min.js')}}"></script>
+        <script src="{{asset('bundles_v2.0/bower_components/morrisjs/morris.js')}}"></script>
+        <script src="{{asset('bundles_v2.0/js/morris-data.js')}}"></script>
+
+    </body>
+
+</html>

@@ -1,0 +1,31 @@
+task_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: TaskBundle:Default:index }
+    
+task_updatetask:    
+    path:     /updatetask
+    defaults: { _controller: TaskBundle:Default:updatetask }
+    
+task_savetask:    
+    path:     /savetask
+    defaults: { _controller: TaskBundle:Default:savetask }
+    
+task_manage_task:    
+    path:     /manageTasks/{type}/{id}
+    defaults: { _controller: TaskBundle:Default:manageTasks }
+    
+task_get_task:    
+    path:     /getTasks/{type}/{id}
+    defaults: { _controller: TaskBundle:Default:getTasks }
+    
+task_complete_task:    
+    path:     /completeTask/{id}
+    defaults: { _controller: TaskBundle:Default:completeTask }
+    
+task_delete_task:    
+    path:     /deleteTask/{id}
+    defaults: { _controller: TaskBundle:Default:deleteTask }
+    
+task_all_open_deal_tasks:
+    path:     /allOpenDealTasks/{type}
+    defaults: { _controller: TaskBundle:Default:allOpenDealTasks }

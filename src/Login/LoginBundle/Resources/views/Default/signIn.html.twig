@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta charset="utf-8" />
+		<title>Pipeline 99</title>
+
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+		<!-- bootstrap & fontawesome -->
+                <link rel="stylesheet" href="{{asset('bundles/loginlogin/css/ace/bootstrap.css')}}" />
+                <link rel="stylesheet" href="{{asset('bundles/loginlogin/css/ace/font-awesome.css')}}" />
+		<link rel="stylesheet" href="{{asset('bundles/loginlogin/css/ace/ace-fonts.css')}}" />
+                <link rel="stylesheet" href="{{asset('bundles/loginlogin/css/ace/ace.css')}}" class="ace-main-stylesheet" id="main-ace-style"/>
+                <link rel="stylesheet" href="{{asset('bundles/loginlogin/css/ace/ace-rtl.css')}}" />
+		
+                <link rel="stylesheet" href="{{asset('bundles/loginlogin/css/parsley.css')}}" />
+		<!--[if lte IE 9]>
+			<link rel="stylesheet" href="../assets/css/ace-part2.css" />
+		<![endif]-->
+		
+
+		<!--[if lte IE 9]>
+		  <link rel="stylesheet" href="../assets/css/ace-ie.css" />
+		<![endif]-->
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+		<!--[if lt IE 9]>
+		<script src="../assets/js/html5shiv.js"></script>
+		<script src="../assets/js/respond.js"></script>
+		<![endif]-->
+	</head>
+
+	<body class="login-layout light-login">
+		<div class="main-container">
+			<div class="main-content">
+				<div class="row">
+                                        {%if errormsg is defined %}
+                                               <div class="alert alert-danger alert-dismissable" id="successmsg" style="width:50%;margin-left: auto;margin-right: auto;margin-top:5px">
+                                                    <button type="button" class="close bigger-200" data-dismiss="alert" aria-hidden="true">
+                                                                            &times;
+                                                    </button>
+                                                    <center> <strong>{{errormsg}}</strong></center>
+                                                </div>
+                                                <script> window.setTimeout(function() { $("#successmsg").alert('close'); }, 5000); </script>
+
+                                        {%endif%}
+                                        {%if successmsg is defined %}
+                                            <div class="alert alert-success alert-dismissable" id="errormsg" style="width:50%;margin-left: auto;margin-right: auto;margin-top:5px">
+                                                    <button type="button" class="close bigger-200" data-dismiss="alert" aria-hidden="true">
+                                                                            &times;
+                                                    </button>
+                                                    <center> <strong>{{successmsg}}</strong></center>
+                                            </div>
+                                            <script> window.setTimeout(function() { $("#errormsg").alert('close'); }, 5000); </script>
+                                        {%endif%}
+					<div class="center" id="trailInfo" style="margin-left:auto;margin-right:auto;width:100%;display:none;">
+						<h1>
+						<!-- <i class="ace-icon fa fa-credit-card blue"></i>
+							 <span class="blue">Start your 30 - day free trial Now! , No billing information required at this point.</span> -->
+												
+						</h1>
+					</div>
+					<div class="col-sm-10 col-sm-offset-1">
+						<div class="login-container" style="width:500px">
+							
+
+							<div class="space-20"></div>
+
+							<div class="position-relative">
+								<div id="login-box" class="login-box visible widget-box no-border">
+									<div class="widget-body">
+										<div class="widget-main">
+											<h4 class="header blue lighter bigger">
+												<i class="ace-icon fa fa-coffee green"></i>
+												<strong>Sign in</strong>
+											</h4>
+
+											<div class="space-6"></div>
+
+											<form action="{{path('login_login_homepage')}}" method="post">
+												<fieldset>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="text" class="form-control" name="username"  placeholder="Username" />
+															<i class="ace-icon fa fa-user"></i>
+														</span>
+													</label>
+
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" class="form-control" name="password" placeholder="Password" />
+															<i class="ace-icon fa fa-lock"></i>
+														</span>
+													</label>
+
+													<div class="space"></div>
+
+													<div class="clearfix">
+														<label class="inline">
+															<input type="checkbox" class="ace" />
+															<span class="lbl"> Remember Me</span>
+														</label>
+
+														<button type="submit" class="width-35 pull-right btn btn-sm btn-primary">
+															<i class="ace-icon fa fa-key"></i>
+															<span class="bigger-110">Login</span>
+														</button>
+													</div>
+
+													<div class="space-4"></div>
+												</fieldset>
+											</form>
+
+								<!--		<div class="social-or-login center">
+												<span class="bigger-110">Or Login Using</span>
+											</div>
+
+											<div class="space-6"></div>
+
+											<div class="social-login center">
+												<a class="btn btn-primary">
+													<i class="ace-icon fa fa-facebook"></i>
+												</a>
+
+												<a class="btn btn-info">
+													<i class="ace-icon fa fa-twitter"></i>
+												</a>
+
+												<a class="btn btn-danger">
+													<i class="ace-icon fa fa-google-plus"></i>
+												</a>
+											</div> -->
+										</div><!-- /.widget-main -->
+
+										<div class="toolbar clearfix">
+											<div>
+												<a href="#" data-target="#forgot-box" class="forgot-password-link">
+													<i class="ace-icon fa fa-arrow-left"></i>
+													Retrieve Password
+												</a>
+											</div>
+
+											<div>
+												<a href="#" data-target="#signup-box" class="user-signup-link">
+													Sign up
+													<i class="ace-icon fa fa-arrow-right"></i>
+												</a>
+											</div>
+										</div>
+									</div><!-- /.widget-body -->
+								</div><!-- /.login-box -->
+
+								<div id="forgot-box" class="forgot-box widget-box no-border">
+									<div class="widget-body">
+										<div class="widget-main">
+											<h4 class="header red lighter bigger">
+												<i class="ace-icon fa fa-key"></i>
+												<strong>Retrieve Password</strong>
+											</h4>
+
+											<div class="space-6"></div>
+											<p>
+												Please provide your email address and we'll send you instructions on how to change your password.
+											</p>
+
+											<form>
+												<fieldset>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="email" class="form-control" placeholder="Email" />
+															<i class="ace-icon fa fa-envelope"></i>
+														</span>
+													</label>
+
+													<div class="clearfix">
+														<button type="button" class="width-35 pull-right btn btn-sm btn-danger">
+															<i class="ace-icon fa fa-lightbulb-o"></i>
+															<span class="bigger-110">Send Me!</span>
+														</button>
+													</div>
+												</fieldset>
+											</form>
+										</div><!-- /.widget-main -->
+
+										<div class="toolbar center">
+											<a href="#" data-target="#login-box"  class="back-to-login-link">
+												Back to log-in
+												<i class="ace-icon fa fa-arrow-right"></i>
+											</a>
+										</div>
+									</div><!-- /.widget-body -->
+								</div><!-- /.forgot-box -->
+								
+								<div id="signup-box" class="signup-box widget-box no-border">
+									
+									
+									<div class="widget-body">
+										
+										<div class="widget-main">
+											<h4 class="header blue lighter bigger">
+												<i class="ace-icon fa fa-users blue"></i>
+												<strong>Sign up</strong>
+											</h4>
+
+											<div class="space-6"></div>
+											<p> Your Information</p>
+
+											<form action="{{path('login_login_signup')}}" method="post" data-parsley-validate>
+												<fieldset>
+                                                                                                        <label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="text" name="firstname" class="form-control" placeholder="First Name" pattern="^[a-zA-Z(),.:/;'_&\n  ]*$" data-parsley-pattern="^[a-zA-Z(),.:/;'_&\n  ]*$" data-parsley-trigger="keyup" required/>
+															<i class="ace-icon fa fa-user"></i>
+														</span>
+													</label>
+                                                                                                    
+                                                                                                        <label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="text" name="lastname" class="form-control"  placeholder="Last Name" pattern="^[a-zA-Z(),.:/;'_&\n  ]*$" data-parsley-pattern="^[a-zA-Z(),.:/;'_&\n  ]*$" data-parsley-trigger="keyup" required/>
+															<i class="ace-icon fa fa-user"></i>
+														</span>
+													</label>
+                                                                                                    
+                                                                                                        <label class="block clearfix" >
+														<span class="block input-icon input-icon-right">
+															<input type="text" name="username" id="username" class="form-control" placeholder="Username" onkeyup="usernameAvailability()" pattern="^[a-zA-Z0-9(),.:/;'_&\n  ]*$" data-parsley-pattern="^[a-zA-Z0-9(),.:/;'_&\n  ]*$" data-parsley-trigger="keyup" required/>
+															<i class="ace-icon fa fa-user"></i>
+														</span>
+                                                                                                               <span id="usernameerror"></span>
+													</label>
+                                                                                                        
+                                                                                                        <label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="text" name="companyname" class="form-control" placeholder="Company Name" pattern="^[a-zA-Z0-9(),.:/;'_&\n ]*$" data-parsley-pattern="^[a-zA-Z0-9(),.:/;'_&\n ]*$" data-parsley-trigger="keyup" required />
+															<i class="ace-icon fa fa-users"></i>
+														</span>
+													</label>
+                                                                                                    
+                                                                                                        
+                                                                                                    
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="email" name="email" class="form-control" placeholder="Email"  data-parsley-type="email" data-parsley-trigger="keyup" required/>
+															<i class="ace-icon fa fa-envelope"></i>
+														</span>
+													</label>
+
+													
+
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" name="password" id="password" class="form-control" placeholder="Password" data-parsley-trigger="change" data-parsley-minlength="8" required/>
+															<i class="ace-icon fa fa-lock"></i>
+														</span>
+													</label>
+
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" name="password_confirm" id="passwordRe" class="form-control" placeholder="Repeat password" data-parsley-trigger="change" data-parsley-equalto="#password"  required/>
+															<i class="ace-icon fa fa-retweet"></i>
+														</span>
+													</label>
+                                                                                                    
+                                                                                                        
+													<label for="form-field-select-1">Company size</label>
+
+													<select class="form-control" name="size" id="form-field-select-1">
+																												<option>1-10</option>
+                                                                                                                <option>11-50</option>
+                                                                                                                <option>51-100</option>
+                                                                                                                <option>100+</option>		
+													</select>
+		
+                                                                                                        <label for="form-field-select-2" style="margin-top:7px ">Company Industry</label>
+                                                                                                        
+													<select class="form-control" name="industry" id="form-field-select-2">
+														<option>Software,App Development</option>
+                                                                                                                <option>Health</option>
+                                                                                                                <option>Tech Startup</option>
+                                                                                                                <option>Education and Training</option>
+                                                                                                                <option>Real Estate</option>
+																												<option>Insurance</option>
+                                                                                                                <option>Creative Agency (Web,Advertising,Video)</option>
+                                                                                                                <option>Financial or Credit Services</option>
+                                                                                                                <option>News, Media and Publications</option>
+                                                                                                                <option>Manufacturing</option>
+                                                                                                                <option>IT Services</option>
+                                                                                                                <option>Consulting</option>
+                                                                                                                <option>Other</option>
+													</select>
+                                                                                                        <br>                                                                                
+													<label class="block">
+														<input type="checkbox" class="ace" />
+														<span class="lbl">
+															I accept the
+															<a href="#">User Agreement</a>
+														</span>
+													</label>
+
+													<div class="space-24"></div>
+
+													<div class="clearfix">
+														<button type="reset" class="width-30 pull-left btn btn-sm">
+															<i class="ace-icon fa fa-refresh"></i>
+															<span class="bigger-110">Reset</span>
+														</button>
+
+														<button type="submit" class="width-65 pull-right btn btn-sm btn-primary">
+															<span class="bigger-110">Sign-up</span>
+
+															<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+														</button>
+													</div>
+												</fieldset>
+											</form>
+										</div>
+
+										<div class="toolbar center">
+											<a href="#" data-target="#login-box" class="back-to-login-link">
+												<i class="ace-icon fa fa-arrow-left"></i>
+												Back to login
+											</a>
+										</div>
+									</div><!-- /.widget-body -->
+								</div><!-- /.signup-box -->
+							</div><!-- /.position-relative -->
+
+							
+						</div>
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div><!-- /.main-content -->
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+			
+		<!--[if !IE]> -->
+		
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='{{asset('bundles/loginlogin/js/ace/jquery.js')}}'>"+"<"+"/script>");
+                       
+		</script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='../assets/js/jquery1x.js'>"+"<"+"/script>");
+</script> 
+<![endif]-->
+                <script src="{{asset('bundles/loginlogin/js/ace/bootstrap.js')}}"></script>
+                <script src="{{asset('bundles/loginlogin/js/parsley.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/parsley.min.js')}}"></script>
+                <script src="{{asset('bundles/loginlogin/js/parsley.remote.js')}}"></script>
+                <script src="{{asset('bundles/loginlogin/js/parsley.remote.min.js')}}"></script>
+		<script type="text/javascript">
+			if('ontouchstart' in document.documentElement) document.write("<script src='{{asset('bundles/loginlogin/js/ace/jquery.mobile.custom.js')}}'>"+"<"+"/script>");
+		</script>
+                
+                <script>
+                   
+                function usernameAvailability(){
+                        $.post('{{path('login_login_uservalidateajax')}}',               
+                {username: document.getElementById('username').value}, 
+                    function(response){
+                        if(response == "true"){
+                            document.getElementById('username').style.color ="#B94A48";
+                            document.getElementById('username').style.backgroundColor ="#F2DEDE";
+                            document.getElementById('username').style.border ="1px solid #EED3D7";
+                            document.getElementById('usernameerror').innerHTML = "<font color = '#B94A48'>username already exists. try a different one.</font>";
+                        }else{
+                            document.getElementById('username').style.color ="#468847";
+                            document.getElementById('username').style.backgroundColor ="#DFF0D8";
+                            document.getElementById('username').style.border ="1px solid #D6E9C6";
+                            document.getElementById('usernameerror').innerHTML = "";
+                        }
+                    });    
+                }
+                
+               
+                </script>
+		<!-- inline scripts related to this page -->
+		<script type="text/javascript">
+			jQuery(function($) {
+			 $(document).on('click', '.toolbar a[data-target]', function(e) {
+				e.preventDefault();
+				var target = $(this).data('target');
+				if(target == '#signup-box'){
+					$('#trailInfo').show();
+				}else{
+					$('#trailInfo').hide();
+				}
+				$('.widget-box.visible').removeClass('visible');//hide others
+				$(target).addClass('visible');//show target
+			 });
+			});
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,82 @@
+<script>
+    var dealsByUserData = [];
+    var dealsByUserGraphData = [];
+    var dealsByUserGraphAllData = [];
+    
+    {% for deal in dealsByUser %} 
+        
+        dealsByUserData.push({
+            name: '{{deal.name}}',
+            won: {{deal.won}},
+            lost: {{deal.lost}},
+            open: {{deal.open}}
+        });
+        
+        dealsByUserGraphData.push({
+            y: '{{deal.name}}',
+            a: {{deal.open}}
+        });
+        
+        dealsByUserGraphAllData.push({
+            y: '{{deal.name}}',
+            a: {{deal.open}} + {{deal.won}} + {{deal.lost}}
+        });
+    {% endfor %}
+    
+    $( "#dealsByUsersDropDown" ).append( "<li><a href='javascript:showHideDealsByUsersBarChart()'>View All Deals</a></li>" );
+    
+    displayDealsByUserBarChart(dealsByUserGraphData);
+    
+    var flag = false;
+    function showHideDealsByUsersBarChart(){
+        $('#dealsByUsersDropDown').html('');
+        if(flag === false){
+            $( "#dealsByUsersDropDown" ).append( "<li><a href='javascript:showHideDealsByUsersBarChart()'>View Open Deals</a></li>" );
+            displayDealsByUserBarChart(dealsByUserGraphAllData);
+            flag = true;
+        }else{
+            $( "#dealsByUsersDropDown" ).append( "<li><a href='javascript:showHideDealsByUsersBarChart()'>View All Deals</a></li>" );
+            displayDealsByUserBarChart(dealsByUserGraphData);
+            flag = false;
+        }
+    }
+    
+    function displayDealsByUserBarChart(data){
+        var filteredData = [];
+        $.each(data, function( index, value ) {
+            if(value.a > 0){
+                filteredData.push(data[index]);
+            }
+        });
+        $('#deals-by-users-morris-bar-chart').html('');
+        Morris.Bar({
+            element: 'deals-by-users-morris-bar-chart',
+            data: filteredData,
+            xkey: 'y',
+            ykeys: ['a'],
+            barColors: function (row, series, type) {
+                if (type === 'bar') {
+                  var red = Math.ceil(255 * row.y / this.ymax);
+                  if(row.x%5 == 0){
+                      return 'rgb(37,119,181)';
+                  }else if(row.x%5 == 1){
+                      return 'rgb(167,179,188)';
+                  }else if(row.x%5 == 2){
+                      return 'rgb(240,173,78)';
+                  }else if(row.x%5 == 3){
+                      return 'rgb(217,237,247)';
+                  }else{
+                      return 'rgb(11,164,98)';
+                  }
+                }
+                else {
+                  return '#000';
+                }
+            },
+            labels: ['Deals'],
+            hideHover: 'auto',
+            resize: true
+        });
+    }
+        
+</script>

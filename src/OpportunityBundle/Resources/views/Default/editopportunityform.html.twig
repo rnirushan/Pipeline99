@@ -1,0 +1,231 @@
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form action="{{path('opportunity_updateopportunity')}}" role="form" method="post" enctype="multipart/form-data" data-parsley-validate>
+                <div class="row">			
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="firstname">Contact Name <span style="color:#FF0000;">*</span></label>
+                            <input type="text" name="personname" id="personname" value="{{opportunity.getPersonname()}}" class="form-control" id="name"  placeholder="" pattern="*" data-parsley-pattern="*"  data-parsley-trigger="keyup" required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">				
+                        <div class="form-group">
+                            <label for="username">Organization Name </label>
+                            <input type="text" name="organizationname" id="organizationname" value="{{opportunity.getOrganizationname()}}"  class="form-control" id="companyname" placeholder="" pattern="*" data-parsley-pattern="*"  data-parsley-trigger="keyup"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">				
+                        <div class="form-group">
+                            <label for="username">Projected Revenue <span style="color:#FF0000;">*</span></label>
+                            <input type="text" name="projectedrevenue" value="{{opportunity.getProjectedrevenue()}}" id="projectedrevenue" class="form-control" id="companyname" placeholder="" pattern="^[a-zA-Z0-9_,.:'; ]*$" data-parsley-pattern="^[a-zA-Z0-9_,.:'; ]*$"  onkeyup ="return forecasecalculateInchangeofProjectedRevenue();" data-parsley-trigger="keyup"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">				
+                        <div class="form-group">
+                            <label for="username">Account Type <span style="color:#FF0000;">*</span></label>
+                            <select class="form-control" name="accounttype" >
+                                {%if accounttypes is defined%}
+                                    {% for accounttype in accounttypes %} 
+                                        {%if accounttype.getId == opportunity.getAccounttype %}
+                                            <option value = "{{accounttype.getId}}" selected>{{accounttype.getName}}</option>   
+                                        {%else%}    
+                                            <option value = "{{accounttype.getId}}">{{accounttype.getName}}</option>
+                                        {%endif%}
+                                    {%endfor%}
+                                {%endif%}   
+                            </select>
+                        </div>
+                    </div>
+                </div>            
+                <div class="row">
+                    <div class="col-xs-6">				
+                        <div class="form-group">
+                            <label for="username"> Stage <span style="color:#FF0000;">*</span></label>
+                            <select class="form-control" id ="stage" onchange="return initiateStageModal();" name="stage" >
+                                {%if stages is defined%}
+                                    {% for stage in stages %} 
+                                        {%if stage.getId == opportunity.getStage %}
+                                            <option value = "{{stage.getId}}" selected>{{stage.getName}}</option> 
+                                        {%else%}    
+                                            <option value = "{{stage.getId}}">{{stage.getName}}</option>
+                                        {%endif%}
+                                    {%endfor%}
+                                {%endif%}
+                                <option value = "won" {%if opportunity.getStage == 'won' %}selected {%endif%}>Won</option>
+                                <option value = "lost" {%if opportunity.getStage == 'lost' %}selected {%endif%}>Lost</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">				
+                        <div class="form-group">
+                            <label for="username"> Chance of Sale <span style="color:#FF0000;">*</span></label>
+                            <div class="progress" style="height:34px;">
+                                <div class="progress-bar" id="progress"  role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width:0%;line-height: 30px;">
+                                    0% 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">				
+                        <div class="form-group">
+                            <label for="username">Weighted Forecast <span style="color:#FF0000;">*</span></label>
+                            <input type="text" name="forecast" id="forecast" value="{{opportunity.getForecast()}}" class="form-control" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">				
+                        <div class="form-group">
+                            <label for="username">Product Type <span style="color:#FF0000;">*</span></label>
+                            <select class="form-control" name="producttype" >
+                                {%if producttypes is defined%}
+                                    {% for producttype in producttypes %} 
+                                        {%if producttype.getId == opportunity.getProducttype %}
+                                            <option value = "{{producttype.getId}}" selected>{{producttype.getName}}</option>   
+                                        {%else%}    
+                                            <option value = "{{producttype.getId}}">{{producttype.getName}}</option>
+                                        {%endif%}
+                                    {%endfor%}
+                                {%endif%}   
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">				
+                        <div class="form-group">
+                            <label for="username">Opportunity Source <span style="color:#FF0000;">*</span></label>
+                            <select class="form-control" name="opportunitysource" >
+                                {%if opportunitysources is defined%}
+                                    {% for opportunitysource in opportunitysources %} 
+                                        {%if opportunitysource.getId == opportunity.getOpportunitysource %}
+                                            <option value = "{{opportunitysource.getId}}" selected>{{opportunitysource.getName}}</option>
+                                        {%else%}    
+                                            <option value = "{{opportunitysource.getId}}">{{opportunitysource.getName}}</option>
+                                        {%endif%}
+                                    {%endfor%}
+                                {%endif%}  	
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">				
+                        <div class="form-group">
+                            <label for="username">Expected Closed Date <span style="color:#FF0000;">*</span></label>
+                            <input id="closeddate" type="text" value ="" name="closeddate" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">				
+                        <div class="form-group">
+                            <label for="username">Visibility <span style="color:#FF0000;">*</span></label>
+                            <select class="form-control" name="visibility" >     
+                                <option value="public" {%if opportunity.getVisibility == 'public'%}selected{%endif%}>Entire Company</option>
+                                <option value="private" {%if opportunity.getVisibility == 'private'%}selected{%endif%}>Private</option>		
+                            </select> 
+                        </div>
+                    </div>
+                </div>
+                <div class="row">			
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="firstname">Tags</label>
+                            <div id="tagDiv">
+                                <input type="text" value="{{opportunity.getTags()}}" name="tags" id="tags" class="form-control" data-role="tagsinput" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">			
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="duallist">Opportunity Sharing <span style="color:#FF0000;">*</span>  </label>
+                            <!-- #section:plugins/input.duallist -->
+                            <select  class="form-control" multiple="multiple" name="sharingusers[]" id="duallist">
+                                {%if users is defined%}
+                                    {%set sharing = opportunity.getSharing()|split(':')%}
+                                    {% for user in users %} 
+                                        {%set flag = 'false'%}
+                                        {%for share in sharing%}
+                                            {%if share|lower == user.getUsername()|lower%}
+                                                <option value="{{user.getUsername()}}" selected="selected">{{user.getFirstname() ~ ' ' ~ user.getLastname()}}</option>
+                                                {%set flag = 'true'%}
+                                            {%endif%}
+                                        {%endfor%}
+                                        {%if flag != 'true' and name != user.getUsername()%} 
+                                            <option value="{{user.getUsername()}}">{{user.getFirstname()  ~ ' ' ~ user.getLastname()}}</option>
+                                            {%set flag = 'false'%}
+                                        {%endif%}  
+                                    {% endfor %} 
+                                {%endif%}    
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                            
+                <div class="row">			
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="duallist">Partner Sharing <span style="color:#FF0000;">*</span>  </label>
+                            <div class="row">
+                                <div class="col-xs-6">				
+                                    <div class="form-group">
+                                        <input type="text" name="partnername" id="forecast" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">				
+                                    <div class="input-group" >
+                                        <input type="hidden" id="commisionnonoriginator">
+                                        <input type="text" name="partnerpercentage" id="partnerpercentage" class="form-control"/>
+                                        <span class="input-group-addon">
+                                            %
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="modalnoteshidden" value="{{opportunity.getWonnotes()}}" id="modalnoteshidden"> 
+                <input type="hidden"  value="{{opportunity.getId()}}" name="id" /> 
+                <input type="hidden" name="revenue" value="{{opportunity.getRevenue()}}" id="revenue">
+                <input type="hidden" name="userrevenue" value="{{opportunity.getUserrevenue()}}" id="userrevenue">
+                <input type="hidden" name="reason" value="{{opportunity.getReason()}}" id="reason">
+
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="avatar"> </label>
+                            <button id="savebutton" class="btn btn-primary">Save</button>
+                            <a href="{{ path('opportunity_deleteopportunity',{'id':opportunity.getId()} )}}" class="btn btn-danger">Delete</a>
+                            <a class="btn btn-default" href="{{path('opportunity_manageopportunityV2')}}">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="{{asset('bundles_v2.0/dist/js/bootstrap-tagsinput.js')}}"></script>
+<script src="{{asset('bundles/loginlogin/js/ace/jquery.bootstrap-duallistbox.js')}}"></script>
+{% include 'OpportunityBundle:Default:editopportunityformScript.html.twig' %}
+<script>
+    $('#closeddate').datepicker({
+        
+    }).on('changeDate', function(e){
+        $(this).datepicker('hide');
+    });
+</script>

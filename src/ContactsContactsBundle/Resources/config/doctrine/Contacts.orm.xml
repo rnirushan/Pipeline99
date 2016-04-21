@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="ContactsContactsBundle\Entity\Contacts" table="contacts">
+    <id name="id" type="integer" column="id" >
+      <generator strategy="AUTO"/>
+    </id>
+    <field name="username" type="string" column="username" length="30" nullable="false"/>
+    <field name="name" type="string" column="name" length="30" nullable="false"/>
+    <field name="email0" type="string" column="email0" length="100" nullable="true"/>
+    <field name="email1" type="string" column="email1" length="100" nullable="true"/>
+    <field name="email2" type="string" column="email2" length="100" nullable="true"/>
+    <field name="email3" type="string" column="email3" length="100" nullable="true"/>
+    <field name="email4" type="string" column="email4" length="100" nullable="true"/>
+    <field name="email5" type="string" column="email5" length="100" nullable="true"/>
+    <field name="email6" type="string" column="email6" length="100" nullable="true"/>
+    <field name="email7" type="string" column="email7" length="100" nullable="true"/>
+    <field name="email8" type="string" column="email8" length="100" nullable="true"/>
+    <field name="email9" type="string" column="email9" length="100" nullable="true"/>
+    <field name="phone0" type="string" column="phone0" length="100" nullable="true"/>
+    <field name="phone1" type="string" column="phone1" length="100" nullable="true"/>
+    <field name="phone2" type="string" column="phone2" length="100" nullable="true"/>
+    <field name="phone3" type="string" column="phone3" length="100" nullable="true"/>
+    <field name="phone4" type="string" column="phone4" length="100" nullable="true"/> 
+    <field name="phone5" type="string" column="phone5" length="100" nullable="true"/>
+    <field name="phone6" type="string" column="phone6" length="100" nullable="true"/>
+    <field name="phone7" type="string" column="phone7" length="100" nullable="true"/>
+    <field name="phone8" type="string" column="phone8" length="100" nullable="true"/>
+    <field name="phone9" type="string" column="phone9" length="100" nullable="true"/>   
+    <field name="dob" type="string" column="dob" length="30" nullable="true"/>
+    <field name="company" type="string" column="company" length="30" nullable="true"/>
+    <field name="address1" type="string" column="address1" length="30" nullable="true"/>
+    <field name="address2" type="string" column="address2" length="20" nullable="true"/>
+    <field name="city" type="string" column="city" length="20" nullable="true"/>
+    <field name="state" type="string" column="state" length="20" nullable="true"/>
+    <field name="postalcode" type="string" column="postalcode" length="50" nullable="true"/>
+    <field name="image" type="string" column="image" length="300" nullable="true"/>
+    <field name="tags" type="string" column="tags" length="200" nullable="true"/>
+    <field name="contactnotes" type="string" column="contactnotes" length="200" nullable="true"/>
+    <field name="status" type="string" column="status" length="30" nullable="false"/>  
+    <field name="visibility" type="string" column="visibility" length="30" nullable="false"/>  
+    <field name="ownedcompany" type="string" column="ownedcompany" length="50" nullable="false"/>
+    <field name="title" type="string" column="title" length="100" nullable="true"/> 
+    <field name="sub_con_name1" type="string" column="sub_con_name1" length="100" nullable="true"/> 
+    <field name="sub_con_title1" type="string" column="sub_con_title1" length="100" nullable="true"/> 
+    <field name="sub_con_email1" type="string" column="sub_con_email1" length="100" nullable="true"/> 
+    <field name="sub_con_phone1" type="string" column="sub_con_phone1" length="100" nullable="true"/> 
+    <field name="sub_con_name2" type="string" column="sub_con_name2" length="100" nullable="true"/> 
+    <field name="sub_con_title2" type="string" column="sub_con_title2" length="100" nullable="true"/> 
+    <field name="sub_con_email2" type="string" column="sub_con_email2" length="100" nullable="true"/> 
+    <field name="sub_con_phone2" type="string" column="sub_con_phone2" length="100" nullable="true"/> 
+   
+    
+  </entity>
+</doctrine-mapping>

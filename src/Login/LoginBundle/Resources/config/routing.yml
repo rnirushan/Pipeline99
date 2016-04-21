@@ -1,0 +1,111 @@
+home_homepage:
+    path:     /
+    defaults: { _controller: LoginLoginBundle:Default:home }
+    
+login_login_homepage:
+    path:     /signin
+    defaults: { _controller: LoginLoginBundle:Default:index }
+    
+login_login_signin:
+    path:     /signinV2
+    defaults: { _controller: LoginLoginBundle:Default:signin }
+
+login_login_forgetPassword:
+    path:     /password
+    defaults: { _controller: LoginLoginBundle:Default:forgetPassword }
+
+login_login_signup:
+    path:     /signup
+    defaults: { _controller: LoginLoginBundle:Default:signup }
+    
+login_login_signupV2:
+    path:     /signupV2
+    defaults: { _controller: LoginLoginBundle:Default:signupV2 }
+    
+login_login_termsofService:
+    path:     /termsofService
+    defaults: { _controller: LoginLoginBundle:Default:termsofService }
+   
+login_login_privacy:
+    path:     /privacy
+    defaults: { _controller: LoginLoginBundle:Default:privacy }
+    
+login_login_uservalidateajax:
+    path:     /uservalidateajax
+    defaults: { _controller: LoginLoginBundle:Default:uservalidateajax }
+    
+login_login_adduser:
+    path:     /adduser
+    defaults: { _controller: LoginLoginBundle:Dashboard:adduser }
+    
+login_login_fullsignup:
+    path:     /fullsignup
+    defaults: { _controller: LoginLoginBundle:Dashboard:fullsignup }
+    
+login_login_logout:
+    path:     /logout
+    defaults: { _controller: LoginLoginBundle:Default:logout }
+    
+login_login_upload:
+    path:     /upload
+    defaults: { _controller: LoginLoginBundle:Dashboard:upload }
+    
+login_login_importuser:
+    path:     /importuser
+    defaults: { _controller: LoginLoginBundle:Dashboard:importuser }
+    
+login_login_updateprofile:
+    path:     /updateprofile
+    defaults: { _controller: LoginLoginBundle:Dashboard:updateprofile }
+    
+login_login_getcompanyajax:
+    path:     /getcompanyajax
+    defaults: { _controller: LoginLoginBundle:Dashboard:getcompanyajax }
+
+login_login_users:
+    path:     /users
+    defaults: { _controller: LoginLoginBundle:Dashboard:users }
+    
+login_login_userTableData:
+    path:     /userTableData
+    defaults: { _controller: LoginLoginBundle:Dashboard:userTableData }
+    
+login_login_edituserpage:
+    path:     /editsingleuser/{id}
+    defaults: { _controller: LoginLoginBundle:Dashboard:editsingleuser }
+ 
+login_login_singleupdate:
+    path:     /singleupdate
+    defaults: { _controller: LoginLoginBundle:Dashboard:singleupdate }
+    
+login_login_deleteuser:
+    path:     /deleteuser/{id}
+    defaults: { _controller: LoginLoginBundle:Dashboard:deleteuser }
+    
+login_login_profile:    
+    path:     /profile/
+    defaults: { _controller: LoginLoginBundle:Dashboard:profile }
+
+login_login_activate:    
+    path:     /activateuser/{id}
+    defaults: { _controller: LoginLoginBundle:Dashboard:activate }
+
+login_login_getusers:
+    path:     /getusers
+    defaults: { _controller: LoginLoginBundle:Default:getusers }
+    
+login_login_getCommissionoriginator:
+    path:     /getCommissionoriginator
+    defaults: { _controller: LoginLoginBundle:Default:getCommissionoriginator }
+    
+login_login_getFullname:
+    path:     /getFullname
+    defaults: { _controller: LoginLoginBundle:Default:getFullname }
+    
+login_login_selecteduseropportunities:
+    path:     /selecteduseropportunities/{username}
+    defaults: { _controller: LoginLoginBundle:Dashboard:selecteduseropportunities }
+    
+login_login_saveconfig:
+    path:     /saveconfig
+    defaults: { _controller: LoginLoginBundle:Dashboard:saveconfig }

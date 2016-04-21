@@ -1,0 +1,109 @@
+<script>
+    function sharingpopup(sharing, total, username, partnername, partnersharing) {
+
+        $.post('{{path('login_login_getusers')}}',
+                {sharedusers: sharing, user: username},
+        function (response) {
+            if (response !== "false") {
+                var responseData = JSON.parse(response);
+                var nonoriginpercentage = 0;
+                for (i = 0; i < responseData.sharing.length; i++) {
+                    nonoriginpercentage += parseInt(responseData.sharing[i].percentage);
+                }
+                var totalpercentage = nonoriginpercentage + parseInt(responseData.orininatorpercentage);
+                
+                var dataArray = [];
+                
+                if(partnersharing !== '' && partnersharing !== null){
+                    var partnerShare = (total * parseInt(partnersharing))/100;
+                    total = total - partnerShare;
+                    var sharingData = {
+                        name:partnername + "(Partner)",
+                        weightedForecast: "$" + partnerShare.toFixed(2).toLocaleString()
+                    };
+                    dataArray.push(sharingData);
+                    
+                }
+                
+                if(totalpercentage>100){
+                   
+                    var adminShare = (total * parseInt(responseData.orininatorpercentage) * 100) / (totalpercentage * 100);
+                    var sharingData = {
+                        name:responseData.originatorname + "(Originator)",
+                        weightedForecast:"$" + adminShare.toFixed(2).toLocaleString()
+                    };
+                    dataArray.push(sharingData);
+                    
+                    for (i = 0; i < responseData.sharing.length; i++) {
+                        var share = (total * parseInt(responseData.sharing[i].percentage) * 100) / (totalpercentage * 100);
+                        sharingData = {
+                            name:responseData.sharing[i].fullname,
+                            weightedForecast:"$" + share.toFixed(2).toLocaleString()
+                        };
+                        dataArray.push(sharingData);
+                        
+                    }   
+                    
+                }else if(totalpercentage < 100){
+                    
+                    var adminShare = (total * (parseInt(responseData.orininatorpercentage) + (100 - totalpercentage))) / 100;
+                    var sharingData = {
+                        name:responseData.originatorname + "(Originator)",
+                        weightedForecast:"$" + adminShare.toFixed(2).toLocaleString()
+                    };
+                    dataArray.push(sharingData);
+                    
+                    for (i = 0; i < responseData.sharing.length; i++) {
+                        var share = (total * parseInt(responseData.sharing[i].percentage)) / 100;
+                        sharingData = {
+                            name:responseData.sharing[i].fullname,
+                            weightedForecast:"$" + share.toFixed(2).toLocaleString()
+                        };
+                        dataArray.push(sharingData);
+                        
+                    }   
+                    
+                }else{
+                    
+                    var adminShare = (total * parseInt(responseData.orininatorpercentage)) / 100;
+                    var sharingData = {
+                        name:responseData.originatorname + "(Originator)",
+                        weightedForecast:"$" + adminShare.toFixed(2).toLocaleString()
+                    };
+                    dataArray.push(sharingData);
+                    
+                    for (i = 0; i < responseData.sharing.length; i++) {
+                        var share = (total * parseInt(responseData.sharing[i].percentage)) / 100;
+                        sharingData = {
+                            name:responseData.sharing[i].fullname,
+                            weightedForecast:"$" + share.toFixed(2).toLocaleString()
+                        };
+                        dataArray.push(sharingData);
+                        
+                    }    
+                    
+                }
+
+               {# if (totalpercentage >= 100) {
+                    document.getElementById('sharingtablebody').innerHTML = "<tr><td>" + originator[0] + " (Originator)</td><td> $" + (total * originator[1] / 100).toLocaleString() + "</td></tr>";
+                } else {
+                    document.getElementById('sharingtablebody').innerHTML = "<tr><td>" + originator[0] + " (Originator)</td><td> $" + (((parseFloat(originator[1]) + (100 - totalpercentage)) * total) / 100).toLocaleString() + "</td></tr>";
+                }
+
+
+                for (i = 0; i < shared.length - 1; i++) {
+                    if (totalpercentage > 100) {
+                        document.getElementById('sharingtablebody').innerHTML += "<tr><td>" + nonoriginators[i][0] + "</td><td> $" + ((total * (nonoriginators[i][1] - ((totalpercentage - 100) / (shared.length - 1)))) / 100).toLocaleString() + "</td></tr>"
+                    } else {
+                        document.getElementById('sharingtablebody').innerHTML += "<tr><td>" + nonoriginators[i][0] + "</td><td> $" + ((total * (nonoriginators[i][1])) / 100).toLocaleString() + "</td></tr>"
+                    }
+                }#}
+
+                showSharedUserModal(dataArray);
+
+            } else {
+                console.log("error occured in the mange opportunity in retriving shared users", response);
+            }
+        });
+    }
+</script>    

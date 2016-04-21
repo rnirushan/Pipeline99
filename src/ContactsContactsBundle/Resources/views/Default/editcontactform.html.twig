@@ -1,0 +1,885 @@
+<script>
+    var showEmailId = 1;
+    var showPhoneId = 1;
+    var showSubContactId = 1;
+</script>
+
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form action="{{path('contacts_contacts_updatecontact')}}" role="form" method="post" enctype="multipart/form-data" data-parsley-validate>
+                <div class="row">			
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="firstname">Contact Name <span style="color:#FF0000;">*</span></label>
+                            <input type="text" name="name" class="form-control" id="name" value="{{ contact.getName() }}" placeholder="" pattern="^[a-zA-Z_.-,':;0-9 ]*$" data-parsley-pattern="^[a-zA-Z_.-,':;0-9 ]*$"  data-parsley-trigger="keyup" required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">			
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="Last Name">Title </label>
+                            <input type="text" name="title" class="form-control" id="title" value="{{ contact.getTitle() }}" placeholder="" pattern="^[a-zA-Z_.-,':;0-9 ]*$" data-parsley-pattern="^[a-zA-Z_.-,':;0-9 ]*$"  data-parsley-trigger="keyup" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">				
+                        <div class="form-group">
+                            <label for="username">Organization Name </label>
+                            <input type="text" name="companyname"  class="form-control" id="companyname" value="{{ contact.getCompany() }}" placeholder="" pattern="*" data-parsley-trigger="keyup"/>
+                            <div id="usernameerror"></div>
+                        </div>
+                    </div>
+                </div>
+
+                {#                Email section#}
+                <div id="emailSection">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="email">Email <span style="color:#FF0000;">*</span></label>
+                                <input type="email"  name="email0" value="{{ (contact.getEmail0()|split(':'))[1]}}" class="form-control" id="email0" placeholder="yourname@yourdomain.com" data-parsley-type="email" data-parsley-trigger="keyup"  required/>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">					
+                                <label for="email">Type</label>
+                                <select class="form-control" name="emailtype0" >
+                                    <option value="Work" {%if (contact.getEmail0()|split(':'))[0] == 'Work' %}selected {% endif %}>Work</option>
+                                    <option value="Home" {%if (contact.getEmail0()|split(':'))[0] == 'Home' %}selected {% endif %}>Home</option>
+                                    <option value = "Other" {%if (contact.getEmail0()|split(':'))[0] == 'Other' %}selected {% endif %}>Custom</option>
+                                </select>  
+                            </div>
+                        </div>
+                    </div>
+                            
+                    {%if contact.getEmail1() == ''%}         
+                        <div class="row" id="emailDiv1" style="display: none">
+                    {%else%}
+                        <script>
+                            showEmailId++;
+                        </script>
+                        <div class="row" id="emailDiv1">
+                    {%endif%}
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email"  name="email1" class="form-control" id="email1" 
+                                       value="{%if (contact.getEmail1()|split(':'))[1] is defined %}{{(contact.getEmail1()|split(':'))[1]}}{%endif%}" 
+                                       placeholder="yourname@yourdomain.com" data-parsley-type="email" data-parsley-trigger="keyup"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">					
+                                <label for="email">Type</label>
+                                <select class="form-control" name="emailtype1" >
+                                    <option value="Work" {%if (contact.getEmail1()|split(':'))[0] == 'Work' %}selected {% endif %}>Work</option>
+                                    <option value="Home" {%if (contact.getEmail1()|split(':'))[0] == 'Home' %}selected {% endif %}>Home</option>
+                                    <option value = "Other" {%if (contact.getEmail1()|split(':'))[0] == 'Other' %}selected {% endif %}>Custom</option>
+                                </select>  
+                            </div>
+                        </div>
+                    </div>
+                                
+                    {%if contact.getEmail2() == ''%}         
+                        <div class="row" id="emailDiv2" style="display: none">
+                    {%else%}
+                        <script>
+                            showEmailId++;
+                        </script>
+                        <div class="row" id="emailDiv2">
+                    {%endif%}
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email"  name="email2" class="form-control" id="email2" 
+                                       value="{%if (contact.getEmail2()|split(':'))[1] is defined %}{{(contact.getEmail2()|split(':'))[1]}}{%endif%}" 
+                                       placeholder="yourname@yourdomain.com" data-parsley-type="email" data-parsley-trigger="keyup"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">					
+                                <label for="email">Type</label>
+                                <select class="form-control" name="emailtype2" >
+                                    <option value="Work" {%if (contact.getEmail2()|split(':'))[0] == 'Work' %}selected {% endif %}>Work</option>
+                                    <option value="Home" {%if (contact.getEmail2()|split(':'))[0] == 'Home' %}selected {% endif %}>Home</option>
+                                    <option value = "Other" {%if (contact.getEmail2()|split(':'))[0] == 'Other' %}selected {% endif %}>Custom</option>
+                                </select>  
+                            </div>
+                        </div>
+                    </div>
+                                
+                    {%if contact.getEmail3() == ''%}         
+                        <div class="row" id="emailDiv3" style="display: none">
+                    {%else%}
+                        <script>
+                            showEmailId++;
+                        </script>
+                        <div class="row" id="emailDiv3">
+                    {%endif%}
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email"  name="email3" class="form-control" id="email3" 
+                                       value="{%if (contact.getEmail3()|split(':'))[1] is defined %}{{(contact.getEmail3()|split(':'))[1]}}{%endif%}" 
+                                       placeholder="yourname@yourdomain.com" data-parsley-type="email" data-parsley-trigger="keyup"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">					
+                                <label for="email">Type</label>
+                                <select class="form-control" name="emailtype3" >
+                                    <option value="Work" {%if (contact.getEmail3()|split(':'))[0] == 'Work' %}selected {% endif %}>Work</option>
+                                    <option value="Home" {%if (contact.getEmail3()|split(':'))[0] == 'Home' %}selected {% endif %}>Home</option>
+                                    <option value = "Other" {%if (contact.getEmail3()|split(':'))[0] == 'Other' %}selected {% endif %}>Custom</option>
+                                </select>  
+                            </div>
+                        </div>
+                    </div>
+                                
+                    {%if contact.getEmail4() == ''%}         
+                        <div class="row" id="emailDiv4" style="display: none">
+                    {%else%}
+                        <script>
+                            showEmailId++;
+                        </script>
+                        <div class="row" id="emailDiv4">
+                    {%endif%}
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email"  name="email4" class="form-control" id="email4" 
+                                       value="{%if (contact.getEmail4()|split(':'))[1] is defined %}{{(contact.getEmail4()|split(':'))[1]}}{%endif%}" 
+                                       placeholder="yourname@yourdomain.com" data-parsley-type="email" data-parsley-trigger="keyup"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">					
+                                <label for="email">Type</label>
+                                <select class="form-control" name="emailtype4" >
+                                    <option value="Work" {%if (contact.getEmail4()|split(':'))[0] == 'Work' %}selected {% endif %}>Work</option>
+                                    <option value="Home" {%if (contact.getEmail4()|split(':'))[0] == 'Home' %}selected {% endif %}>Home</option>
+                                    <option value = "Other" {%if (contact.getEmail4()|split(':'))[0] == 'Other' %}selected {% endif %}>Custom</option>
+                                </select>  
+                            </div>
+                        </div>
+                    </div>
+                                
+                    {%if contact.getEmail5() == ''%}         
+                        <div class="row" id="emailDiv5" style="display: none">
+                    {%else%}
+                        <script>
+                            showEmailId++;
+                        </script>
+                        <div class="row" id="emailDiv5">
+                    {%endif%}
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email"  name="email5" class="form-control" id="email5" 
+                                       value="{%if (contact.getEmail5()|split(':'))[1] is defined %}{{(contact.getEmail5()|split(':'))[1]}}{%endif%}" 
+                                       placeholder="yourname@yourdomain.com" data-parsley-type="email" data-parsley-trigger="keyup"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">					
+                                <label for="email">Type</label>
+                                <select class="form-control" name="emailtype5" >
+                                    <option value="Work" {%if (contact.getEmail5()|split(':'))[0] == 'Work' %}selected {% endif %}>Work</option>
+                                    <option value="Home" {%if (contact.getEmail5()|split(':'))[0] == 'Home' %}selected {% endif %}>Home</option>
+                                    <option value = "Other" {%if (contact.getEmail5()|split(':'))[0] == 'Other' %}selected {% endif %}>Custom</option>
+                                </select>  
+                            </div>
+                        </div>
+                    </div>
+                                
+                    {%if contact.getEmail6() == ''%}         
+                        <div class="row" id="emailDiv6" style="display: none">
+                    {%else%}
+                        <script>
+                            showEmailId++;
+                        </script>
+                        <div class="row" id="emailDiv6">
+                    {%endif%}
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email"  name="email6" class="form-control" id="email6" 
+                                       value="{%if (contact.getEmail6()|split(':'))[1] is defined %}{{(contact.getEmail6()|split(':'))[1]}}{%endif%}" 
+                                       placeholder="yourname@yourdomain.com" data-parsley-type="email" data-parsley-trigger="keyup"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">					
+                                <label for="email">Type</label>
+                                <select class="form-control" name="emailtype6" >
+                                    <option value="Work" {%if (contact.getEmail6()|split(':'))[0] == 'Work' %}selected {% endif %}>Work</option>
+                                    <option value="Home" {%if (contact.getEmail6()|split(':'))[0] == 'Home' %}selected {% endif %}>Home</option>
+                                    <option value = "Other" {%if (contact.getEmail6()|split(':'))[0] == 'Other' %}selected {% endif %}>Custom</option>
+                                </select>  
+                            </div>
+                        </div>
+                    </div>
+                                
+                    {%if contact.getEmail7() == ''%}         
+                        <div class="row" id="emailDiv7" style="display: none">
+                    {%else%}
+                        <script>
+                            showEmailId++;
+                        </script>
+                        <div class="row" id="emailDiv7">
+                    {%endif%}
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email"  name="email7" class="form-control" id="email7" 
+                                       value="{%if (contact.getEmail7()|split(':'))[1] is defined %}{{(contact.getEmail7()|split(':'))[1]}}{%endif%}" 
+                                       placeholder="yourname@yourdomain.com" data-parsley-type="email" data-parsley-trigger="keyup"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">					
+                                <label for="email">Type</label>
+                                <select class="form-control" name="emailtype7" >
+                                    <option value="Work" {%if (contact.getEmail7()|split(':'))[0] == 'Work' %}selected {% endif %}>Work</option>
+                                    <option value="Home" {%if (contact.getEmail7()|split(':'))[0] == 'Home' %}selected {% endif %}>Home</option>
+                                    <option value = "Other" {%if (contact.getEmail7()|split(':'))[0] == 'Other' %}selected {% endif %}>Custom</option>
+                                </select>  
+                            </div>
+                        </div>
+                    </div>
+                                
+                    {%if contact.getEmail8() == ''%}         
+                        <div class="row" id="emailDiv8" style="display: none">
+                    {%else%}
+                        <script>
+                            showEmailId++;
+                        </script>
+                        <div class="row" id="emailDiv8">
+                    {%endif%}
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email"  name="email8" class="form-control" id="email8" 
+                                       value="{%if (contact.getEmail8()|split(':'))[1] is defined %}{{(contact.getEmail8()|split(':'))[1]}}{%endif%}" 
+                                       placeholder="yourname@yourdomain.com" data-parsley-type="email" data-parsley-trigger="keyup"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">					
+                                <label for="email">Type</label>
+                                <select class="form-control" name="emailtype8" >
+                                    <option value="Work" {%if (contact.getEmail8()|split(':'))[0] == 'Work' %}selected {% endif %}>Work</option>
+                                    <option value="Home" {%if (contact.getEmail8()|split(':'))[0] == 'Home' %}selected {% endif %}>Home</option>
+                                    <option value = "Other" {%if (contact.getEmail8()|split(':'))[0] == 'Other' %}selected {% endif %}>Custom</option>
+                                </select>  
+                            </div>
+                        </div>
+                    </div>
+                                
+                    {%if contact.getEmail9() == ''%}         
+                        <div class="row" id="emailDiv9" style="display: none">
+                    {%else%}
+                        <script>
+                            showEmailId++;
+                        </script>
+                        <div class="row" id="emailDiv9">
+                    {%endif%}
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email"  name="email9" class="form-control" id="email9" 
+                                       value="{%if (contact.getEmail9()|split(':'))[1] is defined %}{{(contact.getEmail9()|split(':'))[1]}}{%endif%}" 
+                                       placeholder="yourname@yourdomain.com" data-parsley-type="email" data-parsley-trigger="keyup" />
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">					
+                                <label for="email">Type</label>
+                                <select class="form-control" name="emailtype9" >
+                                    <option value="Work" {%if (contact.getEmail9()|split(':'))[0] == 'Work' %}selected {% endif %}>Work</option>
+                                    <option value="Home" {%if (contact.getEmail9()|split(':'))[0] == 'Home' %}selected {% endif %}>Home</option>
+                                    <option value = "Other" {%if (contact.getEmail9()|split(':'))[0] == 'Other' %}selected {% endif %}>Custom</option>
+                                </select>  
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="addEmailDiv">
+                        <div class="col-sm-4" style="margin-bottom: 10px">
+                            <a href="javascript:addEmail()" id="anotheremail"><i class="fa fa-envelope fa-lg"></i>  Add another email</a> 
+                        </div>
+                    </div>
+                </div>
+
+                {#                Telephone section#}
+                <div id="telephone_section">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="telephonework">Telephone <span style="color:#FF0000;">*</span></label>
+                                <input type="tel" class="form-control" id="phone0" name="phone0" {%if contact.getPhone0() != ''%} value="{{(contact.getPhone0()|split(':'))[1]}}"{%endif%} placeholder="( _ _ _ ) _ _ _ - _ _ _ _" class="col-sm-4"  data-parsley-trigger="change"   />
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">					
+                                <label for="email">Type</label>
+                                <select class="form-control mb-md" name="phonetype0" >
+                                    <option value="Work" {%if (contact.getPhone0()|split(':'))[0] == 'Work' %} selected {%endif%}>Work</option>
+                                    <option value = "Mobile" {%if (contact.getPhone0()|split(':'))[0] == 'Mobile' %} selected {%endif%}  >Mobile</option>         
+                                    <option value="Home" {%if (contact.getPhone0()|split(':'))[0] == 'Home' %} selected {%endif%}>Home</option>
+                                    <option value="Main" {%if (contact.getPhone0()|split(':'))[0] == 'Main' %} selected {%endif%}>Main</option>
+                                    <option value="Work Fax" {%if (contact.getPhone0()|split(':'))[0] == 'Work Fax' %} selected {%endif%} >Work Fax</option>
+                                    <option value="Home Fax" {%if (contact.getPhone0()|split(':'))[0] == 'Home Fax' %} selected {%endif%}>Home Fax</option>
+                                    <option value="Google Voice" {%if (contact.getPhone0()|split(':'))[0] == 'Google Voice' %} selected {%endif%}>Google Voice</option>
+                                    <option value="Pager" {%if (contact.getPhone0()|split(':'))[0] == 'Pager' %} selected {%endif%}>Pager</option>
+                                    <option value="Other" {%if (contact.getPhone0()|split(':'))[0] == 'Other' %} selected {%endif%}>Custom</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {%if contact.getPhone1()== '' %}
+                        <div class="row" id="phoneDiv1" style="display: none">
+                    {%else%}
+                        <script>
+                            showPhoneId++;
+                        </script>
+                        <div class="row" id="phoneDiv1">
+                    {%endif%}
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="telephonework">Telephone</label>
+                                <input type="tel" class="form-control" id="phone1" name="phone1" value="{%if (contact.getPhone1()|split(':'))[1] is defined %}{{(contact.getPhone1()|split(':'))[1]}}{%endif%}" placeholder="( _ _ _ ) _ _ _ - _ _ _ _" class="col-sm-4"  data-parsley-trigger="change"   />
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">					
+                                <label for="email">Type</label>
+                                <select class="form-control" name="phonetype1" >
+                                    <option value="Work" {%if (contact.getPhone1()|split(':'))[0] == 'Work' %} selected {%endif%}>Work</option>
+                                    <option value = "Mobile" {%if (contact.getPhone1()|split(':'))[0] == 'Mobile' %} selected {%endif%}  >Mobile</option>         
+                                    <option value="Home" {%if (contact.getPhone1()|split(':'))[0] == 'Home' %} selected {%endif%}>Home</option>
+                                    <option value="Main" {%if (contact.getPhone1()|split(':'))[0] == 'Main' %} selected {%endif%}>Main</option>
+                                    <option value="Work Fax" {%if (contact.getPhone1()|split(':'))[0] == 'Work Fax' %} selected {%endif%} >Work Fax</option>
+                                    <option value="Home Fax" {%if (contact.getPhone1()|split(':'))[0] == 'Home Fax' %} selected {%endif%}>Home Fax</option>
+                                    <option value="Google Voice" {%if (contact.getPhone1()|split(':'))[0] == 'Google Voice' %} selected {%endif%}>Google Voice</option>
+                                    <option value="Pager" {%if (contact.getPhone1()|split(':'))[0] == 'Pager' %} selected {%endif%}>Pager</option>
+                                    <option value="Other" {%if (contact.getPhone1()|split(':'))[0] == 'Other' %} selected {%endif%}>Custom</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {%if contact.getPhone2()== '' %}
+                        <div class="row" id="phoneDiv2" style="display: none">
+                    {%else%}
+                        <script>
+                            showPhoneId++;
+                        </script>
+                        <div class="row" id="phoneDiv2">
+                    {%endif%}
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="telephonework">Telephone</label>
+                                <input type="tel" class="form-control" id="phone2" value="{%if (contact.getPhone2()|split(':'))[1] is defined %}{{(contact.getPhone2()|split(':'))[1]}}{%endif%}" name="phone2" placeholder="( _ _ _ ) _ _ _ - _ _ _ _" class="col-sm-4"  data-parsley-trigger="change"   />
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">					
+                                <label for="email">Type</label>
+                                <select class="form-control" name="phonetype2" >
+                                    <option value="Work" {%if (contact.getPhone2()|split(':'))[0] == 'Work' %} selected {%endif%}>Work</option>
+                                    <option value = "Mobile" {%if (contact.getPhone2()|split(':'))[0] == 'Mobile' %} selected {%endif%}  >Mobile</option>         
+                                    <option value="Home" {%if (contact.getPhone2()|split(':'))[0] == 'Home' %} selected {%endif%}>Home</option>
+                                    <option value="Main" {%if (contact.getPhone2()|split(':'))[0] == 'Main' %} selected {%endif%}>Main</option>
+                                    <option value="Work Fax" {%if (contact.getPhone2()|split(':'))[0] == 'Work Fax' %} selected {%endif%} >Work Fax</option>
+                                    <option value="Home Fax" {%if (contact.getPhone2()|split(':'))[0] == 'Home Fax' %} selected {%endif%}>Home Fax</option>
+                                    <option value="Google Voice" {%if (contact.getPhone2()|split(':'))[0] == 'Google Voice' %} selected {%endif%}>Google Voice</option>
+                                    <option value="Pager" {%if (contact.getPhone2()|split(':'))[0] == 'Pager' %} selected {%endif%}>Pager</option>
+                                    <option value="Other" {%if (contact.getPhone2()|split(':'))[0] == 'Other' %} selected {%endif%}>Custom</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {%if contact.getPhone3()== '' %}
+                        <div class="row" id="phoneDiv3" style="display: none">
+                    {%else%}
+                        <script>
+                            showPhoneId++;
+                        </script>
+                        <div class="row" id="phoneDiv3">
+                    {%endif%}
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="telephonework">Telephone</label>
+                                <input type="tel" class="form-control" id="phone3" name="phone3" value="{%if (contact.getPhone3()|split(':'))[1] is defined %}{{(contact.getPhone3()|split(':'))[1]}}{%endif%}" placeholder="( _ _ _ ) _ _ _ - _ _ _ _" class="col-sm-4"  data-parsley-trigger="change"   />
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">					
+                                <label for="email">Type</label>
+                                <select class="form-control" name="phonetype3" >
+                                    <option value="Work" {%if (contact.getPhone3()|split(':'))[0] == 'Work' %} selected {%endif%}>Work</option>
+                                    <option value = "Mobile" {%if (contact.getPhone3()|split(':'))[0] == 'Mobile' %} selected {%endif%}  >Mobile</option>         
+                                    <option value="Home" {%if (contact.getPhone3()|split(':'))[0] == 'Home' %} selected {%endif%}>Home</option>
+                                    <option value="Main" {%if (contact.getPhone3()|split(':'))[0] == 'Main' %} selected {%endif%}>Main</option>
+                                    <option value="Work Fax" {%if (contact.getPhone3()|split(':'))[0] == 'Work Fax' %} selected {%endif%} >Work Fax</option>
+                                    <option value="Home Fax" {%if (contact.getPhone3()|split(':'))[0] == 'Home Fax' %} selected {%endif%}>Home Fax</option>
+                                    <option value="Google Voice" {%if (contact.getPhone3()|split(':'))[0] == 'Google Voice' %} selected {%endif%}>Google Voice</option>
+                                    <option value="Pager" {%if (contact.getPhone3()|split(':'))[0] == 'Pager' %} selected {%endif%}>Pager</option>
+                                    <option value="Other" {%if (contact.getPhone3()|split(':'))[0] == 'Other' %} selected {%endif%}>Custom</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {%if contact.getPhone4()== '' %}
+                        <div class="row" id="phoneDiv4" style="display: none">
+                    {%else%}
+                        <script>
+                            showPhoneId++;
+                        </script>
+                        <div class="row" id="phoneDiv4">
+                    {%endif%}
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="telephonework">Telephone</label>
+                                <input type="tel" class="form-control" id="phone4" name="phone4" value="{%if (contact.getPhone4()|split(':'))[1] is defined %}{{(contact.getPhone4()|split(':'))[1]}}{%endif%}" placeholder="( _ _ _ ) _ _ _ - _ _ _ _" class="col-sm-4"  data-parsley-trigger="change"   />
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">					
+                                <label for="email">Type</label>
+                                <select class="form-control" name="phonetype4" >
+                                    <option value="Work" {%if (contact.getPhone4()|split(':'))[0] == 'Work' %} selected {%endif%}>Work</option>
+                                    <option value = "Mobile" {%if (contact.getPhone4()|split(':'))[0] == 'Mobile' %} selected {%endif%}  >Mobile</option>         
+                                    <option value="Home" {%if (contact.getPhone4()|split(':'))[0] == 'Home' %} selected {%endif%}>Home</option>
+                                    <option value="Main" {%if (contact.getPhone4()|split(':'))[0] == 'Main' %} selected {%endif%}>Main</option>
+                                    <option value="Work Fax" {%if (contact.getPhone4()|split(':'))[0] == 'Work Fax' %} selected {%endif%} >Work Fax</option>
+                                    <option value="Home Fax" {%if (contact.getPhone4()|split(':'))[0] == 'Home Fax' %} selected {%endif%}>Home Fax</option>
+                                    <option value="Google Voice" {%if (contact.getPhone4()|split(':'))[0] == 'Google Voice' %} selected {%endif%}>Google Voice</option>
+                                    <option value="Pager" {%if (contact.getPhone4()|split(':'))[0] == 'Pager' %} selected {%endif%}>Pager</option>
+                                    <option value="Other" {%if (contact.getPhone4()|split(':'))[0] == 'Other' %} selected {%endif%}>Custom</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {%if contact.getPhone5()== '' %}
+                        <div class="row" id="phoneDiv5" style="display: none">
+                    {%else%}
+                        <script>
+                            showPhoneId++;
+                        </script>
+                        <div class="row" id="phoneDiv5">
+                    {%endif%}
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="telephonework">Telephone</label>
+                                <input type="tel" class="form-control" id="phone5" name="phone5" value="{%if (contact.getPhone5()|split(':'))[1] is defined %}{{(contact.getPhone5()|split(':'))[1]}}{%endif%}" placeholder="( _ _ _ ) _ _ _ - _ _ _ _" class="col-sm-4"  data-parsley-trigger="change"   />
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">					
+                                <label for="email">Type</label>
+                                <select class="form-control" name="phonetype5" >
+                                    <option value="Work" {%if (contact.getPhone5()|split(':'))[0] == 'Work' %} selected {%endif%}>Work</option>
+                                    <option value = "Mobile" {%if (contact.getPhone5()|split(':'))[0] == 'Mobile' %} selected {%endif%}  >Mobile</option>         
+                                    <option value="Home" {%if (contact.getPhone5()|split(':'))[0] == 'Home' %} selected {%endif%}>Home</option>
+                                    <option value="Main" {%if (contact.getPhone5()|split(':'))[0] == 'Main' %} selected {%endif%}>Main</option>
+                                    <option value="Work Fax" {%if (contact.getPhone5()|split(':'))[0] == 'Work Fax' %} selected {%endif%} >Work Fax</option>
+                                    <option value="Home Fax" {%if (contact.getPhone5()|split(':'))[0] == 'Home Fax' %} selected {%endif%}>Home Fax</option>
+                                    <option value="Google Voice" {%if (contact.getPhone5()|split(':'))[0] == 'Google Voice' %} selected {%endif%}>Google Voice</option>
+                                    <option value="Pager" {%if (contact.getPhone5()|split(':'))[0] == 'Pager' %} selected {%endif%}>Pager</option>
+                                    <option value="Other" {%if (contact.getPhone5()|split(':'))[0] == 'Other' %} selected {%endif%}>Custom</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {%if contact.getPhone6()== '' %}
+                        <div class="row" id="phoneDiv6" style="display: none">
+                    {%else%}
+                        <script>
+                            showPhoneId++;
+                        </script>
+                        <div class="row" id="phoneDiv6">
+                    {%endif%}
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="telephonework">Telephone</label>
+                                <input type="tel" class="form-control" id="phone6" value="{%if (contact.getPhone6()|split(':'))[1] is defined %}{{(contact.getPhone6()|split(':'))[1]}}{%endif%}" name="phone6" placeholder="( _ _ _ ) _ _ _ - _ _ _ _" class="col-sm-4"  data-parsley-trigger="change"   />
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">					
+                                <label for="email">Type</label>
+                                <select class="form-control" name="phonetype6" >
+                                    <option value="Work" {%if (contact.getPhone6()|split(':'))[0] == 'Work' %} selected {%endif%}>Work</option>
+                                    <option value = "Mobile" {%if (contact.getPhone6()|split(':'))[0] == 'Mobile' %} selected {%endif%}  >Mobile</option>         
+                                    <option value="Home" {%if (contact.getPhone6()|split(':'))[0] == 'Home' %} selected {%endif%}>Home</option>
+                                    <option value="Main" {%if (contact.getPhone6()|split(':'))[0] == 'Main' %} selected {%endif%}>Main</option>
+                                    <option value="Work Fax" {%if (contact.getPhone6()|split(':'))[0] == 'Work Fax' %} selected {%endif%} >Work Fax</option>
+                                    <option value="Home Fax" {%if (contact.getPhone6()|split(':'))[0] == 'Home Fax' %} selected {%endif%}>Home Fax</option>
+                                    <option value="Google Voice" {%if (contact.getPhone6()|split(':'))[0] == 'Google Voice' %} selected {%endif%}>Google Voice</option>
+                                    <option value="Pager" {%if (contact.getPhone6()|split(':'))[0] == 'Pager' %} selected {%endif%}>Pager</option>
+                                    <option value="Other" {%if (contact.getPhone6()|split(':'))[0] == 'Other' %} selected {%endif%}>Custom</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {%if contact.getPhone7()== '' %}
+                        <div class="row" id="phoneDiv7" style="display: none">
+                    {%else%}
+                        <script>
+                            showPhoneId++;
+                        </script>
+                        <div class="row" id="phoneDiv7">
+                    {%endif%}
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="telephonework">Telephone</label>
+                                <input type="tel" class="form-control" id="phone7" name="phone7" value="{%if (contact.getPhone7()|split(':'))[1] is defined %}{{(contact.getPhone7()|split(':'))[1]}}{%endif%}" placeholder="( _ _ _ ) _ _ _ - _ _ _ _" class="col-sm-4"  data-parsley-trigger="change"   />
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">					
+                                <label for="email">Type</label>
+                                <select class="form-control" name="phonetype7" >
+                                    <option value="Work" {%if (contact.getPhone7()|split(':'))[0] == 'Work' %} selected {%endif%}>Work</option>
+                                    <option value = "Mobile" {%if (contact.getPhone7()|split(':'))[0] == 'Mobile' %} selected {%endif%}  >Mobile</option>         
+                                    <option value="Home" {%if (contact.getPhone7()|split(':'))[0] == 'Home' %} selected {%endif%}>Home</option>
+                                    <option value="Main" {%if (contact.getPhone7()|split(':'))[0] == 'Main' %} selected {%endif%}>Main</option>
+                                    <option value="Work Fax" {%if (contact.getPhone7()|split(':'))[0] == 'Work Fax' %} selected {%endif%} >Work Fax</option>
+                                    <option value="Home Fax" {%if (contact.getPhone7()|split(':'))[0] == 'Home Fax' %} selected {%endif%}>Home Fax</option>
+                                    <option value="Google Voice" {%if (contact.getPhone7()|split(':'))[0] == 'Google Voice' %} selected {%endif%}>Google Voice</option>
+                                    <option value="Pager" {%if (contact.getPhone7()|split(':'))[0] == 'Pager' %} selected {%endif%}>Pager</option>
+                                    <option value="Other" {%if (contact.getPhone7()|split(':'))[0] == 'Other' %} selected {%endif%}>Custom</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {%if contact.getPhone8()== '' %}
+                        <div class="row" id="phoneDiv8" style="display: none">
+                    {%else%}
+                        <script>
+                            showPhoneId++;
+                        </script>
+                        <div class="row" id="phoneDiv8">
+                    {%endif%}
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="telephonework">Telephone</label>
+                                <input type="tel" class="form-control" id="phone8" name="phone8" value="{%if (contact.getPhone8()|split(':'))[1] is defined %}{{(contact.getPhone8()|split(':'))[1]}}{%endif%}" placeholder="( _ _ _ ) _ _ _ - _ _ _ _" class="col-sm-4"  data-parsley-trigger="change"   />
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">					
+                                <label for="email">Type</label>
+                                <select class="form-control" name="phonetype8" >
+                                    <option value="Work" {%if (contact.getPhone8()|split(':'))[0] == 'Work' %} selected {%endif%}>Work</option>
+                                    <option value = "Mobile" {%if (contact.getPhone8()|split(':'))[0] == 'Mobile' %} selected {%endif%}  >Mobile</option>         
+                                    <option value="Home" {%if (contact.getPhone8()|split(':'))[0] == 'Home' %} selected {%endif%}>Home</option>
+                                    <option value="Main" {%if (contact.getPhone8()|split(':'))[0] == 'Main' %} selected {%endif%}>Main</option>
+                                    <option value="Work Fax" {%if (contact.getPhone8()|split(':'))[0] == 'Work Fax' %} selected {%endif%} >Work Fax</option>
+                                    <option value="Home Fax" {%if (contact.getPhone8()|split(':'))[0] == 'Home Fax' %} selected {%endif%}>Home Fax</option>
+                                    <option value="Google Voice" {%if (contact.getPhone8()|split(':'))[0] == 'Google Voice' %} selected {%endif%}>Google Voice</option>
+                                    <option value="Pager" {%if (contact.getPhone8()|split(':'))[0] == 'Pager' %} selected {%endif%}>Pager</option>
+                                    <option value="Other" {%if (contact.getPhone8()|split(':'))[0] == 'Other' %} selected {%endif%}>Custom</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {%if contact.getPhone9()== '' %}
+                        <div class="row" id="phoneDiv9" style="display: none">
+                    {%else%}
+                        <script>
+                            showPhoneId++;
+                        </script>
+                        <div class="row" id="phoneDiv9">
+                    {%endif%}
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="telephonework">Telephone</label>
+                                <input type="tel" class="form-control" id="phone9" name="phone9" value="{%if (contact.getPhone9()|split(':'))[1] is defined %}{{(contact.getPhone9()|split(':'))[1]}}{%endif%}" placeholder="( _ _ _ ) _ _ _ - _ _ _ _" class="col-sm-4"  data-parsley-trigger="change"   />
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">					
+                                <label for="email">Type</label>
+                                <select class="form-control" name="phonetype9" >
+                                    <option value="Work" {%if (contact.getPhone9()|split(':'))[0] == 'Work' %} selected {%endif%}>Work</option>
+                                    <option value = "Mobile" {%if (contact.getPhone9()|split(':'))[0] == 'Mobile' %} selected {%endif%}  >Mobile</option>         
+                                    <option value="Home" {%if (contact.getPhone9()|split(':'))[0] == 'Home' %} selected {%endif%}>Home</option>
+                                    <option value="Main" {%if (contact.getPhone9()|split(':'))[0] == 'Main' %} selected {%endif%}>Main</option>
+                                    <option value="Work Fax" {%if (contact.getPhone9()|split(':'))[0] == 'Work Fax' %} selected {%endif%} >Work Fax</option>
+                                    <option value="Home Fax" {%if (contact.getPhone9()|split(':'))[0] == 'Home Fax' %} selected {%endif%}>Home Fax</option>
+                                    <option value="Google Voice" {%if (contact.getPhone9()|split(':'))[0] == 'Google Voice' %} selected {%endif%}>Google Voice</option>
+                                    <option value="Pager" {%if (contact.getPhone9()|split(':'))[0] == 'Pager' %} selected {%endif%}>Pager</option>
+                                    <option value="Other" {%if (contact.getPhone9()|split(':'))[0] == 'Other' %} selected {%endif%}>Custom</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="addPhoneDiv">
+                        <div class="col-sm-4" style="margin-bottom: 10px">
+                            <a href="javascript:addPhone()" id="anotherphnoe"><i class="fa fa-phone fa-lg"></i>  Add another phone</a> 
+                        </div>
+                    </div>
+                </div>
+
+                {#                sub contact section#}
+                
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div id="subcontact">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    {%if contact.getSub_con_name1()== '' %}
+                                        <div class="panel panel-default" id="subcontact1" style="display: none">
+                                    {%else%} 
+                                      <script>  
+                                        showSubContactId++;   
+                                      </script>
+                                      <div class="panel panel-default" id="subcontact1" style="display: block">
+                                    {%endif%}    
+                                    
+                                        <div class="panel-heading">Sub-Contact 1</div>
+                                        <div class="panel-body">
+                                            <div>
+                                                <div class="row">			
+                                                    <div class="col-xs-12">
+                                                        <div class="form-group">
+                                                            <label for="firstname">Name</label>
+                                                            <input type="text" name="sub_con_name1" value="{{ contact.getSub_con_name1() }}" class="form-control" id="sub_con_name1"  placeholder="" pattern="^[a-zA-Z_.-,':;0-9 ]*$" data-parsley-pattern="^[a-zA-Z_.,':;0-9 ]*$"  data-parsley-trigger="keyup"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">			
+                                                    <div class="col-xs-12">
+                                                        <div class="form-group">
+                                                            <label for="firstname">Title</label>
+                                                            <input type="text" name="sub_con_title1" value="{{ contact.getSub_con_title1() }}" class="form-control" id="sub_con_title1"  placeholder="" pattern="^[a-zA-Z_.-,':;0-9 ]*$" data-parsley-pattern="^[a-zA-Z_.,':;0-9 ]*$"  data-parsley-trigger="keyup"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">			
+                                                    <div class="col-xs-12">
+                                                        <div class="form-group">
+                                                            <label for="firstname">Email</label>
+                                                            <input type="email"  name="sub_con_email1" value="{{ contact.getSub_con_email1() }}" class="form-control" id="sub_con_email1" placeholder="yourname@yourdomain.com" data-parsley-type="email" data-parsley-trigger="keyup"/>   
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">			
+                                                    <div class="col-xs-12">
+                                                        <div class="form-group">
+                                                            <label for="firstname">Telephone</label>
+                                                            <input type="tel" class="form-control" id="sub_con_phone1" value="{{ contact.getSub_con_phone1() }}" name="sub_con_phone1" placeholder="( _ _ _ ) _ _ _ - _ _ _ _" class="col-sm-4"  data-parsley-trigger="change"   />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    {%if contact.getSub_con_name2()== '' %}
+                                        <div class="panel panel-default" id="subcontact2" style="display: none">
+                                    {%else%} 
+                                      <script>  
+                                        showSubContactId++;   
+                                      </script>
+                                      <div class="panel panel-default" id="subcontact2" style="display: block">
+                                    {%endif%}  
+                                        <div class="panel-heading">Sub-Contact 2</div>
+                                        <div class="panel-body">
+                                            <div>
+                                                <div class="row">			
+                                                    <div class="col-xs-12">
+                                                        <div class="form-group">
+                                                            <label for="firstname">Name</label>
+                                                            <input type="text" name="sub_con_name2" value="{{ contact.getSub_con_name2() }}" class="form-control" id="sub_con_name2"  placeholder="" pattern="^[a-zA-Z_.-,':;0-9 ]*$" data-parsley-pattern="^[a-zA-Z_.,':;0-9 ]*$"  data-parsley-trigger="keyup"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">			
+                                                    <div class="col-xs-12">
+                                                        <div class="form-group">
+                                                            <label for="firstname">Title</label>
+                                                            <input type="text" name="sub_con_title2" value="{{ contact.getSub_con_title2() }}" class="form-control" id="sub_con_title2"  placeholder="" pattern="^[a-zA-Z_.-,':;0-9 ]*$" data-parsley-pattern="^[a-zA-Z_.,':;0-9 ]*$"  data-parsley-trigger="keyup"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">			
+                                                    <div class="col-xs-12">
+                                                        <div class="form-group">
+                                                            <label for="firstname">Email</label>
+                                                            <input type="email"  name="sub_con_email2" value="{{ contact.getSub_con_email2() }}" class="form-control" id="sub_con_email2" placeholder="yourname@yourdomain.com" data-parsley-type="email" data-parsley-trigger="keyup"/>   
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">			
+                                                    <div class="col-xs-12">
+                                                        <div class="form-group">
+                                                            <label for="firstname">Telephone</label>
+                                                            <input type="tel" class="form-control" id="sub_con_phone2" name="sub_con_phone2" value="{{ contact.getSub_con_phone2() }}" placeholder="( _ _ _ ) _ _ _ - _ _ _ _" class="col-sm-4"  data-parsley-trigger="change"   />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row" id="addSubContactDiv">
+                                <div class="col-sm-4" style="margin-bottom: 10px">
+                                    <a href="javascript:addSubContact()" id="anotherphnoe"><i class="fa fa-user-plus fa-lg"></i>  Add Contact</a> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="address1">Address 1</label>
+                            <input type="text" class="form-control" name="address1" value="{{ contact.getAddress1() }}" id="address1" placeholder="Address line 1"  data-parsley-trigger="keyup"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="address2">Address 2</label>
+                            <input type="text" class="form-control" name="address2" value="{{ contact.getAddress2() }}" id="address2" placeholder="Address line 2"  data-parsley-trigger="keyup"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">				
+                    <div class="col-xs-2">
+                        <div class="form-group">
+                            <label for="City">City</label>
+                            <input type="text" class="form-control" id="city" value="{{ contact.getCity() }}" name="city" placeholder="City / Town" pattern="^[a-zA-Z_ ]*$" data-parsley-pattern="^[a-zA-Z_ ]*$"  data-parsley-trigger="keyup"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="form-group">
+                            <label for="City">State</label>
+                            <input type="text" class="form-control" id="state" value="{{ contact.getState() }}" name="state" placeholder="California, New York, Texas, etc." pattern="^[a-zA-Z_ ]*$" data-parsley-pattern="^[a-zA-Z_ ]*$"  data-parsley-trigger="keyup"/>
+                        </div>
+                    </div>
+                    <div class="form-group">							
+                        <div class="col-xs-2">
+                            <label for="City">Zip</label>
+                            <input type="text" class="form-control" id="postalcode" name="postalcode" value="{{ contact.getPostalcode() }}" placeholder="Zip" pattern="^[a-zA-Z0-9_ ]*$" data-parsley-pattern="^[a-zA-Z0-9_ ]*$"  data-parsley-trigger="keyup"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label class="control-label" for="visibility"> Visibility <span style="color:#FF0000;">*</span> </label>
+                            <select class="form-control" name="visibility" >
+                                <option value="public"  {%if contact.getVisibility() == 'public' %}selected {% endif %}>Entire Company</option>
+                                <option value="private" {%if contact.getVisibility() == 'private' %}selected {% endif %}>Private</option>
+                            </select> 
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label class="control-label" for="twitter"> Owner(User)<span style="color:#FF0000;">*</span></label>
+                            <select class="form-control" name="username" >
+                                {%if users is defined%}
+                                    {% for user in users %} 
+                                        {%if contact.getUsername()|lower == user.getUsername()|lower %}
+                                            <option value="{{contact.getUsername()}}" selected="selected">{{user.getFirstname()  ~ ' ' ~ user.getLastname()}}</option>
+                                        {%else%}   
+                                            <option value="{{user.getUsername()}}">{{user.getFirstname()  ~ ' ' ~ user.getLastname()}}</option>
+                                        {%endif%} 
+                                    {% endfor %} 
+                                {%endif%}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">			
+                    <div class="col-xs-6">
+                        <div class="form-group">	
+                            <label for="commorigin">Tags</label>
+                            <input type="text" name="tags" value="{{contact.getTags()}}" class="form-control" data-role="tagsinput" />
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" value = "{{contact.getId()}}" name ="id"> 
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="avatar">Contact Picture</label>
+                            <br>
+                            {%if contact.getImage() != ''%}
+                                <div class="fileinput fileinput-preview fileinput-exists" data-provides="fileinput">
+                                    <div class="fileinput-new thumbnail" style="width: 200px;">
+                                        <img src="{{asset('bundles_v2.0/img/Avatar.PNG')}}" alt="...">
+                                    </div>
+                                    <div class="fileinput-preview fileinput-exists thumbnail" style="width: 200px;">
+                                        <img src="{{asset(contact.getImage())}}" class="image">
+                                    </div>
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileinput-exists">Change</span>
+                                            <span class="fileinput-new">Select image</span>
+                                            <input type="file" name="profileimage">
+                                        </span>
+                                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                    </div>
+                                </div>
+                            {%else%}
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-new thumbnail" style="width: 200px;">
+                                        <img src="{{asset('bundles_v2.0/img/Avatar.PNG')}}" alt="...">
+                                    </div>
+                                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px;"></div>
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileinput-exists">Change</span>
+                                            <span class="fileinput-new">Select image</span>
+                                            <input type="file" name="profileimage">
+                                        </span>
+                                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                    </div>
+                                </div>
+                            {%endif%}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="avatar"> </label>
+                            <button id="savebutton" class="btn btn-primary">Save</button>
+                            <a class="btn btn-default" href="{{path('contacts_contacts_contacts')}}">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% include 'ContactsContactsBundle:Default:editcontactformScript.html.twig' %}

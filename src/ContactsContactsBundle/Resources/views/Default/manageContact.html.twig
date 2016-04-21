@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+	{% include 'LoginLoginBundle:Default:head.html.twig' %}
+
+	<body class="no-skin">
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			{% include 'LoginLoginBundle:Default:navbar.html.twig' %}
+                        
+			<div class="main-content">
+				<div class="main-content-inner">
+					<div class="page-content">
+
+
+						<!-- /section:settings.box -->
+						<div>
+                                                {%if errormsg is defined %}
+                                                    <div class="alert alert-danger alert-dismissable" id="successmsg">
+                                                        <button type="button" class="close bigger-200" data-dismiss="alert" aria-hidden="true">
+                                                                            &times;
+                                                        </button>
+                                                        <center> <strong>{{errormsg}}</strong></center>
+                                                    </div>
+                                                    <script> window.setTimeout(function() { $("#successmsg").alert('close'); }, 5000); </script>
+                                                {%endif%}
+                                                {%if successmsg is defined %}
+                                                    <div class="alert alert-success alert-dismissable" id="errormsg">
+                                                        <button type="button" class="close bigger-200" data-dismiss="alert" aria-hidden="true">
+                                                                            &times;
+                                                        </button>
+                                                        <center> <strong>{{successmsg}}</strong></center>
+                                                    </div>
+                                                    <script> window.setTimeout(function() { $("#errormsg").alert('close'); }, 5000); </script>
+                                                {%endif%}
+							
+						</div><!-- /.page-header -->
+                                                
+                                                <!--Notes modal starts -->
+                                                <div class="modal fade" id="addnotes" role="dialog">
+                                                      <div class="modal-dialog" style="width:50%;margin-left: auto;margin-right: auto;">
+
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content" >
+                                                          <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                                                            <h4 class="modal-title smaller lighter blue"><i class="ace-icon fa fa-comment blue"></i>  Notes</h4> 
+                                                          
+                                                        </div>
+                                                            <div class="widget-body" >
+									<div class="dialogs" id="chatbody" style="height:300px;overflow-y: auto;">
+                                                                            
+                                                                        </div>    <!-- /.widget-body -->
+                                                                        
+									<div class="form-actions">
+                                                                            <div class="input-group">
+										<input placeholder="Type your message here ..." type="text" id="message" class="form-control" name="message" />
+										<span class="input-group-btn">
+											<button class="btn btn-sm btn-info no-radius" type="button" onclick="savenote()">
+												<i class="ace-icon fa fa-share"></i>
+												Add
+											</button>
+										</span>
+                                                                              </div>
+									</div>
+									
+                                                                        <input type="hidden" name="typeid" id="typeid">  
+                                                            </div><!-- /.widget-box -->
+                                                      </div>
+                                                    </div>   
+                                                  </div>
+                                                <!-- Notes modal ends -->
+                                                
+                                                 <!-- start of add tasks Modal -->
+                                                     
+                                                     <div class="modal fade" id="addtask" role="dialog">
+                                                      <div class="modal-dialog" style="width:50%;margin-left: auto;margin-right: auto;">
+
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content" style="background-clip: inherit;" >
+                                                          <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                                                            <h4 class="modal-title smaller lighter blue">Add a New Task</h4> 
+                                                            
+                                                          </div>
+                                                         
+                                                         <form class="form-horizontal" role="form" action="{{path('task_savetask')}}" method="post" data-parsley-validate>  
+                                                            <div class="modal-body no-padding-bottom">
+                                                               <div class="form-inline form-group" > 
+                                                                            <div class="input-group col-sm-12">
+                                                                             
+										<label class="col-sm-1 control-label no-padding-left no-padding-right " style="text-align: left;margin-left: 5px;width:10% " for="linkedin"> Priority <span style="color:#FF0000;">*</span>  </label>
+                                                                                <div class="input-group col-sm-2 pull-left no-padding-right no-padding-left" style="width:15%"> 
+										
+                                                                                   <select class="form-control no-padding-left" name="priority" >
+                                                                                                    
+                                                                                        <option value="Normal" >Normal</option>
+                                                                                        <option value="Medium" >Medium</option>
+                                                                                        <option value="High" >High</option>
+                                                                                   </select>
+                                                                                   
+                                                                                </div>
+                                                                                
+                                                                                <label class="col-sm-1 control-label no-padding-left no-margin-left" style="width:13%" for="twitter"> Due <span style="color:#FF0000;">*</span> </label>
+                                                                                <div class="input-group col-sm-2"style="width:15%"> 
+                                                                                
+                                                                                
+                                                                                    <input class="date-picker col-sm-12" id="taskdue" type="text" name="due" data-date-format="mm-dd-yyyy" placeholder="mm-dd-yyyy" />
+                                                                                
+                                                                                </div>
+                                                                                <input type="hidden" name="assignto" />
+                                                                                
+                                                                                <div class="col-sm-5 pull-right">    
+                                                                                <label class="col-sm-4 control-label no-padding-left" style="width:40%" for="linkedin"> Visibility <span style="color:#FF0000;">*</span>  </label>
+                                                                                <div class="input-group col-sm-8" style="width:60%"> 
+										
+                                                                                   <select class="form-control" name="visibility" >
+                                                                                                    
+                                                                                        <option value="Public" >Entire Company</option>
+                                                                                        <option value="Private" >Private</option>
+                                                                                       
+                                                                                   </select>
+                                                                                   
+                                                                                </div>
+                                                                                </div>
+                                                                                </div>
+                                                                            </div>    
+                                                                               
+							        </div>   
+                                                                <div class="form-inline form-group">
+                                                                    <label class="col-sm-2 control-label no-padding-left" style="text-align:left;margin-left: 15px;" for="name"> Task name<span style="color:#FF0000;">*</span> </label><br><br>
+                                                                    <div class="input-group col-sm-12" style="margin-left: 15px;width:94%">    
+										<input type="text" id="taskname" placeholder="Task name" class="col-sm-12" name="notename" data-parsley-trigger="keyup"  required />
+                                                                                
+                                                                    </div>
+                                                                            
+                                                                              
+                                                                </div> 
+                                                                
+                                                               <div class="form-inline form-group">
+									    <label for="notes" class="col-sm-1 control-label no-padding-left" style="text-align:left;margin-left: 15px;">Notes<span style="color:#FF0000;">*</span> </label><br><br>
+                                                                            <div class="input-group" style="margin-left: 15px;width:94%" >      
+										<textarea  id="tasknotes" placeholder="Notes"  name="notes" data-parsley-trigger="keyup" style="height:250px;width:100%"></textarea>
+                                                                            </div>    
+                                                                </div>
+                                                                
+                                                                
+                                                                
+                                                                <div class="form-inline form-group">
+                                                                    <label class="col-sm-1 control-label no-padding-left" for="name" style="text-align:left;margin-left: 15px;"> Tags</label><br><br>
+                                                                    <div class="input-group col-sm-11" style="margin-left: 15px;width:94%">    
+										<input type="text" id="tasktags" placeholder="Tags" class="col-sm-12" name="tags" data-parsley-trigger="keyup"/>
+                                                                                
+                                                                    </div>
+                                                                            
+                                                                              
+                                                                </div> 
+                                                                
+                                                                <input type="hidden" name="tasktype" value="contact" id="revenue">
+                                                                <input type="hidden" name="tasktypeid" id="tasktypeid">                                   
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                              <button type="submit" class="btn btn-info">Save</button>
+                                                              <button type="button" class="btn btn-info" onclick="return canceltaskmodal();" >Cancel</button>
+                                                            </div>
+                                                        </form>  
+                                                        </div>
+
+                                                      </div>
+                                                    </div>   
+                                                    
+                                                    
+                                                    
+                                                    <!-- end of add tasks Modal -->
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<h3 class="header smaller lighter blue">Manage Contacts</h3>
+                                                               
+									<table id="dynamic-table" class="table table-striped table-bordered table-hover">
+									<thead>
+									<tr>
+                                                                            
+                                                                                        <th>Name</th>
+                                                                                        <th>Organization</th>
+                                                                                        <th>Email - Primary</th>
+											<th>Phone - Primary</th>
+                                                                                        <th># of Opportunities</th>
+                                                                                        <th>Projected Revenue</th>
+                                                                                        <th>Weighted Forecast</th>
+                                                                                        <th>Tags</th>
+											<th>Owner</th>
+                                                                                        <th>Action</th>
+                                                                                        
+									</tr>
+                                                                        </thead>
+
+									<tbody>
+                                                                             {%if contacts is defined%}
+                                                                                    {% for contact in contacts %} 
+                                                                                        {% if (contact.getStatus()== 'Active')%}   
+                                                                                        {% if((contact.getVisibility()=='public') or ((contact.getVisibility()=='private') and (contact.getUsername() == name)) )%}    
+                                                                                            <tr>
+														
+                                                                                           <td>{{contact.getName()}}</td>
+                                                                                            <td>{{contact.getCompany()}}</td> 
+                                                                                           <td><a href="mailto:{{ (contact.getEmail0()|split(':'))[1] }}">{{ (contact.getEmail0()|split(':'))[1]  }}</a></td>
+                                                                                           <td>{{(contact.getPhone0()|split(':'))[1]}}</td>  
+                                                                                           <td>{%if contact.getNoofopportunities() != 0 %}<a href="{{ path('contacts_contacts_filteredopportunities',{'name':contact.getName()} )}}">{{ contact.getNoofopportunities() }}</a>{%else%}{{ contact.getNoofopportunities() }}{%endif%}</td>
+                                                                                           
+                                                                                           <td>${{contact.getProjectedrevenue}}</td>
+                                                                                           <td>${{contact.getWeightedforecast()}}</td>
+                                                                                           <td>{{contact.getTags()}}</td>
+                                                                                           <td>{{contact.getFirstname() ~ ' ' ~ contact.getLastname()}}</td>
+                                                                                           {%if ( name|lower == contact.getUsername()|lower )%}    
+                                                                                            <td class="actions"><a  title="Edit" href="{{ path('contacts_contacts_editcontactpage',{'id':contact.getId()} )}}"><i class="fa fa-pencil"></i></a>  
+                                                                                                {%if contact.getCompany() != ''%}<a href="{{ path('opportunity_addcontactopportunity',{'name':contact.getName(),'orgname':contact.getCompany(),'id':contact.getId()})}}" title="Add Opportunity"><i class="fa fa-plus"></i></a>{%else%}<a href="{{ path('opportunity_addcontactopportunity',{'name':contact.getName(),'orgname':'null','id':contact.getId()})}}" title="Add Opportunity"><i class="fa fa-plus"></i></a>{%endif%}
+                                                                                                <a title="Notes" onclick="notespopup({{contact.getId()}})"><i class="fa fa-file-o"></i></a>
+                                                                                                <a title="Tasks" onclick="taskpopup({{contact.getId()}})"><i class="fa fa-tasks"></i></a>
+                                                                                                {%if (contact.getStatus == 'Inactive')%}<a href="{{ path('contacts_contacts_activate',{'id':contact.getId()} )}}">Activate</a>{%endif%}</td>
+                                                                                        {%else%}
+                                                                                            <td></td>
+                                                                                        {%endif%}    
+                                                                                                                
+                                                                                            </tr>
+                                                                                        {%endif%}
+                                                                                        {%endif%}
+                                                                                   {% endfor %} 
+                                                                               {%endif%}   
+                                                                        </tbody>
+                                                                    </table>
+								
+
+								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div>
+			</div><!-- /.main-content -->
+
+			{% include 'LoginLoginBundle:Default:footer.html.twig' %}
+
+			<a href="#" style="margin-right:30px;" id="btn-scroll-up" class="btn-scroll-up btn btn-lg btn-inverse">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-140"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='{{asset('bundles/loginlogin/js/ace/jquery.js')}}'>"+"<"+"/script>");
+		</script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='../assets/js/jquery1x.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+		<script type="text/javascript">
+			if('ontouchstart' in document.documentElement) document.write("<script src='{{asset('bundles/loginlogin/js/ace/jquery.mobile.custom.js')}}'>"+"<"+"/script>");
+		</script>
+		<script src="{{asset('bundles/loginlogin/js/ace/bootstrap.js')}}"></script>
+                
+		<!-- page specific plugin scripts -->
+
+		<!-- ace scripts -->
+		<script src="{{asset('bundles/loginlogin/js/ace/elements.scroller.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/elements.colorpicker.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/elements.fileinput.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/elements.typeahead.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/elements.wysiwyg.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/elements.spinner.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/elements.treeview.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/elements.wizard.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/elements.aside.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.ajax-content.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.touch-drag.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.sidebar.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.sidebar-scroll-1.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.submenu-hover.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.widget-box.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.settings.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.settings-rtl.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.settings-skin.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.widget-on-reload.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/ace.searchbox-autocomplete.js')}}"></script>
+                
+                <script src="{{asset('bundles/loginlogin/js/ace/jquery.dataTables.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/jquery.dataTables.bootstrap.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/dataTables.tableTools.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/dataTables.colVis.js')}}"></script>
+                <script src="{{asset('bundles/loginlogin/js/ace/bootstrap-datepicker.js')}}"></script>
+		<script src="{{asset('bundles/loginlogin/js/ace/bootstrap-timepicker.js')}}"></script>
+                <script src="{{asset('bundles/loginlogin/js/ace/daterangepicker.js')}}"></script>
+                
+                 
+		<!-- inline scripts related to this page -->
+                <script type="text/javascript">
+			jQuery(function($) {
+				//initiate dataTables plugin
+				var oTable1 = 
+				$('#dynamic-table')
+				//.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
+				.dataTable( {
+					bAutoWidth: false,
+					"aoColumns": [ null,null,null, 
+					  null, null, null, null,null,null,{ "bSortable": false }
+					],
+					"aaSorting": [0,'asc'],  
+			
+					//,
+					//"sScrollY": "200px",
+					//"bPaginate": false,
+			
+					//"sScrollX": "100%",
+					//"sScrollXInner": "120%",
+					//"bScrollCollapse": true,
+					//Note: if you are applying horizontal scrolling (sScrollX) on a ".table-bordered"
+					//you may want to wrap the table inside a "div.dataTables_borderWrap" element
+			
+					"iDisplayLength": {{manageview}}
+			    } );
+				//oTable1.fnAdjustColumnSizing();
+			
+			
+				//TableTools settings
+				TableTools.classes.container = "btn-group btn-overlap";
+				TableTools.classes.print = {
+					"body": "DTTT_Print",
+					"info": "tableTools-alert gritter-item-wrapper gritter-info gritter-center white",
+					"message": "tableTools-print-navbar"
+				}
+			
+				
+				
+				//ColVis extension
+				var colvis = new $.fn.dataTable.ColVis( oTable1, {
+					"buttonText": "<i class='fa fa-search'></i>",
+					"aiExclude": [0, 6],
+					"bShowAll": true,
+					//"bRestore": true,
+					"sAlign": "right",
+					"fnLabel": function(i, title, th) {
+						return $(th).text();//remove icons, etc
+					}
+					
+				}); 
+				
+				
+			
+			
+				
+				
+					$(document).on('click', '#dynamic-table .dropdown-toggle', function(e) {
+					e.stopImmediatePropagation();
+					e.stopPropagation();
+					e.preventDefault();
+				});
+				
+				
+				//And for the first simple table, which doesn't have TableTools or dataTables
+				//select/deselect all rows according to table header checkbox
+				
+				
+			
+				/********************************/
+				//add tooltip for small view action buttons in dropdown menu
+				$('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
+				
+				//tooltip placement on right or left
+				function tooltip_placement(context, source) {
+					var $source = $(source);
+					var $parent = $source.closest('table')
+					var off1 = $parent.offset();
+					var w1 = $parent.width();
+			
+					var off2 = $source.offset();
+					//var w2 = $source.width();
+			
+					if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
+					return 'left';
+				}
+                                
+                                $('.date-picker').datepicker({
+					autoclose: true,
+					todayHighlight: true
+				})
+				//show datepicker when clicking on the icon
+				.next().on(ace.click_event, function(){
+					$(this).prev().focus();
+				});
+			
+				$('#dynamic-table_filter').prepend('<a href="{{path('contacts_contacts_addcontact')}}"><button class="btn btn-info no-padding" style="margin-right:10px;"><i class="ace-icon fa fa-plus bigger-110"></i> Add</button></a><a href="{{path('contacts_contacts_importcontacts')}}"><button class="btn btn-info no-padding" style="margin-right:10px;"><i class="ace-icon fa fa-plus bigger-110"></i> Import</button></a>');
+                                
+                                $("select").on('change', function() {
+                                     $.post('{{path('login_login_saveconfig')}}',               
+                                        {name:'contactview',value:this.value}, 
+                                        function(response){
+                                            if(response !== "false"){
+                                  
+
+                                            }else{
+                                                 console.log("error occured in getting the manage view number in contacts",response); 
+                                            }
+                                     });  
+                                     
+                                });
+			});
+                        
+		</script>
+                <script>
+                    function cancelnotemodal(){
+                        document.getElementById('typeid').value = '';
+                        document.getElementById('due').value = '';
+                        document.getElementById('notename').value = '';
+                        document.getElementById('notes').value = '';
+                        document.getElementById('tags').value = '';
+                        $('#addnotes').modal('hide');
+                    }
+                    function notespopup(id){
+                        
+                      document.getElementById('chatbody').innerHTML = "";
+                      document.getElementById('typeid').value = id;
+                      $.post('{{path('notes_getnotes')}}',               
+                    {id: id,type:'contact'}, 
+                    function(response){
+                        if(response !== "false"){
+                            //console.log("@@@@@@@@@",response);
+                             var notes = response.split('||');
+                            										
+                           
+                            for(i=0;i<notes.length-1;i++){
+                                var details = notes[i].split('**');
+                                if('{{name}}' == details[2]){
+                                    document.getElementById('chatbody').innerHTML += '<div class="itemdiv dialogdiv"><div class="user"><img alt="Alexa Avatar" src="{{asset('bundles/loginlogin/images/default_user_profile_0.png')}}" /></div><input type="hidden" id="note_id'+i+'" value="'+details[0]+'" ><div class="body"><div class="name" id="nameid'+i+'">'+details[1]+' &nbsp;&nbsp;&nbsp; <b>'+details[3]+'</b>&nbsp;&nbsp;&nbsp; <a id="link'+i+'" onclick="editnote('+i+')"><i class="fa fa-pencil"></i></a></div><div class="text" id="textid'+i+'">'+details[4]+'</div></div></div>';
+				
+                                }else{
+                                   document.getElementById('chatbody').innerHTML += '<div class="itemdiv dialogdiv"><div class="user"><img alt="Alexa Avatar" src="{{asset('bundles/loginlogin/images/default_user_profile_0.png')}}" /></div><input type="hidden" id="note_id'+i+'" value="'+details[0]+'" ><div class="body"><div class="name" id="nameid'+i+'">'+details[1]+' &nbsp;&nbsp;&nbsp; <b>'+details[3]+'</b></div><div class="text" id="textid'+i+'">'+details[4]+'</div></div></div>';
+				 
+                                }
+                                //console.log("######",htmlcode);
+                            }
+                            afterajaxnote();
+                        }else{
+                            i=0;
+                           //console.log("error occured in the mange notes in retriving note",response); 
+                          afterajaxnote();
+                        }
+                    }); 
+                    
+                    
+                    }
+                    function afterajaxnote(){
+                        
+                         $('#addnotes').modal('show');
+                        
+                    }
+                    function editnote(id){
+                       document.getElementById('link'+id).style.display = "none"; 
+                       var text = document.getElementById('textid'+id).innerHTML;
+                       document.getElementById('textid'+id).innerHTML = '';
+                       document.getElementById('textid'+id).innerHTML = '<textarea id ="textarea'+id+'" style="width:100%">'+text+'</textarea><br><button type="button" class="btn btn-info btn-sm pull_right" onclick="updatenotes('+id+')" >Update</button>';
+                       
+                        
+                    }
+                    function savenote(){
+                        if(document.getElementById('message').value != ''){
+                                var note = document.getElementById('message').value;
+                                document.getElementById('message').value = '';
+                                var type = "contact";
+                                var type_id = document.getElementById('typeid').value;
+                                var username = "{{name}}";
+                                  $.post('{{path('notes_savenote')}}',               
+                            {type:type,type_id:type_id,note:note,username:username}, 
+                            function(response){
+                                if(response !== "false"){
+                                   // console.log("#######",response);
+                                   var details = response.split('**');
+                                   document.getElementById('chatbody').innerHTML += '<div class="itemdiv dialogdiv"><div class="user"><img alt="Alexa Avatar" src="{{asset('bundles/loginlogin/images/default_user_profile_0.png')}}" /></div><input type="hidden" id="note_id'+i+'" value="'+details[0]+'" ><div class="body"><div class="name" id="nameid'+i+'">'+details[1]+' &nbsp;&nbsp;&nbsp; <b>'+details[3]+'</b>&nbsp;&nbsp;&nbsp; <a id="link'+i+'" onclick="editnote('+i+')"><i class="fa fa-pencil"></i></a></div><div class="text" id="textid'+i+'">'+details[4]+'</div></div></div>';
+                                   i++;
+                                   var objDiv = document.getElementById("chatbody");
+                                   objDiv.scrollTop = objDiv.scrollHeight;
+                                }else{
+
+                                }
+                            }); 
+                        }
+                    }
+                    function updatenotes(id){
+                         var noteid = document.getElementById('note_id'+id).value;
+                         var note = document.getElementById('textarea'+id).value;
+                         $.post('{{path('notes_updatenotes')}}',               
+                            {noteid:noteid,note:note}, 
+                            function(response){
+                                if(response !== "false"){
+                                   console.log("#######",response);
+                                   var details = response.split('**');
+                                   document.getElementById('nameid'+id).innerHTML = details[1]+' &nbsp;&nbsp;&nbsp; <b>'+details[3]+'</b>&nbsp;&nbsp;&nbsp; <a id="link'+id+'" onclick="editnote('+id+')"><i class="fa fa-pencil"></i></a>';
+                                   document.getElementById('textid'+id).innerHTML = details[4];
+                                }else{
+
+                                }
+                            }); 
+                    }
+                    
+                    
+                    function taskpopup(id){
+                       
+                         
+                        
+                            $('#addtask').modal('show');
+                            document.getElementById('tasktypeid').value = id;   
+                        
+                    }
+                    
+                    function canceltaskmodal(){
+                        document.getElementById('tasktypeid').value = '';
+                        document.getElementById('taskdue').value = '';
+                        document.getElementById('taskname').value = '';
+                        document.getElementById('tasknotes').value = '';
+                        document.getElementById('tasktags').value = '';
+                        $('#addtask').modal('hide');
+                    }
+                </script>    
+		<script type="text/javascript">
+			jQuery(function($) {
+			 var $sidebar = $('.sidebar').eq(0);
+			 if( !$sidebar.hasClass('h-sidebar') ) return;
+			
+			 $(document).on('settings.ace.top_menu' , function(ev, event_name, fixed) {
+				if( event_name !== 'sidebar_fixed' ) return;
+			
+				var sidebar = $sidebar.get(0);
+				var $window = $(window);
+			
+				//return if sidebar is not fixed or in mobile view mode
+				var sidebar_vars = $sidebar.ace_sidebar('vars');
+				if( !fixed || ( sidebar_vars['mobile_view'] || sidebar_vars['collapsible'] ) ) {
+					$sidebar.removeClass('lower-highlight');
+					//restore original, default marginTop
+					sidebar.style.marginTop = '';
+			
+					$window.off('scroll.ace.top_menu')
+					return;
+				}
+			
+			
+				 var done = false;
+				 $window.on('scroll.ace.top_menu', function(e) {
+			
+					var scroll = $window.scrollTop();
+					scroll = parseInt(scroll / 4);//move the menu up 1px for every 4px of document scrolling
+					if (scroll > 17) scroll = 17;
+			
+			
+					if (scroll > 16) {			
+						if(!done) {
+							$sidebar.addClass('lower-highlight');
+							done = true;
+						}
+					}
+					else {
+						if(done) {
+							$sidebar.removeClass('lower-highlight');
+							done = false;
+						}
+					}
+			
+					sidebar.style['marginTop'] = (17-scroll)+'px';
+				 }).triggerHandler('scroll.ace.top_menu');
+			
+			 }).triggerHandler('settings.ace.top_menu', ['sidebar_fixed' , $sidebar.hasClass('sidebar-fixed')]);
+			
+			 $(window).on('resize.ace.top_menu', function() {
+				$(document).triggerHandler('settings.ace.top_menu', ['sidebar_fixed' , $sidebar.hasClass('sidebar-fixed')]);
+			 });
+			
+			
+			});
+		</script>
+
+		
+	</body>
+</html>
+

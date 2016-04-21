@@ -1,0 +1,107 @@
+<script src="{{asset('bundles/loginlogin/js/jquery.maskedinput.js')}}"></script>
+<script src="{{asset('bundles/loginlogin/js/jquery.number.js')}}"></script>
+
+<script type="text/javascript">
+    jQuery(function ($) {
+        $('#projectedrevenue').number(true, 0);
+    });
+</script>
+<!-- Modal -->
+<div class="modal fade" id="addTaskModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title"><i class="fa fa-list"></i> Add Task</h3>
+            </div>
+            <div class="modal-body">
+                <form action="#" role="form" method="post" enctype="multipart/form-data" data-parsley-validate>
+                    <div class="row">			
+                        <div class="col-xs-3">
+                            <div class="form-group" id="filterStageDiv">
+                                <label for="firstname">Priority <span style="color:#FF0000;">*</span></label>
+                                <select class="form-control" name="priority" id="priority">
+                                    <option value="Normal" >Normal</option>
+                                    <option value="Medium" >Medium</option>
+                                    <option value="High" >High</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="form-group" id="filterStageDiv">
+                                <label for="firstname">Due <span style="color:#FF0000;">*</span></label>
+                                <input type="text" class="form-control" name="due" id="due">
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="form-group" id="filterStageDiv">
+                                <label for="firstname">AssignTo <span style="color:#FF0000;">*</span></label>
+                                <select class="form-control" name="assignto" id="shareduserselect" >
+                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="form-group" id="filterStageDiv">
+                                <label for="firstname">Visibility <span style="color:#FF0000;">*</span></label>
+                                <select class="form-control" name="visibility" id="visibility" >
+                                    <option value="Public" >Entire Company</option>
+                                    <option value="Private" >Private</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">			
+                        <div class="col-xs-12">
+                            <div class="form-group" id="filterStageDiv">
+                                <label for="firstname">Task Name <span style="color:#FF0000;">*</span></label>
+                                <input type="text" id="taskname" placeholder="Task name" class="form-control" 
+                                       name="notename" id="notename" data-parsley-trigger="keyup" required/>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">			
+                        <div class="col-xs-12">
+                            <div class="form-group" id="filterStageDiv">
+                                <label for="firstname">Description</label>
+                                <textarea  id="tasknotes" placeholder="Notes" name="notes" class="form-control" 
+                                           id="notes" data-parsley-trigger="keyup" rows="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">			
+                        <div class="col-xs-12">
+                            <div class="form-group" id="filterStageDiv">
+                                <label for="firstname">Tags</label>
+                                <input type="text" id="tasktags" class="form-control" name="tags"  data-role="tagsinput"/>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="tasktypeid"/>
+                    <input type="hidden" id="tasktype"/>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default" href="javascript:clearFilter()">Cancel</a>
+                <button id="savebutton" class="btn btn-primary" onclick="saveTask()" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="{{asset('bundles_v2.0/dist/js/bootstrap-tagsinput.js')}}"></script>
+{% include 'TaskBundle:Default:taskModalScript.html.twig' %}
+<script>
+    $('#due').datepicker({
+
+    }).on('changeDate', function(e){
+        $(this).datepicker('hide');
+    });
+$('#due').datepicker('setDate', new Date());
+</script>

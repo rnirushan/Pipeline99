@@ -1,0 +1,26 @@
+
+<div class="modal fade" id="addnotes" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Notes</h4>
+            </div>
+            <div class="modal-body" style='height: 400px'>
+                
+                {% include 'NotesBundle:Default:notesContent.html.twig' %}
+            </div>
+            <div class="panel-footer">
+                    <div class="input-group">
+                        <input id="message" type="text" class="form-control input-md chat_input" placeholder="Write your message here..." />
+                        <span class="input-group-btn">
+                        <button class="btn btn-primary btn-md" id="btn-chat" onclick="savenote()">Send</button>
+                        </span>
+                    </div>
+            </div>
+       </div>
+
+    </div>
+</div>

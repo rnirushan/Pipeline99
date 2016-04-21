@@ -1,0 +1,22 @@
+<script>
+    var earningData = [];
+    {% for earning in earningGoals.data %} 
+        
+        earningData.push({
+            period: '{{earning.year}}',
+            earningGoal: {{earningGoals.goal}},
+            earning: {{earning.earning}}
+        });
+        
+    {% endfor %}
+    Morris.Area({
+        element: 'earning-area-chart',
+        data: earningData,
+        xkey: 'period',
+        ykeys: ['earningGoal', 'earning'],
+        labels: ['Earning Goal', 'Earning'],
+        pointSize: 2,
+        hideHover: 'auto',
+        resize: true
+    });
+</script>

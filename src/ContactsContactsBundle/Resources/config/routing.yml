@@ -1,0 +1,81 @@
+contacts_contacts_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: ContactsContactsBundle:Contacts:index }
+   
+contacts_contacts_managecontacts:
+    path:     /contacts
+    defaults: { _controller: ContactsContactsBundle:Contacts:managecontacts }
+    
+contacts_contacts_contacts:
+    path:     /contactsV2
+    defaults: { _controller: ContactsContactsBundle:Contacts:managecontactsV2 }
+    
+contacts_contacts_addcontact:
+    path:     /addcontact
+    defaults: { _controller: ContactsContactsBundle:Contacts:addcontact }
+    
+contacts_contacts_addcontactV2:
+    path:     /addcontactV2
+    defaults: { _controller: ContactsContactsBundle:Contacts:addcontactV2 }
+
+contacts_contacts_createcontact:
+    path:     /createcontact
+    defaults: { _controller: ContactsContactsBundle:Contacts:createcontact }
+
+contacts_contacts_contactvalidate:
+    path:     /contactvalidate
+    defaults: { _controller: ContactsContactsBundle:Contacts:contactvalidate }
+
+contacts_contacts_editcontactpage:
+    path:     /editcontact/{id}
+    defaults: { _controller: ContactsContactsBundle:Contacts:editcontactpage }
+    
+contacts_contacts_editcontactpageV2:
+    path:     /editcontactV2/{id}
+    defaults: { _controller: ContactsContactsBundle:Contacts:editcontactpageV2 }
+    
+contacts_contacts_updatecontact:
+    path:     /updatecontact
+    defaults: { _controller: ContactsContactsBundle:Contacts:updatecontact }
+    
+contacts_contacts_activate:
+   path:     /activate/{id}
+   defaults: { _controller: ContactsContactsBundle:Contacts:activate }
+   
+contacts_contacts_deletecontact:
+   path:     /deletecontact/{id}
+   defaults: { _controller: ContactsContactsBundle:Contacts:deletecontact }
+    
+contacts_contacts_uploadcontact:
+   path:     /uploadcontact
+   defaults: { _controller: ContactsContactsBundle:Contacts:uploadcontact }
+   
+contacts_contacts_importcontacts:
+   path:     /importcontacts
+   defaults: { _controller: ContactsContactsBundle:Contacts:importcontacts }
+   
+contacts_contacts_contactavailability:
+   path:     /contactavailability
+   defaults: { _controller: ContactsContactsBundle:Contacts:contactavailability }
+
+contacts_contacts_filteredopportunities:
+   path:     /filteredopportunities/{name}
+   defaults: { _controller: ContactsContactsBundle:Contacts:filteredopportunities }
+   
+contacts_contacts_table_data:
+   path:     /contactTableData
+   defaults: { _controller: ContactsContactsBundle:Contacts:contactTableData }
+   
+contacts_contacts_table_data_username_filter:
+   path:     /contactTableDataUsernameFilter/{username}
+   defaults: { _controller: ContactsContactsBundle:Contacts:contactTableDataUsernameFilter }
+
+contacts_delete_contact:
+    path:     /deleteV2
+    defaults: { _controller: ContactsContactsBundle:Contacts:deleteContactV2 }
+    
+contacts_activate_contact:
+    path:     /activateV2
+    defaults: { _controller: ContactsContactsBundle:Contacts:activateContactV2 }
+    
+    

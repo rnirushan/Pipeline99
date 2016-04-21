@@ -1,0 +1,11 @@
+web_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: webBundle:Default:index }
+    
+web_support:
+    path:     /support
+    defaults: { _controller: webBundle:Default:support }
+    
+web_dashboard:
+    path:     /dashboard
+    defaults: { _controller: webBundle:Default:dashboard }

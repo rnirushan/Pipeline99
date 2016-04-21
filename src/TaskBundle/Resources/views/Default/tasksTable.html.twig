@@ -1,0 +1,89 @@
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div style="padding:25px">
+            <div class="row">
+                <div class="col-lg-12">
+                    
+                    <div class="pull-right">  
+                        <span calss="pull-right">
+                            {% if opportunity is defined %}
+                                <a href="{{path('opportunity_manageopportunityV2')}}" style="color: black;margin-left: 10px;border-right: 2px solid #ddd;"> <i class="fa fa-reply"></i> </a>
+                            {% elseif contact is defined %}
+                                <a href="{{path('contacts_contacts_contacts')}}" style="color: black;margin-left: 10px;border-right: 2px solid #ddd;"> <i class="fa fa-reply"></i> </a>
+                            {% elseif user is defined %}
+                                <a href="{{path('login_login_users')}}" style="color: black;margin-left: 10px;border-right: 2px solid #ddd;"> <i class="fa fa-reply"></i> </a>
+                            {% endif %}
+                            {% if opportunity is defined %}
+                                <a href="javascript:taskpopup('{{opportunity.getSharing()}}','{{opportunity.getUsername()}}',{{opportunity.getId()}}, 'opportunity')" 
+                                   style="color: black;margin-left: 10px;">
+                                     <i class="fa fa-plus"></i> Add Tasks
+                                </a>
+                            {% elseif contact is defined %}
+                                <a href="javascript:taskpopup('','{{contact.getUsername()}}',{{contact.getId()}}, 'contact')"
+                                   style="color: black;margin-left: 10px;">
+                                     <i class="fa fa-plus"></i> Add Tasks
+                                </a>
+                            {% elseif user is defined %}
+                                <a href="javascript:taskpopup('','{{user.getUsername()}}',{{user.getId()}}, 'user')"
+                                   style="color: black;margin-left: 10px;">
+                                     <i class="fa fa-plus"></i> Add Tasks
+                                </a>
+                            {% endif %}
+                        </span>
+                        <span calss="pull-right" style="margin-left: 10px;border-right: 2px solid #ddd;border-left: 2px solid #ddd;">
+                            <a href="javascript:refreshTable()" style="color: black;"><i class="fa fa-refresh fa-lg" style="margin-left: 5px;margin-right: 2px;"></i></a>
+                        </span>
+                        <span calss="pull-right" style="margin-left: 10px">
+                            <a href="javascript:window.print()" style="color: black;"><i class="fa fa-print fa-lg"></i></a>
+                        </span>
+                        {#<span calss="pull-right" style="margin-left: 10px">
+                            <a href="#" style="color: black;"><i class="fa fa-file-text-o fa-lg"></i></a>
+                        </span>#}
+                        <span calss="pull-right" style="margin-left: 10px">
+                            <a href="javascript:exportTableDataToCSV()" style="color: black;"><i class="fa fa-file-excel-o fa-lg"></i></a>
+                        </span>
+                        <span calss="pull-right" style="margin-left: 10px">
+                            <a href="javascript:exportTableDataToPDF()" style="color: black;"><i class="fa fa-file-pdf-o fa-lg"></i></a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            {% include 'TaskBundle:Default:addTaskModal.html.twig' %}
+            {% include 'TaskBundle:Default:editTaskModal.html.twig' %}
+            <div class="row">
+                <div class="col-lg-12" id="tableDiv" style="display: none">
+                    <div id="user-table-div" class="table-responsive" style="min-height: 360px;padding-bottom: 100px">
+                        <table id="table"
+                               data-toggle="table"
+                               data-detail-view="true"
+                               data-search="true"
+                               data-page-size="{{manageview}}"
+                               data-page-list="[10,25,50]"
+                               data-pagination="true"
+                               data-show-columns="true"
+                               data-detail-formatter="detailFormatter"
+                               data-row-style="rowStyle"
+                               data-maintain-selected="true">
+                            <thead>
+                                <tr>
+                                    <th data-field="state" data-checkbox="true"></th>
+                                    <th data-field="taskName" data-sortable="true">Task Name</th>
+                                    <th data-field="name" data-sortable="true">Name</th>
+                                    <th data-field="company" data-sortable="true">Company</th>
+                                    <th data-field="priority" data-sortable="true">Priority</th>
+                                    <th data-field="assignedTo" data-sortable="true">Assigned To</th>
+                                    <th data-field="dueDate" data-sortable="true">Due Date</th>
+                                    <th data-field="action">Action</th>
+                                    <th data-field="tags">tags</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% include 'TaskBundle:Default:tasksTableScript.html.twig' %}

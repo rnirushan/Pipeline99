@@ -1,0 +1,88 @@
+<script src="{{asset('bundles/loginlogin/js/parsley.js')}}"></script>
+<script src="{{asset('bundles/loginlogin/js/parsley.min.js')}}"></script>
+<script src="{{asset('bundles/loginlogin/js/parsley.remote.js')}}"></script>
+<script src="{{asset('bundles/loginlogin/js/parsley.remote.min.js')}}"></script>
+<!-- jQuery -->
+
+
+
+
+<!-- Bootstrap Core JavaScript -->
+
+
+<!-- Custom Theme JavaScript -->
+<script src="{{asset('bundles_v2.0/dist/js/sb-admin-2.js')}}"></script>
+
+<script src="{{asset('bundles_v2.0/dist/js/jasny-bootstrap.js')}}"></script>
+
+<script src="{{asset('bundles_v2.0/dist/js/dropzone.js')}}"></script>
+
+<script>
+    var username = "";
+    {%if(user.getUsername() is defined)%}
+        username = '{{user.getUsername()}}';
+    {%endif%}
+    function usernameAvailability() {
+        $.post('{{path('login_login_uservalidateajax')}}',
+                {username: document.getElementById('username').value},
+        function (response) {
+            if (response == "true") {
+                if(username !== "" && document.getElementById('username').value === username){
+                    document.getElementById('username').style.color = "#468847";
+                    document.getElementById('username').style.backgroundColor = "#DFF0D8";
+                    document.getElementById('username').style.border = "1px solid #D6E9C6";
+                    document.getElementById('usernameerror').innerHTML = "";
+                } else {
+                    document.getElementById('username').style.color = "#B94A48";
+                    document.getElementById('username').style.backgroundColor = "#F2DEDE";
+                    document.getElementById('username').style.border = "1px solid #EED3D7";
+                    document.getElementById('usernameerror').innerHTML = "<font color = '#B94A48'>username already exists. try a different one.</font>";
+                }
+            } else {
+                document.getElementById('username').style.color = "#468847";
+                document.getElementById('username').style.backgroundColor = "#DFF0D8";
+                document.getElementById('username').style.border = "1px solid #D6E9C6";
+                document.getElementById('usernameerror').innerHTML = "";
+            }
+        });
+    }
+    
+    function fill(){
+                        $.post('{{path('login_login_getcompanyajax')}}',null, 
+                    function(response){
+                        if(response){
+                            var jsonString = JSON.parse(response);
+                            if(document.getElementById('CopyAddress').checked){
+                                
+                                if(jsonString.companyName != null){
+                                    document.getElementById('companyName').value = jsonString.companyName;
+                                }
+                                if(jsonString.address1 != null){
+                                    document.getElementById('address1').value = jsonString.address1;
+                                }
+                                if(jsonString.address2 != null){
+                                    document.getElementById('address2').value = jsonString.address2;
+                                }
+                                if(jsonString.city != null){
+                                    document.getElementById('city').value = jsonString.city;
+                                }
+                                if(jsonString.state != null){
+                                    document.getElementById('state').value = jsonString.state;
+                                }
+                                 if(jsonString.postalcode != null){
+                                    document.getElementById('postalcode').value = jsonString.postalcode;
+                                }
+                                
+                            }else{
+                                
+                                 document.getElementById('companyName').value = "";
+                                 document.getElementById('address1').value = "";
+                                 document.getElementById('address2').value = "";
+                                 document.getElementById('city').value = "";
+                                 document.getElementById('state').value = "";
+                                 document.getElementById('postalcode').value = "";
+                            }
+                        }
+                    });
+                    }
+</script>

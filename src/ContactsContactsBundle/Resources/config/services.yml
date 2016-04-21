@@ -1,0 +1,4 @@
+services:
+#    contacts_contacts.example:
+#        class: ContactsContactsBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

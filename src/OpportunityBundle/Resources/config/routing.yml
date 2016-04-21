@@ -1,0 +1,60 @@
+opportunity_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: OpportunityBundle:Default:index }
+
+opportunity_addopportunity:
+    path:     /adddeal
+    defaults: { _controller: OpportunityBundle:Default:addopportunity }
+    
+opportunity_addcontactopportunity:
+    path:     /addcontactdeal/{name}/{orgname}/{id}
+    defaults: { _controller: OpportunityBundle:Default:addcontactopportunity }
+    
+opportunity_addcontactopportunityV2:
+    path:     /addcontactdealV2/{id}
+    defaults: { _controller: OpportunityBundle:Default:addcontactopportunityV2 }
+    
+opportunity_saveopportunity:
+    path:     /savedeal
+    defaults: { _controller: OpportunityBundle:Default:saveopportunity }
+    
+opportunity_editopportunity:
+    path:     /editdeal/{id}
+    defaults: { _controller: OpportunityBundle:Default:editopportunity }
+    
+opportunity_editopportunityV2:
+    path:     /editdealV2/{id}
+    defaults: { _controller: OpportunityBundle:Default:editopportunityV2 }
+    
+opportunity_limitededitopportunity:
+    path:     /limitededitdeal/{id}
+    defaults: { _controller: OpportunityBundle:Default:limitededitopportunity }
+    
+opportunity_activateopportunity:
+    path:     /activatedeal/{id}
+    defaults: { _controller: OpportunityBundle:Default:activateopportunity }
+    
+opportunity_manageopportunity:
+    path:     /managedeal
+    defaults: { _controller: OpportunityBundle:Default:manageopportunity }
+    
+opportunity_manageopportunityV2:
+    path:     /managedealV2
+    defaults: { _controller: OpportunityBundle:Default:manageopportunityV2 }
+    
+opportunity_opportunitycontactfilterV2:
+    path:     /dealcontactfilterV2/{id}/{filter}
+    defaults: { _controller: OpportunityBundle:Default:opportunitycontactfilterV2 }
+    
+opportunity_updateopportunity:
+    path:     /updatedeal
+    defaults: { _controller: OpportunityBundle:Default:updateopportunity }
+    
+opportunity_deleteopportunity:
+    path:     /deletedeal/{id}
+    defaults: { _controller: OpportunityBundle:Default:deleteopportunity }
+    
+opportunity_table_data:
+    path:     /dealtable/
+    defaults: { _controller: OpportunityBundle:Default:getOpportunityTableData }
+    

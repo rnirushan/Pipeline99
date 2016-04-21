@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="OpportunityBundle\Entity\Opportunities" table="opportunities">
+    <id name="id" type="integer" column="id" >
+      <generator strategy="AUTO"/>
+    </id>
+    <field name="personname" type="string" column="personname" length="50" nullable="false"/>
+    <field name="username" type="string" column="username" length="50" nullable="false"/>
+    <field name="ownedcompany" type="string" column="ownedcompany" length="50" nullable="false"/>
+    <field name="organizationname" type="string" column="organizationname" length="50" nullable="true"/>
+    <field name="projectedrevenue" type="string" column="projectedrevenue" length="50" nullable="false"/>
+    <field name="accounttype" type="string" column="accounttype" length="50" nullable="false"/>
+    <field name="stage" type="string" column="stage" length="50" nullable="false"/>
+    <field name="producttype" type="string" column="producttype" length="50" nullable="false"/>
+    <field name="opportunitysource" type="string" column="opportunitysource" length="50" nullable="false"/>
+    <field name="closeddate" type="string" column="closeddate" length="50" nullable="false"/>
+    <field name="notes" type="string" column="notes" length="500" nullable="true"/>
+    <field name="visibility" type="string" column="visibility" length="50" nullable="false"/>
+    <field name="forecast" type="string" column="forecast" length="50" nullable="false"/>
+    <field name="sharing" type="string" column="sharing" length="1000" nullable="false"/>
+    <field name="status" type="string" column="status" length="50" nullable="false"/>
+    <field name="revenue" type="string" column="revenue" length="50" nullable="true"/>
+    <field name="reason" type="string" column="reason" length="500" nullable="true"/>   
+     <field name="userrevenue" type="string" column="userrevenue" length="50" nullable="true"/>
+     <field name="contactid" type="integer" column="contactid" length="50" nullable="false"/>
+     <field name="wonnotes" type="string" column="wonnotes" length="500" nullable="true"/>
+     <field name="tags" type="string" column="tags" length="1000" nullable="true"/>   
+     <field name="partnername" type="string" column="partnername" length="50" nullable="true"/>   
+     <field name="partnerpercentage" type="string" column="partnerpercentage" length="50" nullable="true"/>    
+  </entity>
+</doctrine-mapping>

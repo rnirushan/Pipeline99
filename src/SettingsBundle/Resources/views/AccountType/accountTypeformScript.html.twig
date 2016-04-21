@@ -1,0 +1,89 @@
+<script src="{{asset('bundles_v2.0/dist/js/bootstrap-tagsinput.js')}}"></script>
+
+<script>
+    function accounttypeAvailability() {
+        $.post('{{path('settings_validateaccounttype')}}',
+                {name: document.getElementById('addAccountTypeName').value},
+        function (response) {
+            if (response == "true") {
+                document.getElementById('addAccountTypeName').style.color = "#B94A48";
+                document.getElementById('addAccountTypeName').style.backgroundColor = "#F2DEDE";
+                document.getElementById('addAccountTypeName').style.border = "1px solid #EED3D7";
+                $('#savebutton').prop('disabled', true);
+            } else {
+                document.getElementById('addAccountTypeName').style.color = "#468847";
+                document.getElementById('addAccountTypeName').style.backgroundColor = "#DFF0D8";
+                document.getElementById('addAccountTypeName').style.border = "1px solid #D6E9C6";
+                $('#savebutton').prop('disabled', false);
+            }
+        });
+    }
+    
+    function editAccounttypeAvailability() {
+        $.post('{{path('settings_validateaccounttype')}}',
+                {name: document.getElementById('addAccountTypeName').value},
+        function (response) {
+            if (response == "true") {
+                document.getElementById('editAccountTypeName').style.color = "#B94A48";
+                document.getElementById('editAccountTypeName').style.backgroundColor = "#F2DEDE";
+                document.getElementById('editAccountTypeName').style.border = "1px solid #EED3D7";
+                $('#savebutton').prop('disabled', true);
+            } else {
+                document.getElementById('editAccountTypeName').style.color = "#468847";
+                document.getElementById('editAccountTypeName').style.backgroundColor = "#DFF0D8";
+                document.getElementById('editAccountTypeName').style.border = "1px solid #D6E9C6";
+                $('#savebutton').prop('disabled', false);
+            }
+        });
+    }
+
+    function saveNewAccountType() {
+        $.post('{{path('settings_saveaccounttype')}}',
+                {name: $("#addAccountTypeName").val(), notes: $("#addAccountTypeNotes").val()},
+        function (response) {
+            if (response != "false") {
+                refreshAccountTypeTable();
+            }
+        });
+        $("#addStage").find("input[type=text]").each(function (i, object) {
+            $(object).val('');
+        });
+        $('#addAccountTypeModal').modal('hide');
+        $("#addStageNotes").val('');
+        document.getElementById('addAccountTypeName').style.color = "";
+        document.getElementById('addAccountTypeName').style.backgroundColor = "";
+        document.getElementById('addAccountTypeName').style.border = "";
+
+        return false;
+    }
+
+    function opeEditAccountTypeModal(id) {
+        var jsonString = JSON.parse(initResponse);
+
+        for (var i = 0; i < jsonString.accountTypes.length; i++) {
+            var tempStage = jsonString.accountTypes[i];
+
+            if (id === tempStage.id) {
+                $("#editAccountTypeId").val(id);
+                $("#editAccountTypeName").val(tempStage.accountType);
+                $("#editAccountTypeNotes").val(tempStage.notes);
+                $('#editAccountTypeModal').modal('show');
+                break;
+            }
+
+        }
+    }
+
+    function updateAccountType() {
+        $.post('{{path('settings_updateaccounttype')}}',
+                {id: $("#editAccountTypeId").val(), name: $("#editAccountTypeName").val(), notes: $("#editAccountTypeNotes").val()},
+        function (response) {
+            if (response != "false") {
+                refreshAccountTypeTable();
+            }
+        });
+        $('#editAccountTypeModal').modal('hide');
+
+        return false;
+    }
+</script>

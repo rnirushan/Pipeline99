@@ -1,0 +1,317 @@
+
+/* Navbar Brand CSS (Fiverr Logo) */
+.navbar-brand {
+	color: #fff !important;
+	font-weight: 500;
+	font-size: 26px;
+	line-height: 40px;
+	letter-spacing: 1px;
+}
+.navbar-brand:focus,
+.navbar-brand:active,
+.navbar-brand:hover {
+	background: transparent;
+	outline: 0;
+	color: #fff !important;
+}
+
+/* User profile CSS (Right side - user profile ) */
+.navbar-user .dropdown-toggle {
+	color: #fff;
+	font-weight: 500;
+	padding: 16px 15px;
+	position: relative;
+	width: 195px;
+}
+.navbar-user .dropdown-toggle:hover {
+	background: transparent;
+}
+.navbar-user .dropdown-toggle .online {
+	background: #00B22D;
+	width: 12px;
+	height: 12px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	margin-top: 10px;
+	margin-left: 45px;
+	border-radius: 500px;
+}
+.navbar-user .img-user {
+	width: 40px;
+	height: 40px;
+	border-radius: 500px;
+	display: inline-block;
+	margin-right: 5px;
+}
+.navbar-user .arrow-up {
+	visibility: hidden;
+	width: 0; 
+	height: 0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;	
+	border-bottom: 10px solid #fff;
+	position: absolute;
+	z-index: 9999;
+	bottom: 0;
+	right: 0;
+	margin-bottom: 4px;
+	margin-right: 20px;
+}
+.navbar-user .dropdown-messages {
+	visibility: hidden;
+	position: absolute;
+	margin:0;
+	margin-top: -5px;
+	padding:5px 0;
+	width: 195px;
+	z-index: 999999;
+	list-style:none;
+	border: 1px solid #DDD;
+	background: #FFF;
+	border-radius: 4px;
+	box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.05);
+}
+.navbar-user:hover .arrow-up,
+.navbar-user:hover .dropdown-messages {
+	visibility: visible;
+}
+.navbar-user .dropdown-messages hr {
+	margin:0;
+}
+.navbar-user .dropdown-messages li a{
+	display: inline-block;
+	width: 100%;
+	color: #555;
+	padding: 5px 15px;
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+}
+.navbar-user .dropdown-messages li a:focus,
+.navbar-user .dropdown-messages li a:active,
+.navbar-user .dropdown-messages li a:hover {
+	text-decoration: none;
+	background: #eee;
+	outline: 0;
+	color: #337AB7;
+}
+
+/* Main Menu CSS (Black top menu) */
+.navbar-static-top {
+	position: fixed;
+	width: 100%;
+	background: #1F1F1F;
+	color: #fff;
+	min-height: 80px;
+}
+.navbar-top-links {
+    margin-right: 0;
+	margin-left: 0;
+	margin-top: 24px;
+}
+
+.navbar-top-links li {
+    display: inline-block;
+}
+
+.navbar-top-links li a {
+	color: #fff;
+	font-weight: 200;
+	font-size: 22px;
+	line-height: 20px;
+	padding: 2px 10px;
+}
+
+.navbar-top-links li a:focus,
+.navbar-top-links li a:active,
+.navbar-top-links li a:hover {
+	color: #D0CDCD;
+	outline: 0;
+	background: transparent;
+}
+
+
+/* Second Menu CSS (After Black menu) */
+.second-menu-wrapper {
+	background: #FFFFFF;
+	position: fixed;
+	margin-top: 70px;
+	min-height: 40px;
+	width: 100%;
+	z-index: 999;
+	border-bottom: 2px solid #F7F7F7;
+}
+.second-menu {
+	margin:0;
+	padding:0;
+	list-style: none;
+}
+.second-menu  li{
+	float: left;
+	position: relative;
+}
+.second-menu  li a{
+	color: #999;
+	display: inline-block;
+	padding: 13px 15px;
+	font-size: 16px;
+	line-height: 22px;
+}
+.second-menu  li a:hover{
+	color: #666;
+	text-decoration: none;
+}
+.second-menu  li ul.drop-dowm{
+	position: absolute;
+}
+.second-menu  li ul.drop-dowm{
+	visibility: hidden;
+	margin:0;
+	padding:0;
+	list-style: none;
+	background: #fff;
+	width: 180px;
+	border: 1px solid #F7F7F7;
+	padding: 5px 0;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.05);
+}
+.second-menu  li:hover ul.drop-dowm {
+	visibility: visible;
+}
+.second-menu  li ul.drop-dowm li a {
+	padding: 5px 15px;
+}
+
+
+/* Footer CSS */
+#footer {
+	background: #fff;
+	padding-top:20px;
+	padding-bottom:20px;
+	border-top: 1px solid #ddd;
+}
+
+/* Footer Menu CSS */
+.footer-menu {
+	margin:0;
+	padding:0;
+	list-style:none;
+	display: inline-block;
+}
+.footer-menu li{
+	float:left;
+}
+.footer-menu li a{
+	color: #999;
+	display: inline-block;
+	padding: 10px 15px;
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+}
+.footer-menu li a:hover{
+	text-decoration: none;
+	color: #337AB7;
+}
+
+/* Social Profile */
+.social-profile {
+	margin:0;
+	padding:0;
+	padding-right:15px;
+	margin-top: 15px;
+	list-style:none;
+	text-align:right;
+}
+.social-profile li{
+	display: inline-block;
+}
+.social-profile li a{
+	background: #888;
+	color: #fff;
+	width: 30px;
+	height: 30px;
+	display: inline-block;
+	text-align: center;
+	border-radius: 500px;
+	padding-top: 4px;
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+}
+.social-profile li a:hover{
+	text-decoration: none;
+	background: #337AB7;
+}
+
+/* Tooltip custom css */
+.tooltip > .tooltip-inner {
+	background-color: #555;
+	border-radius: 4px;
+	padding: 6px 10px;
+	font-size: 16px;
+	font-weight: 200;
+}
+.tooltip.bottom .tooltip-arrow {
+  border-bottom-color: #555;
+}
+.tooltip.in {
+  filter: alpha(opacity=100);
+  opacity: 1.0;
+}
+
+/* Scroll top Top CSS */
+.scrollToTop{
+	width:50px; 
+	height:50px; 
+	text-align:center; 
+	font-size: 24px;
+	line-height: 28px;
+	padding-top: 5px;
+	border-radius: 2px;
+	color: #fff;
+	text-decoration: none;
+	position:fixed;
+	bottom:20px;
+	right:30px;
+	display:none;
+}
+.scrollToTop:focus,
+.scrollToTop:active,
+.scrollToTop:hover{
+	color: #ddd;
+	outline: 0;
+	text-decoration:none;
+}
+
+/* Copyright text css */
+.copyright {
+	margin-top: 10px;
+	padding-left: 15px;
+	color: #999;
+}
+
+.logo { 
+font-family: 'Oswald', sans-serif; 
+}
+
+.pipeswhite {
+  color:white;
+  font-weight: bold;
+  padding:0px 10px 0px 10px;
+}
+/* Responsive Layout CSS */
+@media (min-width:1200px) {
+	.navbar-top-links {margin-right: 10px !important;}
+	.container-top {width: 1015px;}
+}
+
+@media only screen and (max-width:767px) {
+	.social-profile {display: inline-block;padding-left:15px;}
+}

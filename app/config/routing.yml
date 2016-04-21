@@ -1,0 +1,36 @@
+partners:
+    resource: "@PartnersBundle/Resources/config/routing.yml"
+    prefix:   /
+
+web:
+    resource: "@webBundle/Resources/config/routing.yml"
+    prefix:   /
+
+help:
+    resource: "@HelpBundle/Resources/config/routing.yml"
+    prefix:   /
+
+task:
+    resource: "@TaskBundle/Resources/config/routing.yml"
+    prefix:   /
+
+notes:
+    resource: "@NotesBundle/Resources/config/routing.yml"
+    prefix:   /
+
+opportunity:
+    resource: "@OpportunityBundle/Resources/config/routing.yml"
+    prefix:   /
+
+settings:
+    resource: "@SettingsBundle/Resources/config/routing.yml"
+    prefix:   /
+
+contacts_contacts:
+    resource: "@ContactsContactsBundle/Resources/config/routing.yml"
+    prefix:   /
+
+login_login:
+    resource: "@LoginLoginBundle/Resources/config/routing.yml"
+    prefix:   /
+

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/wamp/www/BusinessPipeline/web/bundles_v2.0/businessPipeline/css/dashboard.css</file>
+            <file>file:/C:/wamp/www/BusinessPipeline/src/TaskBundle/Resources/config/routing.yml</file>
+            <file>file:/C:/wamp/www/BusinessPipeline/src/webBundle/Resources/views/Default/dashboard.html.twig</file>
+            <file>file:/C:/wamp/www/BusinessPipeline/src/webBundle/Controller/DefaultController.php</file>
+            <file>file:/C:/wamp/www/BusinessPipeline/src/TaskBundle/Controller/DefaultController.php</file>
+        </group>
+    </open-files>
+</project-private>

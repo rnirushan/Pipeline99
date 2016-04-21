@@ -1,0 +1,35 @@
+<script src="{{asset('bundles_v2.0/dist/js/bootstrap-tagsinput.js')}}"></script>
+
+<script>
+    $(document).ready(function () {
+
+    });
+
+    function addEmail() {
+        $("#emailDiv" + showEmailId).show();
+        showEmailId++;
+
+        if (showEmailId >= 10) {
+            $("#addEmailDiv").hide();
+        }
+    }
+
+    function addPhone() {
+        $("#phoneDiv" + showPhoneId).show();
+        showPhoneId++;
+
+        if (showPhoneId >= 10) {
+            $("#addPhoneDiv").hide();
+        }
+    }
+
+   
+    function addSubContact() {
+        $("#subcontact" + showSubContactId).show();
+        showSubContactId++;
+
+        if (showSubContactId > 2) {
+            $("#addSubContactDiv").hide();
+        }
+    }
+</script>

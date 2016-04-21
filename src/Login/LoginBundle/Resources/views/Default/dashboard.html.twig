@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    {% include 'AppBundle:Default:head.html.twig' %}
+
+    <body>
+
+        <div id="wrapper">
+
+            <!-- Navigation -->
+            {% include 'AppBundle:Default:navigation.html.twig' %}
+
+            <!-- Page Content -->		
+            <div id="page-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            {%if errormsg is defined %}
+                                <div class="alert alert-danger alert-dismissable" id="successmsg">
+                                    <button type="button" class="close bigger-200" data-dismiss="alert" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <center> <strong>{{errormsg}}</strong></center>
+                                </div>
+                                <script> 
+                                    window.setTimeout(function () {
+                                        $("#successmsg").alert('close');
+                                    }, 5000);
+                                </script>
+                            {%endif%}
+                            {%if successmsg is defined %}
+                                <div class="alert alert-success alert-dismissable" id="errormsg">
+                                    <button type="button" class="close bigger-200" data-dismiss="alert" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <center> <strong>{{successmsg}}</strong></center>
+                                </div>
+                                <script> 
+                                    window.setTimeout(function () {
+                                        $("#errormsg").alert('close');
+                                    }, 5000);
+                                </script>
+                            {%endif%}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class = "page-header">Dashboard</h1>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12" style="min-height: 500px;">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% include 'LoginLoginBundle:Default:footer_v2.html.twig' %}
+
+        </div>
+        <!-- /#wrapper -->
+
+        {% include 'AppBundle:Default:scripts.html.twig' %}
+        <script src="{{asset('bundles_v2.0/dist/js/sb-admin-2.js')}}"></script>
+        <script src="{{asset('bundles_v2.0/bower_components/raphael/raphael-min.js')}}"></script>
+        <script src="{{asset('bundles_v2.0/bower_components/morrisjs/morris.js')}}"></script>
+        <script src="{{asset('bundles_v2.0/js/morris-data.js')}}"></script>
+
+    </body>
+
+</html>

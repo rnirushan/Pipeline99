@@ -1,0 +1,55 @@
+<div class="modal fade" id="wonModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                <h2 class="modal-title lighter blue"><i class="fa fa-trophy"></i> Won Deal!</h2>                                                        
+            </div>
+            <div class="modal-body">
+                <div class="form-group" > 
+                    <div class="input-group col-sm-12"> 
+                        <label  for="projectedrevenue">Account Revenue</label>
+                        <br>
+                        <div class="input-group" >
+                            <span class="input-group-addon">
+                                $
+                            </span>
+                            <input type="text" name="modalrevenue" {%if opportunity is defined %} value="{{opportunity.getRevenue()}}" {%endif%} id="modalrevenue" class="form-control" onkeyup="updateUserRevenue()"class="col-sm-12" required />
+                            <span class="input-group-addon">
+                                .00
+                            </span>
+                        </div>
+                    </div> 
+                    <br>
+                    <div class="input-group col-sm-12"> 
+                        <label  for="projectedrevenue">User Revenue</label>
+                        <br>
+                        <div class="input-group" >
+                            <span class="input-group-addon">
+                                $
+                            </span>
+                            <input type="hidden" id="commisionnonoriginator">
+                            <input type="text" name="modalrevenue" {%if opportunity is defined %} value="{{opportunity.getUserrevenue()}}" {%endif%} id="individualrevenue" class="form-control"  class="col-sm-12" required />
+                            <span class="input-group-addon">
+                                .00
+                            </span>
+                        </div>
+                    </div>  
+                    <br>
+                    <div class="input-group col-sm-12"> 
+                        <label  for="projectedrevenue">Notes</label>
+                        <br>
+                        <div class="input-group col-sm-12" >
+                            <textarea  id="modalnotes" rows="4" class="form-control col-sm-12" name="modalnotes" data-parsley-pattern="^[a-zA-Z0-9,.:;'_ ]*$" data-parsley-trigger="keyup">{%if opportunity is defined %}{{opportunity.getWonnotes()}}{%endif%}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="return setRevenue();" >Save</button>
+                <button type="button" class="btn btn-default" onclick="return clearRevenue();" >Clear</button>
+            </div>
+        </div>
+    </div>
+</div>

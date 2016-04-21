@@ -1,0 +1,55 @@
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div style="padding:25px">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="pull-right">
+                        <span calss="pull-right" style="margin-left: 2px;border-right: 2px solid #ddd;border-left: 2px solid #ddd;">
+                            <a href="javascript:refreshTable()" style="color: black;"><i class="fa fa-refresh fa-lg" style="margin-left: 5px;"></i></a>
+                        </span>
+                        <span calss="pull-right" style="margin-left: 10px">
+                            <a href="javascript:window.print()" style="color: black;"><i class="fa fa-print fa-lg"></i></a>
+                        </span>
+                        {#<span calss="pull-right" style="margin-left: 10px">
+                            <a href="#" style="color: black;"><i class="fa fa-file-text-o fa-lg"></i></a>
+                        </span>#}
+                        <span calss="pull-right" style="margin-left: 10px">
+                            <a href="javascript:exportTableDataToCSV()" style="color: black;"><i class="fa fa-file-excel-o fa-lg"></i></a>
+                        </span>
+                        <span calss="pull-right" style="margin-left: 10px">
+                            <a href="javascript:exportTableDataToPDF()" style="color: black;"><i class="fa fa-file-pdf-o fa-lg"></i></a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12" id="tableDiv" style="display: none">
+                    <div id="user-table-div" class="table-responsive" style="min-height: 360px;padding-bottom: 100px">
+                        <table id="table"
+                               data-toggle="table"
+                               data-search="true"
+                               data-page-size="{{manageview}}"
+                               data-page-list="[10,25,50]"
+                               data-pagination="true"
+                               data-show-columns="true"
+                               data-detail-formatter="detailFormatter"
+                               data-row-style="rowStyle">
+                            <thead>
+                                <tr>
+                                    <th data-field="content" data-sortable="true">Notes</th>
+                                    <th data-field="dateAndTime" data-sortable="true">Date & Time</th>
+                                    <th data-field="owner" data-sortable="true">Owner</th>
+                                    <th data-field="tags">tags</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% include 'NotesBundle:Default:notesTableScript.html.twig' %}

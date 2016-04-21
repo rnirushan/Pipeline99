@@ -1,0 +1,164 @@
+<script>
+    var dealData = [];
+    var dealSourceData = [];
+    var dealProductTypeData = [];
+    
+    {% for deal in deals %} 
+        dealData.push({
+            label: '{{deal.stage}}',
+            value: {{deal.noOfDeals}}
+        });
+    {% endfor %}
+    
+    {% for source in dealSources %} 
+        dealSourceData.push({
+            label: '{{source.name}}',
+            value: {{source.openDeals}},
+            wonDeals: {{source.wonDeals}},
+            lostDeals: {{source.lostDeals}}
+        });
+    {% endfor %}
+    
+    {% for type in dealProductTypes %} 
+        dealProductTypeData.push({
+            label: '{{type.name}}',
+            value: {{type.openDeals}},
+            wonDeals: {{type.wonDeals}},
+            lostDeals: {{type.lostDeals}}
+        });
+    {% endfor %}
+       
+    Morris.Donut({
+        element: 'deals-donut-chart',
+        data: removeZeroData(filterWonLost(dealData)),
+        resize: true,
+        colors: [
+            '#0BA462',
+            '#39B580',
+            '#67C69D',
+            '#95D7BB'
+        ]
+    });
+    
+    Morris.Donut({
+        element: 'deal-sources-donut-chart',
+        data: removeZeroData(dealSourceData),
+        resize: true
+    });
+    
+    Morris.Donut({
+        element: 'deal-product-types-donut-chart',
+        data: removeZeroData(dealProductTypeData),
+        resize: true
+    });
+    
+    function addWonLost(dealSourceData){
+        var returnData = [];
+        $.each(dealSourceData, function( index, value ) {
+            var val = value.value + value.wonDeals + value.lostDeals;
+            returnData.push({
+                label: value.label,
+                value: val
+            });
+        });
+        return returnData;
+    }
+    
+    function removeZeroData(data){
+        var returnData = [];
+        $.each(data, function( index, value ) {
+            if(value.value > 0){
+                returnData.push(value);
+            }
+        });
+        return returnData;
+    }
+    
+    function filterWonLost(dealData){
+        var returnData = [];
+        $.each(dealData, function( index, value ) {
+            if(value.label !== 'won' && value.label !== 'lost'){
+                returnData.push(value);
+            }
+        });
+        return returnData;
+    }
+    
+    function showHideWonLostOnDonutChart(){
+        $('#deals-donut-chart').html('');
+        
+        var innerText = $('#showHideWonLostOnDonutChartTag').html();
+        
+        if(innerText === 'Hide Won And Lost Details'){
+            $('#showHideWonLostOnDonutChartTag').html('Show Won And Lost Details');
+            Morris.Donut({
+                element: 'deals-donut-chart',
+                data: removeZeroData(filterWonLost(dealData)),
+                resize: true,
+                colors: [
+                    '#0BA462',
+                    '#39B580',
+                    '#67C69D',
+                    '#95D7BB'
+                ]
+            });
+        }else{
+            $('#showHideWonLostOnDonutChartTag').html('Hide Won And Lost Details');
+                Morris.Donut({
+                    element: 'deals-donut-chart',
+                    data: removeZeroData(dealData),
+                    resize: true,
+                colors: [
+                    '#0BA462',
+                    '#39B580',
+                    '#67C69D',
+                    '#95D7BB'
+                ]
+                });
+        }
+    }
+    
+    function showHideWonLostOnDealSourcesDonutChart(){
+        $('#deal-sources-donut-chart').html('');
+        
+        var innerText = $('#showHideWonLostOnDealSourcesDonutChartTag').html();
+        
+        if(innerText === 'Hide Won And Lost Details'){
+            $('#showHideWonLostOnDealSourcesDonutChartTag').html('Show Won And Lost Details');
+            Morris.Donut({
+                element: 'deal-sources-donut-chart',
+                data: removeZeroData(dealSourceData),
+                resize: true
+            });
+        }else{
+            $('#showHideWonLostOnDealSourcesDonutChartTag').html('Hide Won And Lost Details');
+                Morris.Donut({
+                    element: 'deal-sources-donut-chart',
+                    data: removeZeroData(addWonLost(dealSourceData)),
+                    resize: true
+                });
+        }
+    }
+    
+    function showHideWonLostOnDealProductTypesDonutChart(){
+        $('#deal-product-types-donut-chart').html('');
+        
+        var innerText = $('#showHideWonLostOnDealProductTypesDonutChartTag').html();
+        
+        if(innerText === 'Hide Won And Lost Details'){
+            $('#showHideWonLostOnDealProductTypesDonutChartTag').html('Show Won And Lost Details');
+            Morris.Donut({
+                element: 'deal-product-types-donut-chart',
+                data: removeZeroData(dealProductTypeData),
+                resize: true
+            });
+        }else{
+            $('#showHideWonLostOnDealProductTypesDonutChartTag').html('Hide Won And Lost Details');
+                Morris.Donut({
+                    element: 'deal-product-types-donut-chart',
+                    data: removeZeroData(addWonLost(dealProductTypeData)),
+                    resize: true
+                });
+        }
+    }
+</script>

@@ -1,0 +1,79 @@
+<script src="{{asset('bundles_v2.0/dist/js/bootstrap-tagsinput.js')}}"></script>
+
+<script>
+    function stageAvailability() {
+     
+            $.post('{{path('settings_validatestage')}}',
+                    {name: document.getElementById('addStageName').value},
+            function (response) {
+                if (response == "true") {
+                    document.getElementById('addStageName').style.color = "#B94A48";
+                    document.getElementById('addStageName').style.backgroundColor = "#F2DEDE";
+                    document.getElementById('addStageName').style.border = "1px solid #EED3D7";
+                    document.getElementById('stageerror').innerHTML = "<font color = '#B94A48'>stage already exists.</font>";
+                    $('#savebutton').prop('disabled', true);
+                } else {
+                    document.getElementById('addStageName').style.color = "#468847";
+                    document.getElementById('addStageName').style.backgroundColor = "#DFF0D8";
+                    document.getElementById('addStageName').style.border = "1px solid #D6E9C6";
+                    document.getElementById('stageerror').innerHTML = "";
+                    $('#savebutton').prop('disabled', false);
+                }
+            });
+        
+
+    }
+
+    function saveNewStageInfo() {
+        $.post('{{path('settings_savestage')}}',
+                {name: $("#addStageName").val(), salechance: $("#addStageSalechancenew").val(), notes: $("#addStageNotes").val()},
+        function (response) {
+            if (response != "false") {
+                refreshStageTable();
+            }
+        });
+        $("#addStageModal").find("input[type=text]").each(function (i, object) {
+            $(object).val('');
+        });
+        $('#addStageModal').modal('hide');
+        $("#addStageNotes").val('');
+        document.getElementById('addStageName').style.color = "";
+        document.getElementById('addStageName').style.backgroundColor = "";
+        document.getElementById('addStageName').style.border = "";
+
+        return false;
+    }
+
+    function opeEditStageModal(id) {
+        var jsonString = JSON.parse(initStageResponse);
+
+        for (var i = 0; i < jsonString.stages.length; i++) {
+            var tempStage = jsonString.stages[i];
+
+            if (id === tempStage.id) {
+                $("#editStageModalId").val(id);
+                $("#editStageModalName").val(tempStage.stage);
+                $("#editStageModalSalechance").val(tempStage.saleChange);
+                $("#editStageModalNotes").val(tempStage.notes);
+                $('#editStageModal').modal('show');
+                break;
+            }
+
+        }
+    }
+
+    function updateStageInfo() {
+        $.post('{{path('settings_updatestage')}}',
+                {id: $("#editStageModalId").val(), name: $("#editStageModalName").val(), salechance: $("#editStageModalSalechance").val(), notes: $("#editStageModalNotes").val()},
+        function (response) {
+            if (response != "false") {
+                refreshStageTable();
+            }
+        });
+        $('#editStageModal').modal('hide');
+
+        return false;
+    }
+    
+    
+</script>

@@ -1,0 +1,59 @@
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="container container-top">
+        <!-- navbar-header -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{path('web_dashboard')}}"><span style="font-family: 'Oswald', serif;">PIPELINE<font color="#95BE22"><strong> 99</font></strong></a></span>
+        </div>
+        <!-- /.end navbar-header -->
+
+        <!-- User Profile -->
+        <ul class="nav navbar-user navbar-right" style="width:115px">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="width:300px">
+                    <img src="{{asset(image)}}" alt="user" class="img-responsive img-user" /> {{fullname}} <i class="fa fa-caret-down"></i>
+                    <!-- <span class="online"></span> -->
+                </a>
+                <span class="arrow-up"></span>
+                <ul class="dropdown-messages">
+                    <li><a href="{{path('login_login_updateprofile')}}">My Profile</a></li>
+                    {%if(role == "Admin" or role == "Master Admin") %}
+                    <li><a href="{{path('settings_pipelinesetup')}}">Pipeline Setup</a></li>
+                    {% endif %}
+                    <li><a href="{{path('login_login_logout')}}">Logout</a></li>
+                </ul>
+                <!-- /.dropdown-messages -->
+            </li>
+        </ul> 
+        <!-- /.end User Profile -->
+
+        <div id="navbar" class="navbar-collapse collapse">
+
+
+            <!-- Top Black Menu -->
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <a href="{{path('web_dashboard')}}" data-toggle="tooltip" data-placement="bottom" title="Dashboard"><i class="fa fa-tachometer"></i></a>
+                </li>
+                <li>
+                    <a href="{{path('contacts_contacts_contacts')}}" data-toggle="tooltip" data-placement="bottom" title="Contacts"><i class="fa fa-user"></i></a>
+                </li>
+                <li>
+                    <a href="{{path('opportunity_manageopportunityV2')}}" data-toggle="tooltip" data-placement="bottom" title="Deals"><i class="fa fa-usd"></i></a>
+                </li>
+                <li>
+                    <a href="{{path('login_login_users')}}" data-toggle="tooltip" data-placement="bottom" title="Users"><i class="fa fa-users"></i></a>
+                </li>
+                <li>
+                    <a href="{{path('web_support')}}" data-toggle="tooltip" data-placement="bottom" title="Help & Support"><i class="fa fa-question"></i></a>
+                </li>
+            </ul>
+            <!-- /.end Top Black Menu -->
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    {% include 'AppBundle:Default:head.html.twig' %}
+
+    <body>
+
+        <div id="wrapper">
+
+            <!-- Navigation -->
+            {% include 'AppBundle:Default:navigation.html.twig' %}
+
+
+            <!-- Page Content -->		
+            <div id="page-wrapper">
+                {% include 'NotesBundle:Default:notesModal.html.twig' %}
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class = "page-header">Manage Contacts</h1>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            {% include 'ContactsContactsBundle:Default:contactTable.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% include 'LoginLoginBundle:Default:footer_v2.html.twig' %}
+
+        </div>
+        <!-- /#wrapper -->
+        {% include 'ContactsContactsBundle:Default:notesModalScript.html.twig' %}
+        {% include 'AppBundle:Default:scripts.html.twig' %}
+        <script src="{{asset('bundles_v2.0/dist/js/sb-admin-2.js')}}"></script>
+        <script src="{{asset('bundles_v2.0/bower_components/raphael/raphael-min.js')}}"></script>
+        <script src="{{asset('bundles_v2.0/bower_components/morrisjs/morris.js')}}"></script>
+        
+
+        <script src="{{asset('bundles_v2.0/notify/bootstrap-notify.js')}}"></script>
+        <link rel="stylesheet" href="{{asset('bundles_v2.0/notify/animate.css')}}">
+        <script>
+            $( document ).ready(function() {
+                {%if errormsg is defined %}
+                    $.notify({
+                            // options
+                            message: '{{errormsg}}'
+                        }, {
+                            // settings
+                            type: 'danger'
+                        });
+                {%endif%}
+                {%if successmsg is defined %}
+                    $.notify({
+                            // options
+                            message: '{{successmsg}}'
+                        }, {
+                            // settings
+                            type: 'success'
+                        });
+                {%endif%}
+            });
+        </script>
+
+    </body>
+
+</html>

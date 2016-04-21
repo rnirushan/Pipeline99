@@ -1,0 +1,56 @@
+<script>
+    var wonLostData = [];
+    var count = 0;
+    var yearText = ["Current Year", "Last Year"];
+    {% for deal in wonAndLostDealForBarBarChart %} 
+        $( "#wonLostDealsYearDropDown" ).append( "<li><a href='javascript:changeYear(" + count + ")'>" + yearText[count] + "</a></li>" );
+        count++;
+        wonLostData.push({
+            year: '{{deal.year}}',
+            won1: {{deal.won["1"]}},
+            won2: {{deal.won["2"]}},
+            won3: {{deal.won["3"]}},
+            won4: {{deal.won["4"]}},
+            lost1: {{deal.lost["1"]}},
+            lost2: {{deal.lost["2"]}},
+            lost3: {{deal.lost["3"]}},
+            lost4: {{deal.lost["4"]}}
+        });
+    {% endfor %}
+    
+    displayBarChart(wonLostData[0]);
+    
+    function changeYear(id){
+        displayBarChart(wonLostData[id]);
+    }
+    
+    function displayBarChart(data){
+        $('#won-lost-morris-bar-chart').html('');
+        Morris.Bar({
+            element: 'won-lost-morris-bar-chart',
+            data: [{
+                y: '1st Q',
+                a: data.won1,
+                b: data.lost1
+            }, {
+                y: '2nd Q',
+                a: data.won2,
+                b: data.lost2
+            }, {
+                y: '3rd Q',
+                a: data.won3,
+                b: data.lost3
+            }, {
+                y: '4th Q',
+                a: data.won4,
+                b: data.lost4
+            }],
+            xkey: 'y',
+            ykeys: ['a', 'b'],
+            labels: ['Won Deals', 'Lost Deals'],
+            hideHover: 'auto',
+            resize: true
+        });
+    }
+        
+</script>

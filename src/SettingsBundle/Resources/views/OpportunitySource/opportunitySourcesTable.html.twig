@@ -1,0 +1,61 @@
+{% include 'SettingsBundle:OpportunitySource:addOpportunitySourceModal.html.twig' %}
+{% include 'SettingsBundle:OpportunitySource:editOpportunitySourceModal.html.twig' %}
+<div class="panel panel-default">
+    <div class="panel-body">
+        
+        <div style="padding:25px">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="pull-right">  
+                        <span calss="pull-right">
+                            <a href="#" style="color: black;" data-toggle="modal" data-target="#addOpportunitySourceModal"><i class="fa fa-user-plus"></i> Add Source</a>
+                        </span>
+                        <span calss="pull-right" style="margin-left: 10px;border-right: 2px solid #ddd;border-left: 2px solid #ddd;">
+                            <a href="javascript:refreshOpportunitySourceTable()" style="color: black;"><i class="fa fa-refresh fa-lg" style="margin-left: 5px;margin-right: 2px;"></i></a>
+                        </span>
+                        <span calss="pull-right" style="margin-left: 10px">
+                            <a href="javascript:window.print()" style="color: black;"><i class="fa fa-print fa-lg"></i></a>
+                        </span>
+                        {#<span calss="pull-right" style="margin-left: 10px">
+                            <a href="#" style="color: black;"><i class="fa fa-file-text-o fa-lg"></i></a>
+                        </span>#}
+                        <span calss="pull-right" style="margin-left: 10px">
+                            <a href="javascript:exportOpportunitySourceTableDataToCSV()" style="color: black;"><i class="fa fa-file-excel-o fa-lg"></i></a>
+                        </span>
+                        <span calss="pull-right" style="margin-left: 10px">
+                            <a href="javascript:exportOpportunitySourceTableDataToPDF()" style="color: black;"><i class="fa fa-file-pdf-o fa-lg"></i></a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12" id="opportunityTableDiv" style="display: none">
+                    <div id="user-table-div" class="table-responsive" style="min-height: 360px;">
+                        <table id="opportunitytable"
+                               data-toggle="table"
+                               data-search="true"
+                               data-page-size="10"
+                               data-page-list="[10,25,50]"
+                               data-pagination="true"
+                               data-show-columns="true"
+                               data-detail-formatter="detailFormatter"
+                               data-row-style="rowStyle">
+                            <thead>
+                                <tr>
+                                    <th data-field="state" data-checkbox="true"></th>
+                                    <th data-field="opportunitySource" data-sortable="true">Opportunity Source</th>
+                                    <th data-field="notes" data-sortable="true">Notes</th>
+                                    <th data-field="status" data-sortable="true">Status</th>
+                                    <th data-field="action" data-sortable="true">Action</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% include 'SettingsBundle:OpportunitySource:opportunitySourceTableScript.html.twig' %}

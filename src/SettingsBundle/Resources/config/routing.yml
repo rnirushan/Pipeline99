@@ -1,0 +1,176 @@
+settings_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: SettingsBundle:Default:index }
+
+settings_pipelinesetup:
+    path:     /pipelinesetup
+    defaults: { _controller: SettingsBundle:Default:pipelinesetup }
+    
+settings_addaccounttype:
+    path:     /addaccounttype
+    defaults: { _controller: SettingsBundle:AccountType:addaccounttype }
+    
+settings_saveaccounttype:
+    path:     /saveaccounttype
+    defaults: { _controller: SettingsBundle:AccountType:saveaccounttype }
+
+settings_manageaccounttypes:
+    path:     /manageaccounttypes
+    defaults: { _controller: SettingsBundle:AccountType:manageaccounttypes }
+    
+settings_deleteaccounttype:
+    path:     /deleteaccounttype/{id}
+    defaults: { _controller: SettingsBundle:AccountType:deleteaccounttype }
+    
+settings_editaccounttype:
+    path:     /editaccounttype/{id}
+    defaults: { _controller: SettingsBundle:AccountType:editaccounttype }
+    
+settings_updateaccounttype:
+    path:     /updateaccounttype
+    defaults: { _controller: SettingsBundle:AccountType:updateaccounttype }
+
+settings_activateaccounttype:
+    path:     /activateaccounttype/{id}
+    defaults: { _controller: SettingsBundle:AccountType:activateaccounttype }
+    
+settings_validateaccounttype:
+    path:     /validateaccounttype
+    defaults: { _controller: SettingsBundle:AccountType:validateaccounttype }
+    
+settings_account_type_table_data:
+    path:     /accountTypeTableData
+    defaults: { _controller: SettingsBundle:AccountType:tableData }
+    
+settings_addstage:
+    path:     /addstage
+    defaults: { _controller: SettingsBundle:Stage:addstage }
+    
+settings_addstageV2:
+    path:     /addstageV2
+    defaults: { _controller: SettingsBundle:Stage:addstageV2 }
+    
+settings_validatestage:
+    path:     /validatestage
+    defaults: { _controller: SettingsBundle:Stage:validatestage }
+    
+settings_managestages:
+    path:     /managestages
+    defaults: { _controller: SettingsBundle:Stage:managestages }
+    
+settings_managestagesV2:
+    path:     /managestagesV2
+    defaults: { _controller: SettingsBundle:Stage:managestagesV2 }
+    
+settings_table_data:
+    path:     /tableData
+    defaults: { _controller: SettingsBundle:Stage:tableData }
+    
+settings_delete_user:
+    path:     /deleteUser
+    defaults: { _controller: SettingsBundle:Users:deleteUser }
+
+settings_activate_user:
+    path:     /activateUser
+    defaults: { _controller: SettingsBundle:Users:activateUser }
+
+settings_savestage:
+    path:     /savestage
+    defaults: { _controller: SettingsBundle:Stage:savestage }
+    
+settings_editstage:
+    path:     /editstage/{id}
+    defaults: { _controller: SettingsBundle:Stage:editstage }
+    
+settings_editstageV2:
+    path:     /editstageV2/{id}
+    defaults: { _controller: SettingsBundle:Stage:editstageV2 }
+    
+settings_deletestage:
+    path:     /deletestage/{id}
+    defaults: { _controller: SettingsBundle:Stage:deletestage }
+    
+settings_activatestage:
+    path:     /activatestage/{id}
+    defaults: { _controller: SettingsBundle:Stage:activatestage }
+    
+settings_updatestage:
+    path:     /updatestage
+    defaults: { _controller: SettingsBundle:Stage:updatestage }
+    
+settings_addproducttype:
+    path:     /addproducttype
+    defaults: { _controller: SettingsBundle:ProductType:addproducttype }
+    
+settings_validateproducttype:
+    path:     /validateproducttype
+    defaults: { _controller: SettingsBundle:ProductType:validateproducttype }
+    
+settings_saveproducttype:
+    path:     /saveproducttype
+    defaults: { _controller: SettingsBundle:ProductType:saveproducttype }
+
+settings_manageproducttypes:
+    path:     /manageproducttypes
+    defaults: { _controller: SettingsBundle:ProductType:manageproducttypes }
+    
+settings_deleteproducttype:
+    path:     /deleteproducttype/{id}
+    defaults: { _controller: SettingsBundle:ProductType:deleteproducttype }
+    
+settings_editproducttype:
+    path:     /editproducttype/{id}
+    defaults: { _controller: SettingsBundle:ProductType:editproducttype }
+    
+settings_updateproducttype:
+    path:     /updateproducttype
+    defaults: { _controller: SettingsBundle:ProductType:updateproducttype }
+
+settings_activateproducttype:
+    path:     /activateproducttype/{id}
+    defaults: { _controller: SettingsBundle:ProductType:activateproducttype }
+
+settings_product_type_table_data:
+    path:     /productTypeTableData
+    defaults: { _controller: SettingsBundle:ProductType:productTypeTableData }
+    
+settings_addopportunitysource:
+    path:     /addopportunitysource
+    defaults: { _controller: SettingsBundle:OpportunitySource:addopportunitysource }
+    
+settings_saveopportunitysource:
+    path:     /saveopportunitysource
+    defaults: { _controller: SettingsBundle:OpportunitySource:saveopportunitysource }
+
+settings_manageopportunitysources:
+    path:     /manageopportunitysources
+    defaults: { _controller: SettingsBundle:OpportunitySource:manageopportunitysources }
+    
+settings_deleteopportunitysource:
+    path:     /deleteopportunitysource/{id}
+    defaults: { _controller: SettingsBundle:OpportunitySource:deleteopportunitysource }
+    
+settings_editopportunitysource:
+    path:     /editopportunitysource/{id}
+    defaults: { _controller: SettingsBundle:OpportunitySource:editopportunitysource }
+    
+settings_updateopportunitysource:
+    path:     /updateopportunitysource
+    defaults: { _controller: SettingsBundle:OpportunitySource:updateopportunitysource }
+
+settings_activateopportunitysource:
+    path:     /activateopportunitysource/{id}
+    defaults: { _controller: SettingsBundle:OpportunitySource:activateopportunitysource }
+    
+settings_validateopportunitysource:
+    path:     /validateopportunitysource
+    defaults: { _controller: SettingsBundle:OpportunitySource:validateopportunitysource }
+    
+settings_opportunity_source_table_data:
+    path:     /opportunityTableData
+    defaults: { _controller: SettingsBundle:OpportunitySource:tableData }
+    
+settings_getsale:
+    path:     /getsale
+    defaults: { _controller: SettingsBundle:Stage:getsale }
+    

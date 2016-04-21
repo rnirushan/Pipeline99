@@ -1,0 +1,36 @@
+
+<script>
+    function clearFilter(){
+        $('#priority option[selected="selected"]').each(
+            function() {
+                $(this).removeAttr('selected');
+            }
+        );
+        $("#priority option:first").attr('selected','selected');
+        
+        $("#due").val("");
+        
+        $('#shareduserselect option[selected="selected"]').each(
+            function() {
+                $(this).removeAttr('selected');
+            }
+        );
+        $("#shareduserselect option:first").attr('selected','selected');
+        
+        $('#visibility option[selected="selected"]').each(
+            function() {
+                $(this).removeAttr('selected');
+            }
+        );
+        $("#visibility option:first").attr('selected','selected');
+        
+        $("#notename").val("");
+        
+        $("#notes").val("");
+        
+        $("#tasktags").tagsinput('removeAll');
+        
+        $("#addTaskModal").modal("hide");
+    }
+
+</script>

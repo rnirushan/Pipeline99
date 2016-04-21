@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bootstrap Tags Input</title>
+    <meta name="robots" content="index, follow" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="{{asset('bundles_v2.0/dist/css/bootstrap-tagsinput.css')}}" rel="stylesheet" type="text/css">
+
+  </head>
+  <body>
+    <div id="fb-root"></div>
+    
+    <div class="container">
+      <section id="examples">
+        <div class="page-header">
+          <h2>Examples</h2>
+        </div>
+
+        <div class="example example_markup">
+          <h3>Markups</h3>
+          <p>Just add <code>data-role="tagsinput"</code> to your input field to automatically change it to a tags input field.</p>
+          <div class="bs-example">
+            <input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="tagsinput" id="myTag"/>
+			<a href="javascript:myClick()">ss</a>
+			<script>
+				function myClick(){
+					alert($("#myTag").tagsinput('items'));
+				}
+			</script>
+          </div>
+        </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="{{asset('bundles_v2.0/dist/js/bootstrap-tagsinput.js')}}"></script>
+  </body>
+</html>

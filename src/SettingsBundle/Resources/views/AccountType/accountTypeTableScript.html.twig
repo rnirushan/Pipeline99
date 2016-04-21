@@ -1,0 +1,256 @@
+<script>
+    var $accounttypetable = $('#accounttypetable');
+    var extendColData = [];
+    var initResponse;
+
+    $(document).ready(function () {
+        $("#tableDiv").show();
+        iniFillAccountTypeTableData();
+    });
+
+    function iniFillAccountTypeTableData() {
+        $accounttypetable.bootstrapTable('showLoading');
+        var data = '{{accountTypeArray}}';
+        var newString = data.replace(/&quot;/g, '"');
+        initResponse = newString;
+        //var newString = JSON.parse(data);
+        $accounttypetable.bootstrapTable('hideLoading');
+        $accounttypetable.bootstrapTable('append', convertAccountTypeData(newString));
+    }
+
+    function refreshAccountTypeTable() {
+        $accounttypetable.bootstrapTable('removeAll');
+        fillAccountTypeTableData();
+    }
+
+    function fillAccountTypeTableData() {
+        $accounttypetable.bootstrapTable('showLoading');
+        $.post('{{path('settings_account_type_table_data')}}', null,
+                function (response) {
+                    if (response) {
+                        $accounttypetable.bootstrapTable('hideLoading');
+                        initResponse = response;
+                        $accounttypetable.bootstrapTable('append', convertAccountTypeData(response));
+                    } else {
+
+                    }
+                }
+        );
+    }
+
+    function fillAccountTypeTableDataWithUsername(username) {
+        $accounttypetable.bootstrapTable('removeAll');
+        $accounttypetable.bootstrapTable('showLoading');
+        var path = '{{path('contacts_contacts_table_data_username_filter', {'username': '0'})}}';
+        path = path.substring(0, path.length - 1);
+
+        $.post(path + username, null,
+                function (response) {
+                    if (response) {
+                        $accounttypetable.bootstrapTable('hideLoading');
+                        $accounttypetable.bootstrapTable('append', convertAccountTypeData(response));
+                    } else {
+
+                    }
+                }
+        );
+    }
+
+    function checkAndSetValue(value, blankValue, scale, pre) {
+        if (value === '' || value === null) {
+            return blankValue;
+        } else {
+            if (pre === true) {
+                return scale + '' + value;
+            } else {
+                return value + '' + scale;
+            }
+        }
+    }
+
+    function detailFormatter(index, row) {
+
+        var note = checkAndSetValue(extendColData[index].note, '-', '', true);
+
+        var html = [];
+        html.push('<div class"row">' +
+                '<div class="col-xs-4">' +
+                '<table class="table" style="margin-left:42px; border: none !important;line-height: 5px;">' +
+                '<tr style="padding:0px;margin:0px;border-bottom: 1px solid #DCDCDC;">' +
+                '<td style="border: none !important;line-height: 5px;width:30%"><small>Notes</small></td>' +
+                '<td style="border: none !important;line-height: 5px;"><small>' + note + '</small></td>' +
+                '</tr>' +
+                '</table>' +
+                '</div>' +
+                '</div>');
+        //html.push('<div class"row">' + index + '</div>');
+        $.each(row, function (key, value) {
+            //html.push('<p><b>' + key + ':</b> ' + value + '</p>');
+        });
+        return html.join('');
+    }
+
+    function convertAccountTypeData(response) {
+        var jsonString = JSON.parse(response);
+        extendColData = [];
+
+        var startId = 1,
+                rows = [];
+
+        for (var i = 0; i < jsonString.accountTypes.length; i++) {
+            var tempType = jsonString.accountTypes[i];
+
+            extendColData.push({
+                note: tempType.notes
+            });
+
+            var name = '{{name|lower}}';
+            var action = '';
+            var role = '{{role}}';
+            if (role === "Admin") {
+                action = '<div class="pull-right">' +
+                        '<div class="keep-open btn-group">' +
+                        '<button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">' +
+                        '<i class="glyphicon glyphicon-chevron-down"></i>' +
+                        '</button>' +
+                        '<ul class="dropdown-menu" role="menu" style="min-width: 0px !important;">' +
+                        '<li><a href="javascript:opeEditAccountTypeModal(' + tempType.id + ')"><i class="fa fa-pencil-square-o"></i> Edit</a></li>';
+
+                if (tempType.status === "Inactive") {
+                    action += '<li><a href="javascript:activateAccountType(' + tempType.id + ')"><i class="fa fa-check"></i> Activate</a></li>';
+                } else if (tempType.status === "Active") {
+                    action += '<li><a href="javascript:deleteAccountType(' + tempType.id + ')"><i class="fa fa-times"></i> Delete</a></li>';
+                }
+
+                action += '</ul>' +
+                        '</div>' +
+                        '</div>';
+            }else{
+                $accounttypetable.bootstrapTable('hideColumn', 'Action');
+            }
+
+            rows.push({
+                accountType: tempType.accountType,
+                notes: tempType.notes,
+                status: tempType.status,
+                action: action
+
+            });
+        }
+        return rows;
+    }
+
+    function deactivateAccountTypeId(id) {
+        $accounttypetable.bootstrapTable('removeAll');
+        $accounttypetable.bootstrapTable('showLoading');
+
+        var jsonString = JSON.parse(initResponse);
+        var filterContact = [];
+
+        for (var i = 0; i < jsonString.accountTypes.length; i++) {
+            var tempStage = jsonString.accountTypes[i];
+
+            if (id === tempStage.id) {
+                tempStage.status = "Inactive";
+            }
+            filterContact.push(tempStage);
+
+        }
+        var filterOpportunitiesArray = {'accountTypes': filterContact};
+        var jsonStr = JSON.stringify(filterOpportunitiesArray);
+        initResponse = jsonStr;
+        
+        $accounttypetable.bootstrapTable('hideLoading');
+        $accounttypetable.bootstrapTable('append', convertAccountTypeData(jsonStr));
+    }
+
+    function deleteAccountType(id) {
+        //$accounttypetable.bootstrapTable('showLoading');
+        var path = '{{ path('settings_deleteaccounttype',{'id':0} )}}';
+        path = path.substring(0, path.length - 1);
+
+        $.post(path + id, null,
+                function (response) {
+                    if (response) {
+                        //$accounttypetable.bootstrapTable('showLoading');
+                        deactivateAccountTypeId(id);
+                    } else {
+                        $accounttypetable.bootstrapTable('hideLoading');
+                    }
+                }
+        );
+    }
+
+    function activateAccountTypeId(id) {
+        $accounttypetable.bootstrapTable('removeAll');
+        $accounttypetable.bootstrapTable('showLoading');
+
+        var jsonString = JSON.parse(initResponse);
+        var filterContact = [];
+
+        for (var i = 0; i < jsonString.accountTypes.length; i++) {
+            var tempStage = jsonString.accountTypes[i];
+
+            if (id === tempStage.id) {
+                tempStage.status = "Active";
+            }
+            filterContact.push(tempStage);
+
+        }
+        var filterOpportunitiesArray = {'accountTypes': filterContact};
+        var jsonStr = JSON.stringify(filterOpportunitiesArray);
+        initResponse = jsonStr;
+        
+        $accounttypetable.bootstrapTable('hideLoading');
+        $accounttypetable.bootstrapTable('append', convertAccountTypeData(jsonStr));
+    }
+
+    function activateAccountType(id) {
+        //$accounttypetable.bootstrapTable('showLoading');
+        var path = '{{ path('settings_activateaccounttype',{'id':0} )}}';
+        path = path.substring(0, path.length - 1);
+
+        $.post(path + id, null,
+                function (response) {
+                    if (response) {
+                        activateAccountTypeId(id);
+                    } else {
+                        $accounttypetable.bootstrapTable('hideLoading');
+                    }
+                }
+        );
+    }
+
+    function priceSorter(a, b) {
+        a = +a.substring(1); // remove $
+        b = +b.substring(1);
+        if (a > b)
+            return 1;
+        if (a < b)
+            return -1;
+        return 0;
+    }
+
+    function rowStyle(row, index) {
+        var classes = ['active'];
+
+        if (index % 2 === 0) {
+            return {
+                classes: classes[0]
+            };
+        }
+        return {};
+    }
+    
+    function exportAccountTypeTableDataToPDF() {
+        var data = JSON.parse(initResponse);
+                
+        var userTablePDF = new exportPDF(data.accountTypes, "accountTypes.pdf", ["accountType", "notes", "status"], "Manage Products");
+    }
+    
+    function exportAccountTypeTableDataToCSV() {
+        var data = JSON.parse(initResponse);
+                
+        exportToCSV(data.accountTypes, "accountTypes.csv", ["accountType", "notes", "status"]);
+    }
+</script>
